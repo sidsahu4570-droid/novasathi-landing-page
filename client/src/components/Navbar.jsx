@@ -48,11 +48,11 @@ export default function Navbar() {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
             >
               <div style={{
-                width: scrolled ? 40 : 46,
-                height: scrolled ? 40 : 46,
+                width: scrolled ? 42 : 48,
+                height: scrolled ? 42 : 48,
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid var(--purple-500)',
@@ -74,14 +74,6 @@ export default function Navbar() {
                     objectPosition: 'center',
                   }}
                 />
-              </div>
-              <div>
-                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)', letterSpacing: '0.05em', lineHeight: 1 }}>
-                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
-                </div>
-                <div style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1, marginTop: '3px' }}>
-                  The Safe Space
-                </div>
               </div>
             </a>
 

@@ -65,11 +65,11 @@ export default function Footer() {
             <a
               href="#home"
               onClick={(e) => { e.preventDefault(); scrollToSection('home') }}
-              style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px', textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '20px', textDecoration: 'none' }}
             >
               <div style={{
-                width: 48,
-                height: 48,
+                width: 52,
+                height: 52,
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid var(--purple-500)',
@@ -90,14 +90,6 @@ export default function Footer() {
                     objectPosition: 'center',
                   }}
                 />
-              </div>
-              <div>
-                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '20px', color: 'var(--text-primary)', letterSpacing: '0.05em', lineHeight: 1 }}>
-                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
-                </div>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1, marginTop: '4px' }}>
-                  The Safe Space
-                </div>
               </div>
             </a>
 
