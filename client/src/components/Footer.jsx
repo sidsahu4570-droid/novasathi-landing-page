@@ -65,16 +65,19 @@ export default function Footer() {
             <a
               href="#home"
               onClick={(e) => { e.preventDefault(); scrollToSection('home') }}
-              style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', textDecoration: 'none' }}
+              style={{ display: 'inline-block', marginBottom: '20px', textDecoration: 'none' }}
             >
-              <div style={{ width: 36, height: 36, background: 'linear-gradient(135deg, var(--purple-500), var(--amber-500))', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px var(--purple-glow)' }}>
-                <Star size={18} color="white" fill="white" />
-              </div>
-              <div>
-                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)', letterSpacing: '0.05em' }}>
-                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
-                </div>
-              </div>
+              <img
+                src="/logo.jpg"
+                alt="Nova Sathi — The Safe Space"
+                style={{
+                  height: '56px',
+                  maxWidth: '220px',
+                  objectFit: 'contain',
+                  borderRadius: '8px',
+                  filter: 'drop-shadow(0 0 16px rgba(172, 75, 255, 0.4))',
+                }}
+              />
             </a>
 
             <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.8, maxWidth: '280px', marginBottom: '24px' }}>

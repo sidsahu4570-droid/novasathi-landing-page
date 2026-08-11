@@ -50,23 +50,18 @@ export default function Navbar() {
               onClick={(e) => handleNavClick(e, '#home')}
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}
             >
-              <div style={{
-                width: 36, height: 36,
-                background: 'linear-gradient(135deg, var(--purple-500), var(--amber-500))',
-                borderRadius: '10px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 20px var(--purple-glow)',
-              }}>
-                <Star size={18} color="white" fill="white" />
-              </div>
-              <div>
-                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)', letterSpacing: '0.05em', lineHeight: 1 }}>
-                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
-                </div>
-                <div style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1, marginTop: '3px' }}>
-                  Your Spiritual Companion
-                </div>
-              </div>
+              <img
+                src="/logo.jpg"
+                alt="Nova Sathi — The Safe Space"
+                style={{
+                  height: scrolled ? '42px' : '50px',
+                  maxWidth: '180px',
+                  objectFit: 'contain',
+                  borderRadius: '8px',
+                  transition: 'all 0.3s ease',
+                  filter: 'drop-shadow(0 0 12px rgba(172, 75, 255, 0.4))',
+                }}
+              />
             </a>
 
             {/* Desktop Nav Links */}
