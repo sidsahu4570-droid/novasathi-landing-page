@@ -65,19 +65,40 @@ export default function Footer() {
             <a
               href="#home"
               onClick={(e) => { e.preventDefault(); scrollToSection('home') }}
-              style={{ display: 'inline-block', marginBottom: '20px', textDecoration: 'none' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px', textDecoration: 'none' }}
             >
-              <img
-                src="/logo.jpg"
-                alt="Nova Sathi — The Safe Space"
-                style={{
-                  height: '56px',
-                  maxWidth: '220px',
-                  objectFit: 'contain',
-                  borderRadius: '8px',
-                  filter: 'drop-shadow(0 0 16px rgba(172, 75, 255, 0.4))',
-                }}
-              />
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: '2px solid var(--purple-500)',
+                boxShadow: '0 0 20px var(--purple-glow)',
+                display: 'flex',
+                alignItems: 'center',
+                justify: 'center',
+                background: '#06070f',
+                flexShrink: 0,
+              }}>
+                <img
+                  src="/logo.jpg"
+                  alt="Nova Sathi"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              </div>
+              <div>
+                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '20px', color: 'var(--text-primary)', letterSpacing: '0.05em', lineHeight: 1 }}>
+                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
+                </div>
+                <div style={{ fontSize: '10px', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1, marginTop: '4px' }}>
+                  The Safe Space
+                </div>
+              </div>
             </a>
 
             <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.8, maxWidth: '280px', marginBottom: '24px' }}>

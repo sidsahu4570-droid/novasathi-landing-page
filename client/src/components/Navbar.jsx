@@ -48,20 +48,41 @@ export default function Navbar() {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}
             >
-              <img
-                src="/logo.jpg"
-                alt="Nova Sathi — The Safe Space"
-                style={{
-                  height: scrolled ? '42px' : '50px',
-                  maxWidth: '180px',
-                  objectFit: 'contain',
-                  borderRadius: '8px',
-                  transition: 'all 0.3s ease',
-                  filter: 'drop-shadow(0 0 12px rgba(172, 75, 255, 0.4))',
-                }}
-              />
+              <div style={{
+                width: scrolled ? 40 : 46,
+                height: scrolled ? 40 : 46,
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: '2px solid var(--purple-500)',
+                boxShadow: '0 0 16px var(--purple-glow)',
+                display: 'flex',
+                alignItems: 'center',
+                justify: 'center',
+                background: '#06070f',
+                flexShrink: 0,
+                transition: 'all 0.3s ease',
+              }}>
+                <img
+                  src="/logo.jpg"
+                  alt="Nova Sathi"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              </div>
+              <div>
+                <div style={{ fontFamily: '"Cinzel", serif', fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)', letterSpacing: '0.05em', lineHeight: 1 }}>
+                  NOVA<span style={{ color: 'var(--purple-500)' }}>SATHI</span>
+                </div>
+                <div style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.15em', textTransform: 'uppercase', lineHeight: 1, marginTop: '3px' }}>
+                  The Safe Space
+                </div>
+              </div>
             </a>
 
             {/* Desktop Nav Links */}
