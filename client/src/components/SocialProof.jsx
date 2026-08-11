@@ -78,19 +78,19 @@ export default function SocialProof() {
       <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="ns-label" style={{ marginBottom: '20px' }}>
+          <div className="ns-label" style={{ marginBottom: '10px' }}>
             💬 Real Stories
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
+          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
             Lives transformed by{' '}
             <span className="gradient-text">real guidance</span>
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.55 }}>
             Thousands of people have found clarity, peace, and direction through NovaSathi. Here's what they say.
           </p>
 
@@ -101,9 +101,9 @@ export default function SocialProof() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '12px',
-              marginTop: '24px',
-              padding: '12px 24px',
+              gap: '10px',
+              marginTop: '14px',
+              padding: '8px 18px',
               background: 'var(--amber-subtle)',
               border: '1px solid var(--border-amber)',
               borderRadius: '50px',
@@ -114,34 +114,37 @@ export default function SocialProof() {
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
           >
             <div style={{ display: 'flex', gap: '3px' }}>
-              {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#f99c00" color="#f99c00" />)}
+              {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#f99c00" color="#f99c00" />)}
             </div>
-            <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>4.9/5</span>
-            <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Average rating from consultations →</span>
+            <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>4.9/5</span>
+            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Average rating from consultations →</span>
           </button>
         </motion.div>
 
         {/* Testimonials Grid */}
-        <div style={{ columns: '3', columnGap: '24px' }} className="testimonials-masonry">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              className="testimonial-card"
+              className="ns-card"
               role="button"
               tabIndex={0}
               onClick={() => selectServiceAndScroll(t.service)}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') selectServiceAndScroll(t.service) }}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.09 }}
-              style={{ cursor: 'pointer' }}
+              transition={{ delay: i * 0.08 }}
+              style={{ padding: '20px', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
             >
-              {/* Quote mark */}
-              <div style={{ fontSize: '44px', lineHeight: 1, color: 'var(--purple-glow)', fontFamily: 'Georgia, serif', marginBottom: '8px', marginTop: '-8px' }}>"</div>
-
-              <p style={{ fontSize: '14px', color: 'var(--text-primary)', lineHeight: 1.7, marginBottom: '20px', fontStyle: 'italic' }}>
-                {t.review}
-              </p>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                  <StarRating rating={t.rating} />
+                  <span style={{ fontSize: '11px', color: 'var(--purple-500)', fontWeight: 600, padding: '2px 8px', background: 'var(--purple-subtle)', borderRadius: '12px' }}>{t.service}</span>
+                </div>
+                <p style={{ fontSize: '13.5px', color: 'var(--text-primary)', lineHeight: 1.5, marginBottom: '14px', fontStyle: 'italic' }}>
+                  "{t.review}"
+                </p>
+              </div>
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

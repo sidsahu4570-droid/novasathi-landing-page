@@ -213,7 +213,7 @@ export default function ContactForm() {
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }} className="contact-grid">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '36px', alignItems: 'start' }} className="contact-grid">
 
           {/* Left — Info */}
           <motion.div
@@ -221,28 +221,28 @@ export default function ContactForm() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="ns-label" style={{ marginBottom: '20px' }}>
+            <div className="ns-label" style={{ marginBottom: '10px' }}>
               📩 Get in Touch
             </div>
-            <h2 className="section-headline" style={{ marginBottom: '20px', color: 'var(--text-primary)' }}>
+            <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
               Ready to start?{' '}
               <span className="gradient-text">Reach out.</span>
             </h2>
-            <p style={{ fontSize: '16px', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '40px' }}>
+            <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.55, marginBottom: '24px' }}>
               Fill out this form and our team will get back to you shortly to help you get started with the right expert for your needs.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {[
                 { icon: '🌐', title: 'Website', val: 'novasathi.com', href: 'https://novasathi.com/' },
                 { icon: '💬', title: 'Platform Support', val: 'Available on novasathi.com', href: 'https://novasathi.com/' },
                 { icon: '🕐', title: 'Support Hours', val: '24/7 — experts always available', href: null },
                 { icon: '🔒', title: 'Privacy', val: '100% secure and anonymous', href: '#faq' },
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-                  <div style={{ fontSize: '24px', flexShrink: 0 }}>{item.icon}</div>
+                <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                  <div style={{ fontSize: '22px', flexShrink: 0 }}>{item.icon}</div>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--purple-500)', marginBottom: '2px' }}>{item.title}</div>
+                    <div style={{ fontWeight: 600, fontSize: '13.5px', color: 'var(--purple-500)', marginBottom: '2px' }}>{item.title}</div>
                     {item.href ? (
                       <a
                         href={item.href}
@@ -255,7 +255,7 @@ export default function ContactForm() {
                           }
                         }}
                         style={{
-                          fontSize: '15px',
+                          fontSize: '14px',
                           color: 'var(--text-primary)',
                           textDecoration: 'none',
                           fontWeight: 500,
@@ -270,7 +270,7 @@ export default function ContactForm() {
                         {item.val} {item.href.startsWith('http') ? '↗' : ''}
                       </a>
                     ) : (
-                      <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>{item.val}</div>
+                      <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>{item.val}</div>
                     )}
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function ContactForm() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="ns-card-purple" style={{ padding: '36px' }}>
+            <div className="ns-card-purple" style={{ padding: '24px 22px' }}>
 
               {status === 'success' ? (
                 <motion.div

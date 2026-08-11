@@ -83,37 +83,40 @@ body {
 /* ============================================
    LAYOUT HELPERS
    ============================================ */
+/* ============================================
+   LAYOUT HELPERS — COMPACT & DENSE SYSTEM
+   ============================================ */
 .ns-container {
-  max-width: 1180px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   width: 100%;
 }
 
 .ns-section {
-  padding: 96px 24px;
+  padding: 56px 20px;
 }
 
 .ns-section-alt {
-  padding: 96px 24px;
+  padding: 56px 20px;
   background-color: var(--bg-alt);
 }
 
 /* ============================================
-   TYPOGRAPHY
+   TYPOGRAPHY — CONTROLLED PREMIUM SCALE
    ============================================ */
 .hero-headline {
-  font-size: clamp(2.1rem, 5vw, 3.8rem);
-  line-height: 1.1;
+  font-size: clamp(1.85rem, 3.8vw, 3.1rem);
+  line-height: 1.15;
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 
 .section-headline {
-  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
-  line-height: 1.2;
+  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 /* ── Gradient text ─────────────────────────── */

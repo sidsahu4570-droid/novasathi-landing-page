@@ -42,19 +42,19 @@ export default function ProductShowcase() {
       <div className="ns-container">
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="ns-label" style={{ marginBottom: '20px' }}>
+          <div className="ns-label" style={{ marginBottom: '10px' }}>
             👁️ See the Experience
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
+          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
             Meet the experts{' '}
             <span className="gradient-text">waiting to help you</span>
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.55 }}>
             Browse from 150+ verified practitioners. Read real reviews, check specialties, and connect instantly.
           </p>
         </motion.div>
@@ -64,10 +64,10 @@ export default function ProductShowcase() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
-          style={{ marginBottom: '40px' }}
+          style={{ marginBottom: '24px' }}
         >
           {/* App frame */}
-          <div className="ns-card-purple" style={{ padding: '24px', borderRadius: '20px' }}>
+          <div className="ns-card-purple" style={{ padding: '20px', borderRadius: '16px' }}>
 
             {/* App header bar */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', padding: '12px 16px', background: 'var(--bg-surface)', borderRadius: '12px', border: '1px solid var(--border-default)' }}>

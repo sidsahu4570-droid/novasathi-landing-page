@@ -61,25 +61,25 @@ export default function WhyNovaSathi() {
       <div className="ns-container">
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="ns-label-amber" style={{ marginBottom: '20px' }}>
+          <div className="ns-label-amber" style={{ marginBottom: '10px' }}>
             ✨ Why Choose Us
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
+          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
             Why thousands choose{' '}
             <span style={{ color: 'var(--amber-500)' }}>NovaSathi</span>{' '}
             over everything else
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.55 }}>
             These aren't just marketing claims. Here's what actually makes NovaSathi different.
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           {reasons.map((r, i) => (
             <motion.div
               key={i}
@@ -92,7 +92,7 @@ export default function WhyNovaSathi() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1 }}
               style={{
-                padding: '32px',
+                padding: '20px',
                 cursor: 'pointer',
                 borderColor: 'var(--border-amber)',
                 display: 'flex',
@@ -101,14 +101,14 @@ export default function WhyNovaSathi() {
               }}
             >
               <div>
-                <div style={{ fontSize: '36px', marginBottom: '16px' }}>{r.icon}</div>
-                <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>{r.title}</h3>
-                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '20px' }}>{r.desc}</p>
+                <div style={{ fontSize: '28px', marginBottom: '10px' }}>{r.icon}</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>{r.title}</h3>
+                <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '14px' }}>{r.desc}</p>
               </div>
 
-              <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 14px', background: 'var(--amber-subtle)', border: '1px solid var(--border-amber)', borderRadius: '8px' }}>
-                <span style={{ fontSize: '12px', color: 'var(--amber-500)', fontWeight: 600 }}>{r.highlight}</span>
-                <ArrowRight size={14} color="var(--amber-500)" />
+              <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 12px', background: 'var(--amber-subtle)', border: '1px solid var(--border-amber)', borderRadius: '8px' }}>
+                <span style={{ fontSize: '11.5px', color: 'var(--amber-500)', fontWeight: 600 }}>{r.highlight}</span>
+                <ArrowRight size={13} color="var(--amber-500)" />
               </div>
             </motion.div>
           ))}

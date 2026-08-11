@@ -37,37 +37,36 @@ export default function FinalCTA() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div style={{ fontSize: '52px', marginBottom: '24px' }}>✨</div>
+          <div style={{ fontSize: '28px', marginBottom: '10px' }}>✨</div>
 
-          <div className="ns-label-amber" style={{ marginBottom: '24px' }}>
+          <div className="ns-label-amber" style={{ marginBottom: '10px' }}>
             🚀 Take the First Step
           </div>
 
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '20px', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1.65rem, 3.2vw, 2.2rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '10px', letterSpacing: '-0.02em' }}>
             Your clarity is closer{' '}
-            <br />
             <span className="gradient-text">than you think</span>
           </h2>
 
-          <p style={{ fontSize: '18px', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '580px', margin: '0 auto 40px' }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.55, maxWidth: '540px', margin: '0 auto 20px' }}>
             Stop carrying the weight of uncertainty alone. Thousands of people have found their direction, 
             peace of mind, and clarity through NovaSathi — in a single session, completely private, 
             starting free.
           </p>
 
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '20px' }}>
             <button
               type="button"
               onClick={() => selectServiceAndScroll('General Inquiry')}
               className="btn-amber"
-              style={{ fontSize: '17px', padding: '18px 44px' }}
+              style={{ fontSize: '15px', padding: '13px 32px' }}
             >
               Start Free Consultation ✨
             </button>
           </div>
 
           {/* Trust row */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
             {[
               { label: '✓ 5 min free', target: 'pricing' },
               { label: '✓ 100% anonymous', target: 'why-novasathi' },

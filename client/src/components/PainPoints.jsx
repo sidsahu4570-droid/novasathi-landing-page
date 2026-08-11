@@ -46,25 +46,25 @@ export default function PainPoints() {
 
         {/* Header */}
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="ns-label" style={{ marginBottom: '20px', display: 'inline-flex' }}>
+          <div className="ns-label" style={{ marginBottom: '10px', display: 'inline-flex' }}>
             🌑 The Struggle Is Real
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
+          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
             You shouldn't have to navigate{' '}
             <span className="gradient-text">life's hardest moments</span> alone
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto', lineHeight: 1.55 }}>
             If you've ever felt any of these, you're not alone — and NovaSathi exists to change exactly that.
           </p>
         </motion.div>
 
         {/* Pain Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
           {pains.map((pain, i) => (
             <motion.div
               key={i}
@@ -77,21 +77,21 @@ export default function PainPoints() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               style={{
-                padding: '28px',
+                padding: '20px',
                 display: 'flex',
-                gap: '16px',
+                gap: '14px',
                 alignItems: 'flex-start',
                 cursor: 'pointer',
                 borderColor: 'rgba(255,35,87,0.18)',
               }}
             >
-              <div style={{ fontSize: '32px', flexShrink: 0 }}>{pain.emoji}</div>
+              <div style={{ fontSize: '26px', flexShrink: 0 }}>{pain.emoji}</div>
               <div>
-                <div style={{ fontWeight: 600, fontSize: '16px', color: 'var(--text-primary)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ color: '#ff2357', fontSize: '14px', fontWeight: 700 }}>✗</span>
+                <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--text-primary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ color: '#ff2357', fontSize: '13px', fontWeight: 700 }}>✗</span>
                   {pain.title}
                 </div>
-                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                   {pain.desc}
                 </p>
               </div>
@@ -106,7 +106,7 @@ export default function PainPoints() {
           tabIndex={0}
           onClick={() => scrollToSection('transformation')}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection('transformation') }}
-          style={{ marginTop: '56px', textAlign: 'center', padding: '36px', borderRadius: '20px', cursor: 'pointer' }}
+          style={{ marginTop: '28px', textAlign: 'center', padding: '24px 20px', borderRadius: '16px', cursor: 'pointer' }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}

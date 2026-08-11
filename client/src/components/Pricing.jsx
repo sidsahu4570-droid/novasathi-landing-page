@@ -71,10 +71,10 @@ const PlanCard = ({ plan, index, inView }) => (
     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') selectServiceAndScroll(plan.service || plan.name) }}
     style={{
       position: 'relative',
-      padding: '36px 32px',
-      borderRadius: '20px',
+      padding: '22px 20px',
+      borderRadius: '16px',
       cursor: 'pointer',
-      transform: plan.isPopular ? 'scale(1.03)' : 'scale(1)',
+      transform: plan.isPopular ? 'scale(1.02)' : 'scale(1)',
       transition: 'all 0.3s ease',
       display: 'flex',
       flexDirection: 'column',
@@ -82,39 +82,39 @@ const PlanCard = ({ plan, index, inView }) => (
     }}
   >
     {plan.isPopular && (
-      <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', padding: '5px 18px', background: 'linear-gradient(135deg, var(--purple-500), var(--purple-600))', borderRadius: '50px', fontSize: '11px', fontWeight: 700, color: 'white', letterSpacing: '0.06em', whiteSpace: 'nowrap', boxShadow: '0 4px 16px var(--purple-glow)' }}>
+      <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', padding: '3px 14px', background: 'linear-gradient(135deg, var(--purple-500), var(--purple-600))', borderRadius: '50px', fontSize: '10px', fontWeight: 700, color: 'white', letterSpacing: '0.06em', whiteSpace: 'nowrap', boxShadow: '0 4px 16px var(--purple-glow)' }}>
         ✨ MOST POPULAR
       </div>
     )}
 
     <div>
-      <div style={{ marginBottom: '24px' }}>
-        <div style={{ fontSize: '11px', fontWeight: 700, color: plan.isPopular ? 'var(--purple-500)' : 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '6px' }}>{plan.tagline}</div>
-        <h3 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '12px' }}>{plan.name}</h3>
+      <div style={{ marginBottom: '16px' }}>
+        <div style={{ fontSize: '10.5px', fontWeight: 700, color: plan.isPopular ? 'var(--purple-500)' : 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px' }}>{plan.tagline}</div>
+        <h3 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>{plan.name}</h3>
         
-        <div style={{ marginBottom: '16px' }}>
+        <div style={{ marginBottom: '10px' }}>
           {plan.pricePerMin === 0 ? (
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-              <span style={{ fontSize: '42px', fontWeight: 900, color: 'var(--green-active)' }}>FREE</span>
+              <span style={{ fontSize: '34px', fontWeight: 900, color: 'var(--green-active)' }}>FREE</span>
             </div>
           ) : (
             <div>
-              <div style={{ fontSize: '16px', fontWeight: 600, color: 'var(--purple-500)' }}>Pay-per-session</div>
-              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '2px' }}>Pricing varies by expert level</div>
+              <div style={{ fontSize: '15px', fontWeight: 600, color: 'var(--purple-500)' }}>Pay-per-session</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>Pricing varies by expert level</div>
             </div>
           )}
         </div>
 
-        <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{plan.description}</p>
+        <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{plan.description}</p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
         {plan.features.map((f, i) => (
-          <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-            <div style={{ width: 20, height: 20, background: plan.isPopular ? 'var(--purple-subtle)' : 'rgba(0,187,127,0.12)', border: `1px solid ${plan.isPopular ? 'var(--border-purple)' : 'rgba(0,187,127,0.25)'}`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
-              <Check size={12} color={plan.isPopular ? 'var(--purple-500)' : 'var(--green-active)'} strokeWidth={3} />
+          <div key={i} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+            <div style={{ width: 18, height: 18, background: plan.isPopular ? 'var(--purple-subtle)' : 'rgba(0,187,127,0.12)', border: `1px solid ${plan.isPopular ? 'var(--border-purple)' : 'rgba(0,187,127,0.25)'}`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
+              <Check size={11} color={plan.isPopular ? 'var(--purple-500)' : 'var(--green-active)'} strokeWidth={3} />
             </div>
-            <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>{f}</span>
+            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{f}</span>
           </div>
         ))}
       </div>

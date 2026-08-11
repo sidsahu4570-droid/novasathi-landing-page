@@ -33,11 +33,11 @@ const FAQItem = ({ faq, index, inView }) => {
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        style={{ width: '100%', padding: '20px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+        style={{ width: '100%', padding: '14px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '14px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
       >
-        <span style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>{faq.question}</span>
-        <div style={{ width: 28, height: 28, borderRadius: '50%', background: open ? 'var(--purple-subtle)' : 'rgba(255,255,255,0.05)', border: `1px solid ${open ? 'var(--border-purple)' : 'var(--border-default)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.25s ease' }}>
-          {open ? <Minus size={14} color="var(--purple-500)" /> : <Plus size={14} color="var(--text-secondary)" />}
+        <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.35 }}>{faq.question}</span>
+        <div style={{ width: 24, height: 24, borderRadius: '50%', background: open ? 'var(--purple-subtle)' : 'rgba(255,255,255,0.05)', border: `1px solid ${open ? 'var(--border-purple)' : 'var(--border-default)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.25s ease' }}>
+          {open ? <Minus size={13} color="var(--purple-500)" /> : <Plus size={13} color="var(--text-secondary)" />}
         </div>
       </button>
 
@@ -47,11 +47,11 @@ const FAQItem = ({ faq, index, inView }) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
           >
-            <div style={{ padding: '0 24px 20px', paddingTop: '0' }}>
-              <div style={{ height: '1px', background: 'var(--border-purple)', marginBottom: '14px' }} />
-              <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{faq.answer}</p>
+            <div style={{ padding: '0 18px 16px', paddingTop: '0' }}>
+              <div style={{ height: '1px', background: 'var(--border-purple)', marginBottom: '12px' }} />
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{faq.answer}</p>
             </div>
           </motion.div>
         )}
@@ -77,10 +77,10 @@ export default function FAQ() {
       ref={ref}
       className="ns-section bg-glow-purple"
     >
-      <div className="ns-container" style={{ maxWidth: '820px' }}>
+      <div className="ns-container" style={{ maxWidth: '800px' }}>
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}

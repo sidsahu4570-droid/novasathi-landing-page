@@ -46,14 +46,14 @@ export default function Footer() {
       style={{
         background: 'linear-gradient(180deg, var(--bg-alt) 0%, #03040a 100%)',
         borderTop: '1px solid var(--border-default)',
-        padding: '80px 24px 40px',
+        padding: '48px 20px 24px',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
       <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '60px', marginBottom: '64px' }}
+          style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '32px', marginBottom: '32px' }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}

@@ -78,24 +78,24 @@ export default function Features() {
     >
       <div className="ns-container">
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '64px' }}
+          style={{ textAlign: 'center', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <div className="ns-label" style={{ marginBottom: '20px' }}>
+          <div className="ns-label" style={{ marginBottom: '10px' }}>
             🔮 Our Services
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
+          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
             Everything you need,{' '}
             <span className="gradient-text">without the complexity</span>
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '580px', margin: '0 auto', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto', lineHeight: 1.55 }}>
             Every service on NovaSathi is designed to give you one thing: the clarity and confidence to move forward with your life.
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '16px' }}>
           {features.map((f, i) => (
             <motion.div
               key={i}
@@ -109,7 +109,7 @@ export default function Features() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               style={{
-                padding: '32px',
+                padding: '22px 20px',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
@@ -118,18 +118,18 @@ export default function Features() {
             >
               <div>
                 {/* Icon */}
-                <div style={{ width: 60, height: 60, background: f.color, border: `1px solid ${f.border}`, borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', marginBottom: '20px' }}>
+                <div style={{ width: 44, height: 44, background: f.color, border: `1px solid ${f.border}`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '12px' }}>
                   {f.icon}
                 </div>
 
                 {/* Label */}
-                <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--purple-500)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>{f.label}</div>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--purple-500)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '6px' }}>{f.label}</div>
 
                 {/* Title */}
-                <h3 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px', lineHeight: 1.3 }}>{f.title}</h3>
+                <h3 style={{ fontSize: '16.5px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px', lineHeight: 1.3 }}>{f.title}</h3>
 
                 {/* Desc */}
-                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '24px' }}>{f.desc}</p>
+                <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '16px' }}>{f.desc}</p>
               </div>
 
               {/* Action Button Pill */}
