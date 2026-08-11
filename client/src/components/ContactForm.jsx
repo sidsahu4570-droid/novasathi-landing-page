@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle, ChevronDown } from 'lucide-react'
 import axios from 'axios'
 
 const services = [
@@ -11,6 +11,161 @@ const services = [
   'Dil Ki Baat',
   'General Inquiry',
 ]
+
+const CustomDropdown = ({ value, onChange, options, placeholder = 'Select a service...' }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [])
+
+  const handleSelect = (optionValue) => {
+    onChange(optionValue)
+    setIsOpen(false)
+  }
+
+  return (
+    <div ref={dropdownRef} style={{ position: 'relative', width: '100%' }}>
+      {/* Trigger Button */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justify: 'space-between',
+          padding: '13px 16px',
+          backgroundColor: '#10121e',
+          border: isOpen ? '1px solid var(--purple-500)' : '1px solid var(--border-default)',
+          borderRadius: '12px',
+          color: value ? '#f5f5f7' : 'rgba(245, 245, 247, 0.45)',
+          fontFamily: 'inherit',
+          fontSize: '15px',
+          cursor: 'pointer',
+          outline: 'none',
+          boxShadow: isOpen ? '0 0 0 3px rgba(172, 75, 255, 0.15)' : 'none',
+          transition: 'all 0.25s ease',
+          textAlign: 'left',
+        }}
+      >
+        <span>{value || placeholder}</span>
+        <ChevronDown
+          size={18}
+          color="var(--purple-500)"
+          style={{
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.25s ease',
+            flexShrink: 0,
+            marginLeft: '8px',
+          }}
+        />
+      </button>
+
+      {/* Floating Dark Options Overlay — Styled like iOS floating dark menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 4, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              zIndex: 100,
+              backgroundColor: '#10121e',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid var(--border-purple)',
+              borderRadius: '14px',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--purple-glow)',
+              overflow: 'hidden',
+              padding: '6px',
+            }}
+          >
+            {/* Reset / Placeholder option */}
+            <button
+              type="button"
+              onClick={() => handleSelect('')}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '12px 14px',
+                borderRadius: '8px',
+                border: 'none',
+                background: !value ? 'rgba(172, 75, 255, 0.15)' : 'transparent',
+                color: !value ? '#f5f5f7' : 'rgba(245, 245, 247, 0.6)',
+                fontSize: '14px',
+                fontWeight: !value ? 600 : 400,
+                cursor: 'pointer',
+                textAlign: 'left',
+                transition: 'background 0.2s ease',
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(172, 75, 255, 0.15)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = !value ? 'rgba(172, 75, 255, 0.15)' : 'transparent'}
+            >
+              <span style={{ width: 16, display: 'inline-block', textAlign: 'center', color: '#a78bfa', fontWeight: 700 }}>
+                {!value ? '✓' : ''}
+              </span>
+              <span>{placeholder}</span>
+            </button>
+
+            {options.map((opt) => {
+              const isSelected = value === opt
+              return (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => handleSelect(opt)}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '12px 14px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    background: isSelected ? 'rgba(172, 75, 255, 0.15)' : 'transparent',
+                    color: isSelected ? '#f5f5f7' : 'rgba(245, 245, 247, 0.85)',
+                    fontSize: '14px',
+                    fontWeight: isSelected ? 600 : 400,
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'background 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(172, 75, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = isSelected ? 'rgba(172, 75, 255, 0.15)' : 'transparent'}
+                >
+                  <span style={{ width: 16, display: 'inline-block', textAlign: 'center', color: '#a78bfa', fontWeight: 700 }}>
+                    {isSelected ? '✓' : ''}
+                  </span>
+                  <span>{opt}</span>
+                </button>
+              )
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export default function ContactForm() {
   const ref = useRef(null)
@@ -194,10 +349,12 @@ export default function ContactForm() {
 
                     <div>
                       <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>I'm interested in</label>
-                      <select name="service" className="ns-input" value={form.service} onChange={handleChange}>
-                        <option value="">Select a service...</option>
-                        {services.map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                      <CustomDropdown
+                        value={form.service}
+                        onChange={(selectedService) => setForm(prev => ({ ...prev, service: selectedService }))}
+                        options={services}
+                        placeholder="Select a service..."
+                      />
                     </div>
 
                     <div>
