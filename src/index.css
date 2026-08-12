@@ -988,31 +988,10 @@ html, body {
     box-shadow: 0 4px 12px rgba(109, 74, 255, 0.35) !important;
   }
 
-  /* Hero Mobile Layout & Localized Atmospheric Pseudo-Element Scrim */
+  /* Hero Mobile Layout */
   .hero-section {
-    position: relative !important;
-    z-index: 2 !important;
     padding: 24px 0 20px 0 !important;
     background: transparent !important;
-  }
-
-  .hero-section::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -40px !important;
-    bottom: -40px !important;
-    left: -30px !important;
-    right: -30px !important;
-    background: radial-gradient(
-      ellipse 90% 85% at 50% 45%,
-      rgba(10, 5, 35, 0.78) 0%,
-      rgba(10, 5, 35, 0.55) 50%,
-      rgba(10, 5, 35, 0.15) 80%,
-      transparent 100%
-    ) !important;
-    pointer-events: none !important;
-    z-index: -1 !important;
-    border-radius: 50% !important;
   }
 
   .hero-offer-badge {
@@ -1028,7 +1007,7 @@ html, body {
     padding: 0 4px !important;
     word-break: break-word !important;
     color: #FFFFFF !important;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75) !important;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.80) !important;
   }
 
   .hero-subheading {
@@ -1036,8 +1015,8 @@ html, body {
     line-height: 1.5 !important;
     margin-bottom: 18px !important;
     padding: 0 4px !important;
-    color: rgba(255, 255, 255, 0.90) !important;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.60) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
 
   .hero-cta-group {
@@ -1066,8 +1045,8 @@ html, body {
   .hero-microcopy {
     font-size: 0.8rem !important;
     margin-bottom: 18px !important;
-    color: rgba(255, 255, 255, 0.88) !important;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.50) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
 
   .hero-trust-badges {
@@ -1080,64 +1059,28 @@ html, body {
     border-radius: 99px !important;
     width: 100% !important;
     max-width: 340px !important;
-    background: rgba(10, 5, 35, 0.65) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    backdrop-filter: blur(8px) !important;
-    color: rgba(255, 255, 255, 0.92) !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
 
-  /* Section Spacing, Atmospheric Radial Glow & Text Shadows */
+  /* Section Spacing & Text Shadows */
   .section-problem-selector {
-    position: relative !important;
-    z-index: 2 !important;
     padding: 18px 0 20px 0 !important;
-  }
-
-  .section-problem-selector::before {
-    content: '' !important;
-    position: absolute !important;
-    top: -20px !important;
-    left: -20px !important;
-    right: -20px !important;
-    height: 200px !important;
-    background: radial-gradient(
-      ellipse 90% 80% at 50% 30%,
-      rgba(10, 5, 35, 0.75) 0%,
-      rgba(10, 5, 35, 0.45) 55%,
-      rgba(10, 5, 35, 0.10) 85%,
-      transparent 100%
-    ) !important;
-    pointer-events: none !important;
-    z-index: -1 !important;
+    background: transparent !important;
   }
 
   .section-title {
     font-size: 1.5rem !important;
     line-height: 1.25 !important;
     color: #FFFFFF !important;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75) !important;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.80) !important;
   }
 
   .section-subtitle {
     font-size: 0.84rem !important;
     margin-bottom: 16px !important;
-    color: rgba(255, 255, 255, 0.88) !important;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.60) !important;
-  }
-
-  /* Translucent Glass Surface Contrast for Mobile Cards */
-  .problem-card,
-  .step-card,
-  .trust-strip,
-  .testimonial-card,
-  .final-cta-card,
-  .faq-item {
-    background: rgba(20, 12, 50, 0.82) !important;
-    border: 1px solid rgba(200, 184, 244, 0.2) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
 
   .problem-card-title,
@@ -1145,16 +1088,17 @@ html, body {
   .testimonial-author,
   .faq-question {
     color: #FFFFFF !important;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
 
   .problem-card-desc,
   .step-desc,
   .testimonial-quote,
   .faq-answer {
-    color: rgba(255, 255, 255, 0.88) !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
   }
+
 
 
 
