@@ -108,21 +108,21 @@ export default function Hero() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '580px',
-        height: '580px',
-        opacity: 0.25,
+        width: '560px',
+        height: '560px',
+        opacity: 0.12,
         pointerEvents: 'none',
         animation: 'spin-slow 60s linear infinite',
       }}>
         <svg viewBox="0 0 200 200" width="100%" height="100%">
-          <circle cx="100" cy="100" r="95" stroke="rgba(255,255,255,0.20)" strokeWidth="0.8" fill="none" strokeDasharray="3 3" />
-          <circle cx="100" cy="100" r="80" stroke="rgba(217,119,6,0.50)" strokeWidth="0.6" fill="none" />
-          <circle cx="100" cy="100" r="60" stroke="rgba(167,139,250,0.40)" strokeWidth="0.6" fill="none" strokeDasharray="2 2" />
-          <text x="100" y="15" fill="#f59e0b" fontSize="8" textAnchor="middle" fontWeight="bold">♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓</text>
+          <circle cx="100" cy="100" r="95" stroke="var(--purple-500)" strokeWidth="0.8" fill="none" strokeDasharray="3 3" />
+          <circle cx="100" cy="100" r="80" stroke="var(--amber-500)" strokeWidth="0.6" fill="none" />
+          <circle cx="100" cy="100" r="60" stroke="var(--purple-500)" strokeWidth="0.6" fill="none" strokeDasharray="2 2" />
+          <text x="100" y="15" fill="var(--purple-500)" fontSize="8" textAnchor="middle" fontWeight="bold">♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓</text>
         </svg>
       </div>
 
-      <CosmicOrb size="380px" color="rgba(124,58,237,0.25)" top="-10%" left="-10%" delay={0} opacity={0.15} />
+      <CosmicOrb size="380px" color="rgba(109,74,255,0.12)" top="-10%" left="-10%" delay={0} opacity={0.08} />
 
       <div className="ns-container" style={{ paddingTop: '4px', paddingBottom: '4px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '20px', alignItems: 'center' }} className="hero-grid">
@@ -134,9 +134,9 @@ export default function Hero() {
                 type="button"
                 onClick={() => scrollToSection('reviews')}
                 className="ns-label"
-                style={{ marginBottom: '6px', cursor: 'pointer', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', color: '#F5F3FF', padding: '2px 8px', fontSize: '10.5px' }}
+                style={{ marginBottom: '6px', cursor: 'pointer', background: 'rgba(109,74,255,0.08)', border: '1px solid var(--border-purple)', padding: '2px 8px', fontSize: '10.5px' }}
               >
-                <Star size={10} fill="#f59e0b" color="#f59e0b" />
+                <Star size={10} fill="var(--amber-500)" color="var(--amber-500)" />
                 Trusted by thousands across India →
               </button>
             </motion.div>
@@ -147,10 +147,10 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ marginBottom: '8px', color: '#FFFFFF', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
+              style={{ marginBottom: '8px', color: '#171329' }}
             >
               Get Clarity on Life's{' '}
-              <span style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span style={{ background: 'linear-gradient(135deg, #6D4AFF 0%, #C89B3C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 Biggest Questions
               </span>{' '}
               — From Experts Who Understand
@@ -161,11 +161,11 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ fontSize: '13.5px', lineHeight: 1.4, color: 'rgba(245, 245, 247, 0.88)', marginBottom: '12px', maxWidth: '460px' }}
+              style={{ fontSize: '13.5px', lineHeight: 1.4, color: '#5E5870', marginBottom: '12px', maxWidth: '460px' }}
             >
               Connect with verified astrologers, tarot readers, and emotional wellness counselors. 
               Get personalized guidance for career, relationships, and life — completely private, 
-              available 24/7, and starting <strong style={{ color: '#fbbf24' }}>100% free</strong>.
+              available 24/7, and starting <strong style={{ color: 'var(--purple-500)' }}>100% free</strong>.
             </motion.p>
 
             <motion.div
@@ -187,7 +187,7 @@ export default function Hero() {
                 type="button"
                 onClick={() => scrollToSection('how-it-works')}
                 className="btn-secondary"
-                style={{ fontSize: '13px', padding: '8px 18px', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', color: '#FFFFFF' }}
+                style={{ fontSize: '13px', padding: '8px 18px' }}
               >
                 How It Works <ChevronDown size={13} />
               </button>
@@ -211,7 +211,7 @@ export default function Hero() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px',
-                    color: 'rgba(245, 245, 247, 0.85)',
+                    color: 'var(--text-secondary)',
                     fontSize: '12px',
                     background: 'transparent',
                     border: 'none',
@@ -220,8 +220,8 @@ export default function Hero() {
                     textAlign: 'left',
                     transition: 'color 0.2s ease',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245, 245, 247, 0.85)'}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
                 >
                   <span style={{ color: 'var(--green-active)' }}>{item.icon}</span>
                   {item.text}

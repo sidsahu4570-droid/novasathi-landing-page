@@ -62,8 +62,8 @@ export default function Features() {
     <section
       id="features"
       ref={ref}
-      className="ns-section"
-      style={{ position: 'relative', background: 'transparent' }}
+      className="ns-section bg-alt"
+      style={{ position: 'relative' }}
     >
       <div id="pain" style={{ position: 'absolute', top: 0 }} />
       <div id="transformation" style={{ position: 'absolute', top: 0 }} />
@@ -77,18 +77,18 @@ export default function Features() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4 }}
         >
-          <div className="ns-label" style={{ marginBottom: '6px', background: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.25)', color: '#F5F3FF' }}>
+          <div className="ns-label" style={{ marginBottom: '6px' }}>
             🔮 Services & Solution
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '6px', color: '#FFFFFF', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
-            From confusion to <span style={{ background: 'linear-gradient(135deg, #c084fc 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>complete clarity</span>
+          <h2 className="section-headline" style={{ marginBottom: '6px', color: 'var(--text-primary)' }}>
+            From confusion to <span className="gradient-text">complete clarity</span>
           </h2>
 
           {/* Problem → Solution 1-line bar */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: 'rgba(255, 255, 255, 0.92)', border: '1px solid rgba(255, 255, 255, 0.3)', borderRadius: '50px', fontSize: '12.5px', color: '#171329', maxWidth: '640px', flexWrap: 'wrap', justifyContent: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
-            <span style={{ color: '#dc2626', fontWeight: 700 }}>Struggling alone?</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: 'rgba(172, 75, 255, 0.08)', border: '1px solid var(--border-purple)', borderRadius: '50px', fontSize: '12.5px', color: 'var(--text-secondary)', maxWidth: '640px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span style={{ color: '#ff2357', fontWeight: 600 }}>Struggling alone?</span>
             <span>→</span>
-            <span style={{ color: '#059669', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ color: 'var(--green-active)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 size={13} /> NovaSathi brings 24/7 private expert guidance
             </span>
           </div>

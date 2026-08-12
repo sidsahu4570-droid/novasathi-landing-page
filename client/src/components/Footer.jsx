@@ -29,10 +29,9 @@ export default function Footer() {
     <footer
       ref={ref}
       style={{
-        background: 'rgba(14, 9, 29, 0.88)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        borderTop: '1px solid rgba(124, 58, 237, 0.25)',
+        background: 'rgba(250, 248, 255, 0.60)',
+        backdropFilter: 'blur(12px)',
+        borderTop: '1px solid rgba(109, 74, 255, 0.12)',
         padding: '24px 16px 16px',
         position: 'relative',
         overflow: 'hidden',

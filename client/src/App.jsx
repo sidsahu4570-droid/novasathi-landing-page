@@ -1,3 +1,4 @@
+import CosmicBackground from './components/CosmicBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import PainPoints from './components/PainPoints'
@@ -10,9 +11,10 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div style={{ backgroundColor: '#05060f', color: '#f8fafc' }}>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <CosmicBackground />
       <Navbar />
-      <main>
+      <main style={{ position: 'relative', zIndex: 1 }}>
         {/* Section 1: Header + Hero */}
         <Hero />
 

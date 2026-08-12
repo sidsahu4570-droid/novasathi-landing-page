@@ -25,8 +25,8 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       ref={ref}
-      className="ns-section"
-      style={{ position: 'relative', background: 'transparent' }}
+      className="ns-section bg-base"
+      style={{ position: 'relative' }}
     >
       <div id="benefits" style={{ position: 'absolute', top: 0 }} />
       <div id="why-novasathi" style={{ position: 'absolute', top: 0 }} />
@@ -39,13 +39,13 @@ export default function HowItWorks() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <div className="ns-label" style={{ marginBottom: '6px', background: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.25)', color: '#F5F3FF' }}>
+          <div className="ns-label" style={{ marginBottom: '6px' }}>
             ⚡ Why Choose NovaSathi & How It Works
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '4px', color: '#FFFFFF', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
-            Guidance made <span style={{ background: 'linear-gradient(135deg, #c084fc 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>simple, private & fast</span>
+          <h2 className="section-headline" style={{ marginBottom: '4px', color: 'var(--text-primary)' }}>
+            Guidance made <span className="gradient-text">simple, private & fast</span>
           </h2>
-          <p style={{ fontSize: '13.5px', color: 'rgba(245, 245, 247, 0.85)', maxWidth: '460px', margin: '0 auto', lineHeight: 1.4 }}>
+          <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', maxWidth: '460px', margin: '0 auto', lineHeight: 1.4 }}>
             Four key benefits paired with a simple 2-minute process.
           </p>
         </motion.div>
