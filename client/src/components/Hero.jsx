@@ -102,28 +102,6 @@ export default function Hero() {
     >
       <StarField />
 
-      {/* Subtle Zodiac Wheel Background */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '560px',
-        height: '560px',
-        opacity: 0.12,
-        pointerEvents: 'none',
-        animation: 'spin-slow 60s linear infinite',
-      }}>
-        <svg viewBox="0 0 200 200" width="100%" height="100%">
-          <circle cx="100" cy="100" r="95" stroke="var(--purple-500)" strokeWidth="0.8" fill="none" strokeDasharray="3 3" />
-          <circle cx="100" cy="100" r="80" stroke="var(--amber-500)" strokeWidth="0.6" fill="none" />
-          <circle cx="100" cy="100" r="60" stroke="var(--purple-500)" strokeWidth="0.6" fill="none" strokeDasharray="2 2" />
-          <text x="100" y="15" fill="var(--purple-500)" fontSize="8" textAnchor="middle" fontWeight="bold">♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓</text>
-        </svg>
-      </div>
-
-      <CosmicOrb size="380px" color="rgba(109,74,255,0.12)" top="-10%" left="-10%" delay={0} opacity={0.08} />
-
       <div className="ns-container" style={{ paddingTop: '4px', paddingBottom: '4px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '20px', alignItems: 'center' }} className="hero-grid">
 
