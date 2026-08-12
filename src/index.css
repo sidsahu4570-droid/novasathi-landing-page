@@ -891,26 +891,353 @@ html, body {
 }
 
 /* ----------------------------------------------------
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE ADJUSTMENTS & MOBILE OPTIMIZATION
    ---------------------------------------------------- */
 @media (max-width: 900px) {
-  .hero-headline { font-size: 2.4rem; }
+  .hero-headline { font-size: 2.2rem; }
   .problem-grid { grid-template-columns: repeat(2, 1fr); }
   .steps-container { grid-template-columns: 1fr; gap: 14px; }
   .testimonials-grid { grid-template-columns: 1fr; gap: 14px; }
-  .trust-strip { flex-direction: column; gap: 8px; border-radius: 20px; }
-  .trust-strip-divider { display: none; }
   .nav-links { display: none; } /* Mobile navbar simplification */
 }
 
-@media (max-width: 600px) {
-  .hero-headline { font-size: 1.95rem; }
-  .hero-subheading { font-size: 1rem; }
-  .problem-grid { grid-template-columns: 1fr; }
-  .hero-trust-badges { flex-direction: column; gap: 6px; border-radius: 16px; }
-  .final-cta-headline { font-size: 1.7rem; }
-  .final-cta-offer { font-size: 1.4rem; }
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  .cosmic-container {
+    width: 100vw !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .content-container {
+    padding: 0 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Celestial background elements on mobile */
+  .planet-ringed {
+    top: 18% !important;
+    right: 3% !important;
+    width: 55px !important;
+    height: 55px !important;
+    opacity: 0.6 !important;
+  }
+  .planet-sphere-violet {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .planet-ring {
+    width: 65px !important;
+    height: 20px !important;
+  }
+
+  .planet-orb-left {
+    top: 14% !important;
+    left: 3% !important;
+    width: 28px !important;
+    height: 28px !important;
+    opacity: 0.5 !important;
+  }
+
+  /* Navbar Mobile Layout */
+  .navbar {
+    padding: 10px 0 !important;
+  }
+
+  .navbar-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .logo-link {
+    font-size: 1.25rem !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-cta {
+    font-size: 0.78rem !important;
+    padding: 7px 12px !important;
+    white-space: nowrap !important;
+    border-radius: 99px !important;
+    box-shadow: 0 4px 12px rgba(109, 74, 255, 0.35) !important;
+  }
+
+  /* Hero Mobile Layout */
+  .hero-section {
+    padding: 22px 0 18px 0 !important;
+  }
+
+  .hero-offer-badge {
+    font-size: 0.78rem !important;
+    padding: 5px 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .hero-headline {
+    font-size: 1.8rem !important;
+    line-height: 1.22 !important;
+    margin-bottom: 12px !important;
+    padding: 0 4px !important;
+    word-break: break-word !important;
+  }
+
+  .hero-subheading {
+    font-size: 0.92rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px !important;
+    padding: 0 4px !important;
+  }
+
+  .hero-cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  .hero-cta-group .btn-primary.btn-gold {
+    width: 100% !important;
+    max-width: 320px !important;
+    text-align: center !important;
+    font-size: 0.98rem !important;
+    padding: 13px 20px !important;
+  }
+
+  .hero-cta-group .btn-secondary {
+    width: 100% !important;
+    max-width: 320px !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    padding: 11px 20px !important;
+  }
+
+  .hero-microcopy {
+    font-size: 0.8rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .hero-trust-badges {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px 14px !important;
+    font-size: 0.78rem !important;
+    padding: 7px 14px !important;
+    border-radius: 99px !important;
+    width: 100% !important;
+    max-width: 340px !important;
+  }
+
+  /* Section Spacing & Grid Adjustments */
+  .section-problem-selector {
+    padding: 20px 0 24px 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.6rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.88rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  .problem-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .problem-card {
+    padding: 18px 16px !important;
+    min-height: auto !important;
+  }
+
+  .problem-card-title {
+    font-size: 1.05rem !important;
+  }
+
+  .problem-card-desc {
+    font-size: 0.85rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .section-how-it-works {
+    padding: 20px 0 24px 0 !important;
+  }
+
+  .steps-container {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .step-card {
+    padding: 18px 16px !important;
+  }
+
+  .step-number {
+    font-size: 1.8rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Trust Strip Grid on Mobile */
+  .trust-strip-container {
+    padding: 10px 0 18px 0 !important;
+  }
+
+  .trust-strip {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px 8px !important;
+    padding: 14px 12px !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .trust-strip-item {
+    justify-content: center !important;
+    font-size: 0.74rem !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .trust-strip-divider {
+    display: none !important;
+  }
+
+  .section-testimonials {
+    padding: 20px 0 24px 0 !important;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .testimonial-card {
+    padding: 18px 16px !important;
+  }
+
+  .section-final-cta {
+    padding: 20px 0 24px 0 !important;
+  }
+
+  .final-cta-card {
+    padding: 26px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .final-cta-headline {
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .final-cta-sub {
+    font-size: 0.88rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .final-cta-offer {
+    font-size: 1.35rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .final-cta-card .btn-primary {
+    width: 100% !important;
+    max-width: 320px !important;
+    font-size: 0.98rem !important;
+    padding: 13px 20px !important;
+  }
+
+  .section-faq {
+    padding: 20px 0 24px 0 !important;
+  }
+
+  .faq-item {
+    padding: 14px 16px !important;
+  }
+
+  .faq-question {
+    font-size: 0.92rem !important;
+    gap: 8px !important;
+  }
+
+  .faq-answer {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .footer {
+    padding: 22px 0 20px 0 !important;
+  }
+
+  .footer-inner {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 14px !important;
+  }
+
+  .footer-links {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 10px 16px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .modal-content {
+    width: 100% !important;
+    max-width: 380px !important;
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+
+  .modal-title {
+    font-size: 1.35rem !important;
+  }
+
+  .modal-sub {
+    font-size: 0.82rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  .modal-topic-select {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .modal-topic-btn {
+    padding: 8px 10px !important;
+    font-size: 0.78rem !important;
+  }
 }
+
+@media (max-width: 380px) {
+  .logo-link {
+    font-size: 1.1rem !important;
+  }
+  .nav-cta {
+    font-size: 0.72rem !important;
+    padding: 6px 10px !important;
+  }
+  .hero-headline {
+    font-size: 1.55rem !important;
+  }
+}
+
 
 /* ----------------------------------------------------
    RESTORED COSMIC BACKGROUND KEYFRAME ANIMATIONS
