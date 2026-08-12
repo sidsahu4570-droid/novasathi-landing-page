@@ -915,7 +915,8 @@ html, body {
   }
 
   .content-container {
-    padding: 0 22px !important;
+    padding-left: clamp(16px, 4.8vw, 20px) !important;
+    padding-right: clamp(16px, 4.8vw, 20px) !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
