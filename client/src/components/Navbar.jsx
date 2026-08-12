@@ -34,7 +34,7 @@ export default function Navbar() {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-scrolled' : ''}`}
         style={{
-          background: scrolled ? 'rgba(255, 255, 255, 0.88)' : 'rgba(250, 248, 255, 0.65)',
+          background: scrolled ? 'rgba(255, 255, 255, 0.75)' : 'rgba(255, 255, 255, 0.45)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
           borderBottom: '1px solid rgba(109, 74, 255, 0.12)',

@@ -10,10 +10,10 @@ export default function CosmicBackground() {
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
-        background: '#100B2E',
+        background: '#060713',
       }}
     >
-      {/* High-Resolution Photorealistic Cosmic Universe Background Wallpaper */}
+      {/* High-Resolution Photorealistic Cosmic Universe Background Wallpaper — 100% Full Opacity */}
       <div
         style={{
           position: 'absolute',
@@ -22,19 +22,8 @@ export default function CosmicBackground() {
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.90,
-        }}
-      />
-
-      {/* Soft Light Cosmic Atmosphere Overlay for Content Readability */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            radial-gradient(ellipse at 50% 20%, rgba(250, 248, 255, 0.55) 0%, rgba(250, 248, 255, 0.20) 65%),
-            linear-gradient(180deg, rgba(250, 248, 255, 0.30) 0%, rgba(244, 240, 255, 0.40) 100%)
-          `,
+          opacity: 1.0,
+          filter: 'contrast(1.05) saturate(1.10)',
         }}
       />
     </div>

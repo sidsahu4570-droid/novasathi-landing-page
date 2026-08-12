@@ -63,7 +63,7 @@ section[id], div[id] {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: var(--bg-base);
+  background-color: #060713;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,7 +72,7 @@ body {
 
 /* ── Scrollbar ─────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-track { background: #060713; }
 ::-webkit-scrollbar-thumb { background: var(--purple-700); border-radius: 3px; }
 
 /* ── Selection ────────────────────────────── */
@@ -94,7 +94,7 @@ body {
 
 .ns-section-alt {
   padding: 28px 16px;
-  background-color: var(--bg-alt);
+  background-color: transparent;
 }
 
 /* ============================================
