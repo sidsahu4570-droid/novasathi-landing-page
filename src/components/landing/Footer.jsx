@@ -21,7 +21,7 @@ export default function Footer() {
           <li><a href="#faq" className="footer-link">FAQ</a></li>
           <li><a href="https://novasathi.com/privacy" target="_blank" rel="noopener noreferrer" className="footer-link">Privacy Policy</a></li>
           <li><a href="https://novasathi.com/terms" target="_blank" rel="noopener noreferrer" className="footer-link">Terms of Service</a></li>
-          <li><a href="#" className="footer-link">Contact</a></li>
+          <li><a href="https://novasathi.com/contact" target="_blank" rel="noopener noreferrer" className="footer-link">Contact</a></li>
         </ul>
       </div>
     </footer>
