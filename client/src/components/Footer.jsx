@@ -46,14 +46,14 @@ export default function Footer() {
       style={{
         background: 'linear-gradient(180deg, var(--bg-alt) 0%, #03040a 100%)',
         borderTop: '1px solid var(--border-default)',
-        padding: '48px 20px 24px',
+        padding: '32px 16px 20px',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
       <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '32px', marginBottom: '32px' }}
+          style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '24px', marginBottom: '24px' }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -65,11 +65,11 @@ export default function Footer() {
             <a
               href="#home"
               onClick={(e) => { e.preventDefault(); scrollToSection('home') }}
-              style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '20px', textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '14px', textDecoration: 'none' }}
             >
               <div style={{
-                width: 52,
-                height: 52,
+                width: 40,
+                height: 40,
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid var(--purple-500)',

@@ -94,17 +94,16 @@ export default function Hero() {
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        paddingTop: '76px',
-        paddingBottom: '36px',
+        paddingTop: '64px',
+        paddingBottom: '16px',
         overflow: 'hidden',
       }}
     >
       <StarField />
-      <CosmicOrb size="500px" color="rgba(172,75,255,0.3)" top="-10%" left="-10%" delay={0} opacity={0.08} />
-      <CosmicOrb size="360px" color="rgba(249,156,0,0.3)" top="20%" left="70%" delay={2} opacity={0.06} />
+      <CosmicOrb size="400px" color="rgba(172,75,255,0.3)" top="-10%" left="-10%" delay={0} opacity={0.08} />
 
-      <div className="ns-container" style={{ paddingTop: '16px', paddingBottom: '16px', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '36px', alignItems: 'center' }} className="hero-grid">
+      <div className="ns-container" style={{ paddingTop: '8px', paddingBottom: '8px', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '24px', alignItems: 'center' }} className="hero-grid">
 
           {/* Left — Copy */}
           <div>
@@ -113,9 +112,9 @@ export default function Hero() {
                 type="button"
                 onClick={() => scrollToSection('reviews')}
                 className="ns-label"
-                style={{ marginBottom: '12px', cursor: 'pointer', background: 'var(--purple-subtle)', border: '1px solid var(--border-purple)', padding: '4px 12px', fontSize: '12px' }}
+                style={{ marginBottom: '8px', cursor: 'pointer', background: 'var(--purple-subtle)', border: '1px solid var(--border-purple)', padding: '3px 10px', fontSize: '11px' }}
               >
-                <Star size={11} fill="var(--purple-500)" color="var(--purple-500)" />
+                <Star size={10} fill="var(--purple-500)" color="var(--purple-500)" />
                 Trusted by thousands across India →
               </button>
             </motion.div>
@@ -126,7 +125,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ marginBottom: '14px', color: 'var(--text-primary)' }}
+              style={{ marginBottom: '10px', color: 'var(--text-primary)' }}
             >
               Get Clarity on Life's{' '}
               <span className="gradient-text">Biggest Questions</span>{' '}
@@ -138,7 +137,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ fontSize: '15.5px', lineHeight: 1.55, color: 'var(--text-secondary)', marginBottom: '20px', maxWidth: '500px' }}
+              style={{ fontSize: '14.5px', lineHeight: 1.45, color: 'var(--text-secondary)', marginBottom: '14px', maxWidth: '480px' }}
             >
               Connect with verified astrologers, tarot readers, and emotional wellness counselors. 
               Get personalized guidance for career, relationships, and life — completely private, 
@@ -150,23 +149,23 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '24px' }}
+              style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '16px' }}
             >
               <button
                 type="button"
                 onClick={() => selectServiceAndScroll('General Inquiry')}
                 className="btn-primary"
-                style={{ fontSize: '14.5px', padding: '12px 26px' }}
+                style={{ fontSize: '13.5px', padding: '10px 22px' }}
               >
-                Start Free Consultation <ArrowRight size={16} />
+                Start Free Consultation <ArrowRight size={15} />
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('how-it-works')}
                 className="btn-secondary"
-                style={{ fontSize: '14.5px', padding: '11px 24px' }}
+                style={{ fontSize: '13.5px', padding: '9px 20px' }}
               >
-                How It Works <ChevronDown size={15} />
+                How It Works <ChevronDown size={14} />
               </button>
             </motion.div>
 
@@ -176,7 +175,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}
               className="trust-grid"
             >
               {trustItems.map((item, i) => (

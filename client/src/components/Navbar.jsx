@@ -42,7 +42,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <div className="ns-container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: scrolled ? '64px' : '76px', transition: 'height 0.3s ease' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: scrolled ? '54px' : '62px', transition: 'height 0.3s ease' }}>
 
             {/* Logo */}
             <a
@@ -51,8 +51,8 @@ export default function Navbar() {
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
             >
               <div style={{
-                width: scrolled ? 42 : 48,
-                height: scrolled ? 42 : 48,
+                width: scrolled ? 36 : 40,
+                height: scrolled ? 36 : 40,
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid var(--purple-500)',

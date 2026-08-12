@@ -5,18 +5,14 @@ import axios from 'axios'
 import { selectServiceAndScroll } from '../utils/navigation'
 
 const defaultFaqs = [
-  { question: "What exactly is NovaSathi?", answer: "NovaSathi is an online platform that connects you with verified astrologers, tarot readers, numerologists, Vastu consultants, and emotional wellness counselors. It's designed to give you personalised spiritual guidance and emotional support — privately, conveniently, and 24/7.", category: 'general' },
-  { question: "How does the free 5-minute consultation work?", answer: "When you connect with any expert, the first 5 minutes are completely free. No payment, no credit card. You simply start chatting or calling. After 5 minutes, if you'd like to continue, you'll be prompted to unlock the session with a payment.", category: 'services' },
-  { question: "Are the experts genuinely verified?", answer: "Yes. Every practitioner on NovaSathi undergoes a verification process before they're listed on the platform. Additionally, every expert has ratings and reviews from real users visible on their profile — so you can check their track record before connecting.", category: 'general' },
-  { question: "Is my privacy truly protected?", answer: "Absolutely. NovaSathi uses end-to-end phone masking, which means the expert never sees your real phone number. For 'Dil Ki Baat' emotional wellness sessions, you're identified by a system-generated anonymous ID, not your real identity. Your personal data is never shared.", category: 'privacy' },
-  { question: "What is 'Dil Ki Baat'?", answer: "'Dil Ki Baat' (meaning 'Words from the Heart') is NovaSathi's unique emotional wellness service. It provides a completely anonymous, judgment-free space where you can speak to a compassionate peer listener about what's weighing on your heart. It's not therapy or a crisis helpline — it's a safe, human space to be heard.", category: 'services' },
-  { question: "How much does a session cost after the free trial?", answer: "Pricing varies by expert and their experience level. You'll see each expert's per-minute or per-session rate on their profile before you connect. After your free 5 minutes, you'll be clearly shown the cost before unlocking. There are no hidden charges.", category: 'pricing' },
-  { question: "Do I need to download an app?", answer: "No app download needed! NovaSathi is a Progressive Web App (PWA). You can access it directly from your browser and optionally install it to your home screen in one tap — just like an app, but without going through an app store.", category: 'process' },
-  { question: "Is it available in Hindi or regional languages?", answer: "Many experts on NovaSathi offer consultations in Hindi and regional Indian languages. You can check an expert's language of consultation on their profile before connecting.", category: 'process' },
-  { question: "Can I choose which expert I want to talk to?", answer: "Yes. You browse a full directory of experts, filtered by category (astrology, tarot, etc.), rating, availability, and speciality. You select the expert who feels right, and connect directly with them.", category: 'process' },
-  { question: "What if NovaSathi is not right for me?", answer: "Since the first 5 minutes are completely free, there's no financial risk to trying. If you don't feel the session is for you, simply don't unlock the paid continuation. You only pay when you actively choose to.", category: 'pricing' },
-  { question: "Is NovaSathi a substitute for professional therapy or medical advice?", answer: "No. NovaSathi is for spiritual guidance and peer emotional support only. It is not a substitute for certified professional medical, psychological, or legal advice. If you're experiencing a mental health crisis, please contact emergency services or a certified mental health professional.", category: 'support' },
-  { question: "How do I get started?", answer: "Simply visit NovaSathi, browse the expert directory, select an expert whose profile resonates with you, and start your free 5-minute consultation. No registration barrier, no payment required to start.", category: 'general' },
+  { question: "What exactly is NovaSathi?", answer: "NovaSathi connects you with verified astrologers, tarot readers, numerologists, Vastu consultants, and peer counselors for 24/7 private guidance." },
+  { question: "How does the free 5-minute consultation work?", answer: "Your first 5 minutes with any expert are completely free. No credit card or payment required to start chatting or calling." },
+  { question: "Are the experts genuinely verified?", answer: "Yes. Every practitioner undergoes background verification and has ratings/reviews from real users visible on their profile." },
+  { question: "Is my privacy truly protected?", answer: "Absolutely. End-to-end phone masking hides your real number. 'Dil Ki Baat' uses system-generated anonymous IDs so your identity stays private." },
+  { question: "What is 'Dil Ki Baat'?", answer: "'Dil Ki Baat' provides a completely anonymous, judgment-free space to speak with compassionate peer listeners about what is on your heart." },
+  { question: "How much does a session cost after the free trial?", answer: "Rates vary by expert and are displayed on their profile. You are shown the exact per-minute/session cost before unlocking. Zero hidden fees." },
+  { question: "Do I need to download an app?", answer: "No download needed! NovaSathi is a Progressive Web App (PWA) accessible directly from any browser or home screen." },
+  { question: "Is NovaSathi substitute for professional therapy?", answer: "No. NovaSathi is for spiritual guidance & peer support. It is not a substitute for certified medical, psychological, or legal crisis therapy." },
 ]
 
 const FAQItem = ({ faq, index, inView }) => {
@@ -24,20 +20,21 @@ const FAQItem = ({ faq, index, inView }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.05 }}
+      transition={{ delay: index * 0.04 }}
       className={`faq-item ${open ? 'open' : ''}`}
+      style={{ marginBottom: '6px' }}
     >
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        style={{ width: '100%', padding: '14px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '14px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+        style={{ width: '100%', padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', minHeight: '46px' }}
       >
-        <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.35 }}>{faq.question}</span>
-        <div style={{ width: 24, height: 24, borderRadius: '50%', background: open ? 'var(--purple-subtle)' : 'rgba(255,255,255,0.05)', border: `1px solid ${open ? 'var(--border-purple)' : 'var(--border-default)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.25s ease' }}>
-          {open ? <Minus size={13} color="var(--purple-500)" /> : <Plus size={13} color="var(--text-secondary)" />}
+        <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>{faq.question}</span>
+        <div style={{ width: 22, height: 22, borderRadius: '50%', background: open ? 'var(--purple-subtle)' : 'rgba(255,255,255,0.05)', border: `1px solid ${open ? 'var(--border-purple)' : 'var(--border-default)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.25s ease' }}>
+          {open ? <Minus size={12} color="var(--purple-500)" /> : <Plus size={12} color="var(--text-secondary)" />}
         </div>
       </button>
 
@@ -47,11 +44,11 @@ const FAQItem = ({ faq, index, inView }) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
           >
-            <div style={{ padding: '0 18px 16px', paddingTop: '0' }}>
-              <div style={{ height: '1px', background: 'var(--border-purple)', marginBottom: '12px' }} />
-              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{faq.answer}</p>
+            <div style={{ padding: '0 14px 12px', paddingTop: '0' }}>
+              <div style={{ height: '1px', background: 'var(--border-purple)', marginBottom: '8px', opacity: 0.5 }} />
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{faq.answer}</p>
             </div>
           </motion.div>
         )}
@@ -62,7 +59,7 @@ const FAQItem = ({ faq, index, inView }) => {
 
 export default function FAQ() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '-40px' })
   const [faqs, setFaqs] = useState(defaultFaqs)
 
   useEffect(() => {
@@ -77,48 +74,49 @@ export default function FAQ() {
       ref={ref}
       className="ns-section bg-glow-purple"
     >
-      <div className="ns-container" style={{ maxWidth: '800px' }}>
+      <div className="ns-container" style={{ maxWidth: '780px' }}>
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '24px' }}
-          initial={{ opacity: 0, y: 30 }}
+          style={{ textAlign: 'center', marginBottom: '14px' }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="ns-label" style={{ marginBottom: '20px' }}>
-            ❓ FAQ
+          <div className="ns-label" style={{ marginBottom: '6px' }}>
+            ❓ Frequently Asked Questions
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>
-            <span className="gradient-text">Frequently asked</span> questions
+          <h2 className="section-headline" style={{ marginBottom: '4px', color: 'var(--text-primary)' }}>
+            Got questions? <span className="gradient-text">We've got answers</span>
           </h2>
-          <p style={{ fontSize: '17px', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-            Everything you need to know before your first session.
+          <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', maxWidth: '440px', margin: '0 auto', lineHeight: 1.4 }}>
+            Everything you need to know about starting your free 5-minute session.
           </p>
         </motion.div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        {/* FAQ Accordion List */}
+        <div>
           {faqs.map((faq, i) => (
             <FAQItem key={i} faq={faq} index={i} inView={inView} />
           ))}
         </div>
 
+        {/* Still have questions banner */}
         <motion.div
-          className="ns-card-purple"
-          style={{ marginTop: '48px', textAlign: 'center', padding: '28px' }}
+          style={{ textAlign: 'center', marginTop: '16px' }}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.4 }}
         >
-          <p style={{ fontSize: '16px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            Still have a question that's not answered here?
+          <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+            Still have questions?{' '}
+            <button
+              type="button"
+              onClick={() => selectServiceAndScroll('General Inquiry')}
+              style={{ background: 'none', border: 'none', color: 'var(--purple-500)', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline' }}
+            >
+              Ask our team directly →
+            </button>
           </p>
-          <button
-            type="button"
-            onClick={() => selectServiceAndScroll('General Inquiry')}
-            className="btn-secondary"
-          >
-            Ask Us Directly →
-          </button>
         </motion.div>
       </div>
     </section>

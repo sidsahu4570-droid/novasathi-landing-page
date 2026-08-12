@@ -1,39 +1,34 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight } from 'lucide-react'
-import { scrollToSection } from '../utils/navigation'
+import { ArrowRight, CheckCircle, XCircle } from 'lucide-react'
+import { selectServiceAndScroll, scrollToSection } from '../utils/navigation'
 
-const pains = [
+const compareData = [
   {
-    emoji: '😰',
-    title: 'Life feels uncertain and overwhelming',
-    desc: "You're at a crossroads — career, relationship, or a big decision — and you don't know who to turn to for honest, non-judgmental guidance.",
+    before: 'Navigating career, relationship & life decisions alone',
+    after: 'Personalized Vedic Astrology & Tarot guidance on your path',
+    service: 'Vedic Astrology',
   },
   {
-    emoji: '🤯',
-    title: 'Too many conflicting opinions around you',
-    desc: "Everyone gives advice, but nobody truly understands your situation. You need someone who listens deeply and guides from a place of wisdom.",
+    before: 'Hiding your feelings because privacy feels impossible',
+    after: '100% anonymous — phone masking protects your identity',
+    service: 'General Inquiry',
   },
   {
-    emoji: '🔒',
-    title: "You want to talk, but privacy feels impossible",
-    desc: "Sharing your fears with family or friends feels risky. You need a safe, anonymous space where your identity is completely protected.",
+    before: 'Unsure if an astrologer or counselor is qualified',
+    after: 'Every expert is verified, rated, and reviewed by real users',
+    service: 'General Inquiry',
   },
   {
-    emoji: '⏰',
-    title: 'Good astrologers are hard to find — and expensive',
-    desc: "Finding a genuinely skilled, verified astrologer or counselor takes forever. And when you do, they charge a fortune just to get started.",
-  },
-  {
-    emoji: '🌑',
-    title: 'You carry the emotional weight alone',
-    desc: "There's something weighing on your heart — something you can't say out loud. You wish someone would just listen without judging you.",
+    before: 'Carrying emotional weight with no safe place to speak',
+    after: 'Speak your heart freely via "Dil Ki Baat" — judgment-free',
+    service: 'Dil Ki Baat',
   },
 ]
 
 export default function PainPoints() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
     <section
@@ -42,85 +37,96 @@ export default function PainPoints() {
       className="ns-section bg-alt"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
+      <div id="transformation" style={{ position: 'absolute', top: 0 }} />
       <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '24px' }}
-          initial={{ opacity: 0, y: 30 }}
+          style={{ textAlign: 'center', marginBottom: '16px' }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="ns-label" style={{ marginBottom: '10px', display: 'inline-flex' }}>
-            🌑 The Struggle Is Real
+          <div className="ns-label" style={{ marginBottom: '6px', display: 'inline-flex' }}>
+            ⚡ The Shift
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
-            You shouldn't have to navigate{' '}
-            <span className="gradient-text">life's hardest moments</span> alone
+          <h2 className="section-headline" style={{ marginBottom: '6px', color: 'var(--text-primary)' }}>
+            From confusion to <span className="gradient-text">complete clarity</span>
           </h2>
-          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto', lineHeight: 1.55 }}>
-            If you've ever felt any of these, you're not alone — and NovaSathi exists to change exactly that.
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.45 }}>
+            See how NovaSathi replaces uncertainty with genuine, private guidance.
           </p>
         </motion.div>
 
-        {/* Pain Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-          {pains.map((pain, i) => (
+        {/* Side-by-side comparison table / card grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
+          {compareData.map((item, i) => (
             <motion.div
               key={i}
               className="ns-card"
               role="button"
               tabIndex={0}
-              onClick={() => scrollToSection('transformation')}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection('transformation') }}
-              initial={{ opacity: 0, y: 30 }}
+              onClick={() => selectServiceAndScroll(item.service)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') selectServiceAndScroll(item.service) }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
               style={{
-                padding: '20px',
+                padding: '14px 16px',
                 display: 'flex',
-                gap: '14px',
-                alignItems: 'flex-start',
+                flexDirection: 'column',
+                gap: '8px',
                 cursor: 'pointer',
-                borderColor: 'rgba(255,35,87,0.18)',
               }}
             >
-              <div style={{ fontSize: '26px', flexShrink: 0 }}>{pain.emoji}</div>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--text-primary)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ color: '#ff2357', fontSize: '13px', fontWeight: 700 }}>✗</span>
-                  {pain.title}
-                </div>
-                <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  {pain.desc}
-                </p>
+              {/* Without NovaSathi */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                <XCircle size={15} color="#ff2357" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.45, textDecoration: 'line-through' }}>
+                  {item.before}
+                </span>
+              </div>
+
+              {/* Divider line */}
+              <div style={{ height: '1px', background: 'var(--border-purple)', opacity: 0.4 }} />
+
+              {/* With NovaSathi */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                <CheckCircle size={15} color="var(--green-active)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ fontSize: '13.5px', color: 'var(--text-primary)', fontWeight: 600, lineHeight: 1.45 }}>
+                  {item.after}
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Empathy bridge */}
+        {/* Empathy bridge button */}
         <motion.div
-          className="ns-card-purple"
-          role="button"
-          tabIndex={0}
-          onClick={() => scrollToSection('transformation')}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection('transformation') }}
-          style={{ marginTop: '28px', textAlign: 'center', padding: '24px 20px', borderRadius: '16px', cursor: 'pointer' }}
-          initial={{ opacity: 0, y: 20 }}
+          style={{ marginTop: '16px', textAlign: 'center' }}
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div style={{ fontSize: '28px', marginBottom: '12px' }}>✨</div>
-          <p style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
-            What if you could get clarity — tonight, in minutes, completely privately?
-          </p>
-          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px' }}>
-            That's exactly what NovaSathi makes possible. Here's how it transforms your experience.
-          </p>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--purple-500)', fontWeight: 600, fontSize: '14px' }}>
-            See the Transformation <ArrowRight size={16} />
-          </div>
+          <button
+            type="button"
+            onClick={() => selectServiceAndScroll('General Inquiry')}
+            style={{
+              padding: '6px 16px',
+              background: 'var(--purple-subtle)',
+              border: '1px solid var(--border-purple)',
+              borderRadius: '50px',
+              color: 'var(--purple-500)',
+              fontSize: '12.5px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            Start your free 5-minute shift now <ArrowRight size={13} />
+          </button>
         </motion.div>
       </div>
     </section>

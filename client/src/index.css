@@ -60,7 +60,7 @@ html {
 }
 
 section[id], div[id] {
-  scroll-margin-top: 84px;
+  scroll-margin-top: 68px;
 }
 
 body {
@@ -81,40 +81,37 @@ body {
 ::selection { background: rgba(172, 75, 255, 0.3); color: #fff; }
 
 /* ============================================
-   LAYOUT HELPERS
-   ============================================ */
-/* ============================================
-   LAYOUT HELPERS — COMPACT & DENSE SYSTEM
+   LAYOUT HELPERS — HYPER-COMPACT DENSE SYSTEM (50% SCALE REDUCTION)
    ============================================ */
 .ns-container {
-  max-width: 1140px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
   width: 100%;
 }
 
 .ns-section {
-  padding: 56px 20px;
+  padding: 38px 16px;
 }
 
 .ns-section-alt {
-  padding: 56px 20px;
+  padding: 38px 16px;
   background-color: var(--bg-alt);
 }
 
 /* ============================================
-   TYPOGRAPHY — CONTROLLED PREMIUM SCALE
+   TYPOGRAPHY — CONTROLLED PREMIUM COMPACT SCALE
    ============================================ */
 .hero-headline {
-  font-size: clamp(1.85rem, 3.8vw, 3.1rem);
+  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
   line-height: 1.15;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .section-headline {
-  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
-  line-height: 1.25;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  line-height: 1.22;
   font-weight: 700;
   letter-spacing: -0.015em;
 }
@@ -135,23 +132,23 @@ body {
 }
 
 /* ============================================
-   BUTTONS — brand-accurate
+   BUTTONS — brand-accurate compact
    ============================================ */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 13px 30px;
+  gap: 6px;
+  padding: 10px 22px;
   background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
   color: #fff;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 13.5px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 20px var(--purple-glow);
+  box-shadow: 0 4px 16px var(--purple-glow);
   text-decoration: none;
   white-space: nowrap;
   font-family: inherit;
