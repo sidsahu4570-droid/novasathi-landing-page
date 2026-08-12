@@ -1053,56 +1053,65 @@ html, body {
     margin-bottom: 16px !important;
   }
 
-  /* Sleek Horizontal Mobile Glass List-Cards */
+  /* Mobile Card Outer Margins & 2-Column Grid Fix */
+  .section-problem-selector,
+  .section-how-it-works,
+  .trust-strip-container,
+  .section-testimonials,
+  .section-final-cta,
+  .section-faq {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2-Column Mobile Problem Card Grid with 16px Outer Margins */
   .problem-grid {
-    display: flex !important;
-    flex-direction: column !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
+    align-items: stretch !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
   }
 
   .problem-card {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 14px 16px !important;
-    min-height: auto !important;
-    border-radius: 16px !important;
-    gap: 12px !important;
-  }
-
-  .problem-card > div:first-child {
+    padding: 12px 10px !important;
+    min-height: 135px !important;
+    border-radius: 14px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 2px !important;
-    flex: 1 !important;
+    justify-content: space-between !important;
   }
 
   .problem-icon-title {
     display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    margin-bottom: 2px !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    margin-bottom: 4px !important;
   }
 
   .problem-icon {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
     line-height: 1 !important;
     flex-shrink: 0 !important;
   }
 
   .problem-card-title {
-    font-size: 0.95rem !important;
+    font-size: 0.88rem !important;
     font-weight: 600 !important;
-    color: var(--color-soft-cream) !important;
     line-height: 1.25 !important;
+    color: var(--color-soft-cream) !important;
   }
 
   .problem-card-desc {
-    font-size: 0.8rem !important;
+    font-size: 0.72rem !important;
     line-height: 1.35 !important;
-    color: rgba(248, 244, 234, 0.8) !important;
-    margin-bottom: 0 !important;
+    color: rgba(248, 244, 234, 0.75) !important;
+    margin-bottom: 8px !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -1110,23 +1119,24 @@ html, body {
   }
 
   .problem-card-cta {
-    font-size: 0.8rem !important;
+    font-size: 0.72rem !important;
     font-weight: 600 !important;
     color: var(--color-warm-gold) !important;
-    margin-top: 0 !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
+    margin-top: auto !important;
   }
-
 
   .section-how-it-works {
     padding: 22px 0 24px 0 !important;
   }
 
-  /* Spacious Vertical Step Cards on Mobile */
+  /* How It Works Steps with 16px Outer Margins */
   .steps-container {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
   }
 
   .step-card {
@@ -1163,7 +1173,7 @@ html, body {
     color: rgba(248, 244, 234, 0.8) !important;
   }
 
-  /* Trust Strip Grid on Mobile */
+  /* Trust Strip Grid on Mobile with 16px Outer Margins */
   .trust-strip-container {
     padding: 12px 0 18px 0 !important;
   }
@@ -1174,7 +1184,10 @@ html, body {
     gap: 10px 12px !important;
     padding: 14px 16px !important;
     border-radius: 16px !important;
-    width: 100% !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
     text-align: center !important;
   }
 
@@ -1193,6 +1206,7 @@ html, body {
     display: none !important;
   }
 
+  /* Testimonials Grid on Mobile with 16px Outer Margins */
   .section-testimonials {
     padding: 22px 0 24px 0 !important;
   }
@@ -1200,6 +1214,10 @@ html, body {
   .testimonials-grid {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
   }
 
   .testimonial-card {
@@ -1209,6 +1227,58 @@ html, body {
     flex-direction: column !important;
     justify-content: space-between !important;
   }
+
+  .stars {
+    font-size: 1rem !important;
+    color: #FFD700 !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .testimonial-quote {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    color: rgba(248, 244, 234, 0.9) !important;
+    font-style: italic !important;
+    margin-bottom: 12px !important;
+  }
+
+  .testimonial-author {
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    color: var(--color-lavender) !important;
+  }
+
+  .testimonial-service {
+    font-size: 0.78rem !important;
+    color: rgba(248, 244, 234, 0.6) !important;
+    margin-top: 2px !important;
+  }
+
+  .section-final-cta {
+    padding: 22px 0 24px 0 !important;
+  }
+
+  .final-cta-card {
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
+    padding: 26px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .section-faq {
+    padding: 22px 0 24px 0 !important;
+  }
+
+  .faq-list {
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
 
   .stars {
     font-size: 1rem !important;
