@@ -8,43 +8,43 @@
    ============================================ */
 
 :root {
-  /* ── BACKGROUNDS ─────────────────────────── */
-  --bg-base:        #06070f;   /* deepest bg — matches NS meta theme-color */
-  --bg-alt:         #0d0f17;   /* section alternates */
-  --bg-surface:     #10121e;   /* cards, panels */
-  --bg-surface-2:   #1a1c2e;   /* elevated cards, modals */
-  --bg-overlay:     rgba(10, 11, 22, 0.85);
+  /* ── DARK ASTROLOGY BACKGROUNDS ─────────── */
+  --bg-base:        #050507;   /* primary near-black tone */
+  --bg-alt:         #0A0A10;   /* secondary deep dark tone */
+  --bg-surface:     #101018;   /* cards, panels */
+  --bg-surface-2:   #151520;   /* elevated surface */
+  --bg-overlay:     rgba(5, 5, 7, 0.90);
 
-  /* ── BRAND PURPLE — primary color ─────────── */
-  --purple-500:     #ac4bff;   /* main brand — most frequent in NS CSS */
-  --purple-600:     #9810fa;   /* darker shade */
-  --purple-700:     #7b2fbe;   /* deepest purple */
-  --purple-dark:    #59168b;   /* background tint */
-  --purple-glow:    rgba(172, 75, 255, 0.25);
-  --purple-subtle:  rgba(172, 75, 255, 0.08);
-  --purple-border:  rgba(172, 75, 255, 0.20);
+  /* ── COSMIC ACCENTS ───────────────────────── */
+  --purple-500:     #6D4AFF;   /* deep cosmic purple */
+  --purple-600:     #8B5CF6;   /* violet accent */
+  --purple-700:     #5b38db;   /* deep shade */
+  --purple-glow:    rgba(109, 74, 255, 0.30);
+  --purple-subtle:  rgba(109, 74, 255, 0.10);
+  --purple-border:  rgba(109, 74, 255, 0.25);
 
-  /* ── AMBER / GOLD — accent ────────────────── */
-  --amber-500:      #f99c00;   /* NS primary amber */
-  --amber-600:      #c47b00;   /* darker amber */
-  --amber-glow:     rgba(249, 156, 0, 0.25);
-  --amber-subtle:   rgba(249, 156, 0, 0.08);
-  --amber-border:   rgba(249, 156, 0, 0.20);
+  --amber-500:      #D6B56A;   /* soft astrology gold */
+  --amber-600:      #b8974d;   /* deeper gold */
+  --amber-glow:     rgba(214, 181, 106, 0.30);
+  --amber-subtle:   rgba(214, 181, 106, 0.10);
+  --amber-border:   rgba(214, 181, 106, 0.25);
+
+  --highlight:      #B79CFF;   /* soft cosmic highlight */
 
   /* ── TEXT ─────────────────────────────────── */
-  --text-primary:   #f5f5f7;
-  --text-secondary: rgba(245, 245, 247, 0.60);
-  --text-muted:     rgba(245, 245, 247, 0.35);
-  --text-purple:    #c07eff;
-  --text-amber:     #f99c00;
+  --text-primary:   #F5F3FF;   /* crisp cosmic white */
+  --text-secondary: #A7A3B5;   /* soft muted purple-gray */
+  --text-muted:     #777383;   /* subtle dark muted */
+  --text-purple:    #B79CFF;
+  --text-amber:     #D6B56A;
 
   /* ── BORDERS ──────────────────────────────── */
-  --border-default: rgba(255, 255, 255, 0.07);
-  --border-purple:  rgba(172, 75, 255, 0.22);
-  --border-amber:   rgba(249, 156, 0, 0.20);
-  --border-subtle:  rgba(255, 255, 255, 0.04);
+  --border-default: #252535;
+  --border-purple:  rgba(109, 74, 255, 0.30);
+  --border-amber:   rgba(214, 181, 106, 0.25);
+  --border-subtle:  rgba(37, 37, 53, 0.60);
 
-  /* ── GREEN (online/success) ───────────────── */
+  /* ── GREEN (success) ──────────────────────── */
   --green-active:   #00bb7f;
   --green-glow:     rgba(0, 187, 127, 0.4);
 }

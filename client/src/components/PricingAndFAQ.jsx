@@ -56,10 +56,10 @@ const CustomDropdown = ({ value, onChange, options, placeholder = 'Select a serv
           alignItems: 'center',
           justify: 'space-between',
           padding: '10px 14px',
-          backgroundColor: '#10121e',
-          border: isOpen ? '1px solid var(--purple-500)' : '1px solid var(--border-default)',
+          backgroundColor: '#101018',
+          border: isOpen ? '1px solid var(--purple-500)' : '1px solid #252535',
           borderRadius: '10px',
-          color: value ? '#f5f5f7' : 'rgba(245, 245, 247, 0.45)',
+          color: value ? '#F5F3FF' : '#777383',
           fontFamily: 'inherit',
           fontSize: '13.5px',
           cursor: 'pointer',
@@ -88,10 +88,10 @@ const CustomDropdown = ({ value, onChange, options, placeholder = 'Select a serv
               left: 0,
               right: 0,
               zIndex: 100,
-              backgroundColor: '#10121e',
-              border: '1px solid var(--border-purple)',
+              backgroundColor: '#101018',
+              border: '1px solid var(--purple-border)',
               borderRadius: '12px',
-              boxShadow: '0 12px 32px rgba(0, 0, 0, 0.8)',
+              boxShadow: '0 12px 32px rgba(0, 0, 0, 0.9)',
               overflow: 'hidden',
               padding: '4px',
             }}
@@ -109,15 +109,15 @@ const CustomDropdown = ({ value, onChange, options, placeholder = 'Select a serv
                   padding: '9px 12px',
                   borderRadius: '6px',
                   border: 'none',
-                  background: value === opt ? 'rgba(172, 75, 255, 0.15)' : 'transparent',
-                  color: value === opt ? '#f5f5f7' : 'rgba(245, 245, 247, 0.85)',
+                  background: value === opt ? 'rgba(109, 74, 255, 0.20)' : 'transparent',
+                  color: value === opt ? '#F5F3FF' : '#A7A3B5',
                   fontSize: '13px',
                   fontWeight: value === opt ? 600 : 400,
                   cursor: 'pointer',
                   textAlign: 'left',
                 }}
               >
-                <span style={{ width: 14, color: '#a78bfa', fontWeight: 700 }}>{value === opt ? '✓' : ''}</span>
+                <span style={{ width: 14, color: '#B79CFF', fontWeight: 700 }}>{value === opt ? '✓' : ''}</span>
                 <span>{opt}</span>
               </button>
             ))}

@@ -97,10 +97,32 @@ export default function Hero() {
         paddingTop: '56px',
         paddingBottom: '12px',
         overflow: 'hidden',
+        background: 'radial-gradient(ellipse at 50% 30%, rgba(109, 74, 255, 0.15) 0%, rgba(5, 5, 7, 0.98) 70%), #050507',
       }}
     >
       <StarField />
-      <CosmicOrb size="380px" color="rgba(172,75,255,0.25)" top="-10%" left="-10%" delay={0} opacity={0.08} />
+
+      {/* Subtle Zodiac Wheel Background */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '560px',
+        height: '560px',
+        opacity: 0.05,
+        pointerEvents: 'none',
+        animation: 'spin-slow 60s linear infinite',
+      }}>
+        <svg viewBox="0 0 200 200" width="100%" height="100%">
+          <circle cx="100" cy="100" r="95" stroke="var(--purple-500)" strokeWidth="0.8" fill="none" strokeDasharray="3 3" />
+          <circle cx="100" cy="100" r="80" stroke="var(--amber-500)" strokeWidth="0.5" fill="none" />
+          <circle cx="100" cy="100" r="60" stroke="var(--purple-500)" strokeWidth="0.5" fill="none" strokeDasharray="2 2" />
+          <text x="100" y="15" fill="var(--amber-500)" fontSize="8" textAnchor="middle">♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓</text>
+        </svg>
+      </div>
+
+      <CosmicOrb size="380px" color="rgba(109,74,255,0.20)" top="-10%" left="-10%" delay={0} opacity={0.08} />
 
       <div className="ns-container" style={{ paddingTop: '4px', paddingBottom: '4px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '20px', alignItems: 'center' }} className="hero-grid">
@@ -112,9 +134,9 @@ export default function Hero() {
                 type="button"
                 onClick={() => scrollToSection('reviews')}
                 className="ns-label"
-                style={{ marginBottom: '6px', cursor: 'pointer', background: 'var(--purple-subtle)', border: '1px solid var(--border-purple)', padding: '2px 8px', fontSize: '10.5px' }}
+                style={{ marginBottom: '6px', cursor: 'pointer', background: 'rgba(109,74,255,0.12)', border: '1px solid var(--border-purple)', padding: '2px 8px', fontSize: '10.5px' }}
               >
-                <Star size={10} fill="var(--purple-500)" color="var(--purple-500)" />
+                <Star size={10} fill="var(--amber-500)" color="var(--amber-500)" />
                 Trusted by thousands across India →
               </button>
             </motion.div>
@@ -125,10 +147,12 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ marginBottom: '8px', color: 'var(--text-primary)' }}
+              style={{ marginBottom: '8px', color: '#F5F3FF' }}
             >
               Get Clarity on Life's{' '}
-              <span className="gradient-text">Biggest Questions</span>{' '}
+              <span style={{ background: 'linear-gradient(135deg, #6D4AFF 0%, #D6B56A 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                Biggest Questions
+              </span>{' '}
               — From Experts Who Understand
             </motion.h1>
 
@@ -137,11 +161,11 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ fontSize: '13.5px', lineHeight: 1.4, color: 'var(--text-secondary)', marginBottom: '12px', maxWidth: '460px' }}
+              style={{ fontSize: '13.5px', lineHeight: 1.4, color: '#A7A3B5', marginBottom: '12px', maxWidth: '460px' }}
             >
               Connect with verified astrologers, tarot readers, and emotional wellness counselors. 
               Get personalized guidance for career, relationships, and life — completely private, 
-              available 24/7, and starting <strong style={{ color: 'var(--purple-500)' }}>100% free</strong>.
+              available 24/7, and starting <strong style={{ color: 'var(--amber-500)' }}>100% free</strong>.
             </motion.p>
 
             <motion.div
