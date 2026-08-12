@@ -172,8 +172,8 @@ export default function PricingAndFAQ() {
     <section
       id="pricing"
       ref={ref}
-      className="ns-section bg-alt"
-      style={{ position: 'relative' }}
+      className="ns-section"
+      style={{ position: 'relative', background: 'transparent' }}
     >
       <div id="contact" style={{ position: 'absolute', top: 0 }} />
       <div id="faq" style={{ position: 'absolute', top: 0 }} />
@@ -187,13 +187,13 @@ export default function PricingAndFAQ() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <div className="ns-label" style={{ marginBottom: '6px' }}>
+          <div className="ns-label" style={{ marginBottom: '6px', background: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.25)', color: '#F5F3FF' }}>
             💳 Pricing & Start Consultation
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '4px', color: 'var(--text-primary)' }}>
-            Transparent pricing, <span className="gradient-text">instant 5-minute free trial</span>
+          <h2 className="section-headline" style={{ marginBottom: '4px', color: '#FFFFFF', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+            Transparent pricing, <span style={{ background: 'linear-gradient(135deg, #c084fc 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>instant 5-minute free trial</span>
           </h2>
-          <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.4 }}>
+          <p style={{ fontSize: '13.5px', color: 'rgba(245, 245, 247, 0.85)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.4 }}>
             Fill in your details below to start your free consultation or check FAQs.
           </p>
         </motion.div>

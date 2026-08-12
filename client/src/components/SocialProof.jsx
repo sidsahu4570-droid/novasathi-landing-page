@@ -32,8 +32,8 @@ export default function SocialProof() {
     <section
       id="reviews"
       ref={ref}
-      className="ns-section bg-glow-amber"
-      style={{ position: 'relative' }}
+      className="ns-section"
+      style={{ position: 'relative', background: 'transparent' }}
     >
       <div id="showcase" style={{ position: 'absolute', top: 0 }} />
 
@@ -45,18 +45,18 @@ export default function SocialProof() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <div className="ns-label-amber" style={{ marginBottom: '4px' }}>
+          <div className="ns-label-amber" style={{ marginBottom: '4px', background: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.25)', color: '#fbbf24' }}>
             💬 Trust & Real Reviews
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '4px', color: 'var(--text-primary)' }}>
-            Trusted by thousands for <span style={{ color: 'var(--amber-500)' }}>real direction</span>
+          <h2 className="section-headline" style={{ marginBottom: '4px', color: '#FFFFFF', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+            Trusted by thousands for <span style={{ color: '#fbbf24' }}>real direction</span>
           </h2>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', background: 'var(--amber-subtle)', border: '1px solid var(--border-amber)', borderRadius: '50px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', background: 'rgba(255, 255, 255, 0.92)', border: '1px solid rgba(255, 255, 255, 0.3)', borderRadius: '50px', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', gap: '2px' }}>
-              {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="#f99c00" color="#f99c00" />)}
+              {[...Array(5)].map((_, i) => <Star key={i} size={11} fill="#f59e0b" color="#f59e0b" />)}
             </div>
-            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>4.9/5 Rating</span>
-            <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>· 150+ Verified Practitioners</span>
+            <span style={{ fontSize: '12px', fontWeight: 700, color: '#171329' }}>4.9/5 Rating</span>
+            <span style={{ fontSize: '11px', color: '#524b68' }}>· 150+ Verified Practitioners</span>
           </div>
         </motion.div>
 

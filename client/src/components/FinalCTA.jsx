@@ -10,8 +10,8 @@ export default function FinalCTA() {
     <section
       id="final-cta"
       ref={ref}
-      className="ns-section bg-glow-purple"
-      style={{ position: 'relative', overflow: 'hidden', padding: '28px 16px' }}
+      className="ns-section"
+      style={{ position: 'relative', overflow: 'hidden', padding: '28px 16px', background: 'transparent' }}
     >
       <div className="ns-container" style={{ maxWidth: '760px', textAlign: 'center', position: 'relative', zIndex: 1 }}>
 
@@ -20,15 +20,15 @@ export default function FinalCTA() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <div className="ns-label-amber" style={{ marginBottom: '8px' }}>
+          <div className="ns-label-amber" style={{ marginBottom: '8px', background: 'rgba(255,255,255,0.12)', borderColor: 'rgba(255,255,255,0.25)', color: '#fbbf24' }}>
             🚀 Take the First Step
           </div>
 
-          <h2 style={{ fontSize: 'clamp(1.45rem, 2.8vw, 2.0rem)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '8px', letterSpacing: '-0.02em' }}>
-            Your clarity is closer <span className="gradient-text">than you think</span>
+          <h2 style={{ fontSize: 'clamp(1.45rem, 2.8vw, 2.0rem)', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.15, marginBottom: '8px', letterSpacing: '-0.02em', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+            Your clarity is closer <span style={{ background: 'linear-gradient(135deg, #c084fc 0%, #fbbf24 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>than you think</span>
           </h2>
 
-          <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', lineHeight: 1.45, maxWidth: '480px', margin: '0 auto 16px' }}>
+          <p style={{ fontSize: '13.5px', color: 'rgba(245, 245, 247, 0.88)', lineHeight: 1.45, maxWidth: '480px', margin: '0 auto 16px' }}>
             Stop carrying uncertainty alone. Connect with a verified expert in 2 minutes — completely private, starting 100% free.
           </p>
 
@@ -59,13 +59,13 @@ export default function FinalCTA() {
                   background: 'none',
                   border: 'none',
                   fontSize: '11.5px',
-                  color: 'var(--text-muted)',
+                  color: 'rgba(245, 245, 247, 0.85)',
                   cursor: 'pointer',
                   padding: 0,
                   transition: 'color 0.2s ease',
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--purple-500)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245, 245, 247, 0.85)'}
               >
                 {item.label}
               </button>

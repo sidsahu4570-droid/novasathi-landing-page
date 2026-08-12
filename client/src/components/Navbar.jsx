@@ -34,10 +34,10 @@ export default function Navbar() {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-scrolled' : ''}`}
         style={{
-          background: scrolled ? 'rgba(255, 255, 255, 0.88)' : 'rgba(250, 248, 255, 0.65)',
+          background: scrolled ? 'rgba(14, 9, 29, 0.88)' : 'rgba(14, 9, 29, 0.60)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(109, 74, 255, 0.12)',
+          borderBottom: '1px solid rgba(124, 58, 237, 0.25)',
         }}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -87,16 +87,16 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   style={{
-                    color: 'var(--text-secondary)',
+                    color: 'rgba(245, 245, 247, 0.85)',
                     textDecoration: 'none',
-                    fontSize: '14px',
+                    fontSize: '13.5px',
                     fontWeight: 500,
-                    padding: '6px 14px',
+                    padding: '6px 12px',
                     borderRadius: '8px',
                     transition: 'all 0.2s ease',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--purple-subtle)' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(245, 245, 247, 0.85)'; e.currentTarget.style.background = 'transparent' }}
                 >
                   {link.label}
                 </a>

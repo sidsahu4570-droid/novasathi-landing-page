@@ -8,43 +8,42 @@
    ============================================ */
 
 :root {
-  /* ── LIGHT COSMIC BACKGROUNDS ───────────── */
-  --bg-base:        #FAF8FF;   /* light lavender universe base */
-  --bg-alt:         #F4F0FF;   /* pale violet secondary tone */
-  --bg-surface:     rgba(255, 255, 255, 0.85); /* glass cards */
+  /* ── COSMIC NEBULA SPACE BACKGROUNDS (Matching Image) ── */
+  --bg-base:        #0e091d;   /* deep cosmic space base */
+  --bg-alt:         rgba(15, 10, 32, 0.45);
+  --bg-surface:     rgba(255, 255, 255, 0.88); /* light frosted glass cards */
   --bg-surface-2:   rgba(255, 255, 255, 0.95);
-  --bg-overlay:     rgba(250, 248, 255, 0.92);
+  --bg-overlay:     rgba(14, 9, 29, 0.85);
 
-  /* ── COSMIC PURPLE & GOLD ACCENTS ───────── */
-  --purple-500:     #6D4AFF;   /* main purple accent */
-  --purple-600:     #5B38DB;   /* deeper purple */
-  --purple-700:     #4A29C7;
-  --purple-glow:    rgba(109, 74, 255, 0.15);
-  --purple-subtle:  rgba(109, 74, 255, 0.08);
-  --purple-border:  rgba(109, 74, 255, 0.18);
+  /* ── COSMIC ACCENTS ───────────────────────── */
+  --purple-500:     #7c3aed;   /* vibrant violet purple */
+  --purple-600:     #6d28d9;
+  --purple-700:     #5b21b6;
+  --purple-glow:    rgba(124, 58, 237, 0.25);
+  --purple-subtle:  rgba(124, 58, 237, 0.08);
+  --purple-border:  rgba(124, 58, 237, 0.22);
 
-  --amber-500:      #C89B3C;   /* soft astrology gold */
-  --amber-600:      #B3862B;
-  --amber-glow:     rgba(200, 155, 60, 0.20);
-  --amber-subtle:   rgba(200, 155, 60, 0.08);
-  --amber-border:   rgba(200, 155, 60, 0.20);
+  --amber-500:      #d97706;   /* warm gold accent */
+  --amber-glow:     rgba(217, 119, 6, 0.25);
+  --amber-subtle:   rgba(217, 119, 6, 0.08);
+  --amber-border:   rgba(217, 119, 6, 0.22);
 
-  /* ── HIGH-LEGIBILITY LIGHT THEME TEXT ────── */
-  --text-primary:   #171329;   /* deep navy heading text */
-  --text-secondary: #5E5870;   /* soft purple-gray body copy */
-  --text-muted:     #867E96;   /* muted captions */
-  --text-purple:    #6D4AFF;
-  --text-amber:     #C89B3C;
+  /* ── HIGH-LEGIBILITY CARD TEXT ─────────────── */
+  --text-primary:   #171329;   /* crisp dark navy for cards */
+  --text-secondary: #524b68;   /* soft purple-gray body copy */
+  --text-muted:     #7a7291;
+  --text-purple:    #7c3aed;
+  --text-amber:     #d97706;
 
   /* ── BORDERS & SHADOWS ────────────────────── */
-  --border-default: rgba(109, 74, 255, 0.12);
-  --border-purple:  rgba(109, 74, 255, 0.22);
-  --border-amber:   rgba(200, 155, 60, 0.22);
-  --border-subtle:  rgba(109, 74, 255, 0.06);
+  --border-default: rgba(124, 58, 237, 0.15);
+  --border-purple:  rgba(124, 58, 237, 0.28);
+  --border-amber:   rgba(217, 119, 6, 0.25);
+  --border-subtle:  rgba(124, 58, 237, 0.08);
 
-  /* ── GREEN (success) ──────────────────────── */
-  --green-active:   #00a86b;
-  --green-glow:     rgba(0, 168, 107, 0.25);
+  /* ── GREEN ────────────────────────────────── */
+  --green-active:   #059669;
+  --green-glow:     rgba(5, 150, 105, 0.25);
 }
 
 /* ============================================
@@ -63,7 +62,9 @@ section[id], div[id] {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: var(--bg-base);
+  background:
+    linear-gradient(180deg, rgba(14, 9, 29, 0.35) 0%, rgba(20, 12, 45, 0.45) 100%),
+    url('/cosmic-bg-texture.jpg') center top / cover no-repeat fixed;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
