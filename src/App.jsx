@@ -13,16 +13,34 @@ import Footer from './components/landing/Footer';
 import ConsultationModal from './components/landing/ConsultationModal';
 import AdminPanel from './components/admin/AdminPanel';
 
+function checkIsAdminRoute() {
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const search = window.location.search.toLowerCase();
+  return path.startsWith('/admin') || hash.includes('admin') || search.includes('admin');
+}
+
 /**
  * NovaSathi Root Application
- * Routes /admin to the admin panel; all other paths show the landing page.
+ * Routes /admin or #admin to the admin panel; all other paths show the landing page.
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTopic, setModalTopic] = useState('Love & Relationships');
+  const [isAdminRoute, setIsAdminRoute] = useState(checkIsAdminRoute);
 
-  // Simple client-side routing without a router library
-  const isAdminRoute = window.location.pathname.startsWith('/admin');
+  // Listen for live URL/hash changes
+  React.useEffect(() => {
+    const handleLocationChange = () => {
+      setIsAdminRoute(checkIsAdminRoute());
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
 
   if (isAdminRoute) {
     return <AdminPanel />;
