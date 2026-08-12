@@ -911,3 +911,103 @@ html, body {
   .final-cta-headline { font-size: 1.7rem; }
   .final-cta-offer { font-size: 1.4rem; }
 }
+
+/* ----------------------------------------------------
+   RESTORED COSMIC BACKGROUND KEYFRAME ANIMATIONS
+   ---------------------------------------------------- */
+@keyframes floatNebula1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2.5vw, 3.5vh) scale(1.05); }
+  100% { transform: translate(-1.5vw, 1.5vh) scale(0.97); }
+}
+
+@keyframes floatNebula2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-3vw, -2.5vh) scale(1.06); }
+  100% { transform: translate(1.5vw, 3vh) scale(0.96); }
+}
+
+@keyframes floatNebula3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3vw, -3vh) scale(1.04); }
+  100% { transform: translate(-2vw, -1.5vh) scale(0.98); }
+}
+
+@keyframes floatNebula4 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-2.5vw, 2.5vh) scale(1.05); }
+  100% { transform: translate(1.5vw, -2vh) scale(0.97); }
+}
+
+@keyframes pulseCenterGlow {
+  0% { opacity: 0.22; transform: scale(0.96); }
+  50% { opacity: 0.32; transform: scale(1.04); }
+  100% { opacity: 0.25; transform: scale(0.98); }
+}
+
+@keyframes floatGoldAccent {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+  50% { transform: translate(-15px, 25px) scale(1.12); opacity: 0.22; }
+  100% { transform: translate(15px, -15px) scale(0.92); opacity: 0.15; }
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes twinkleBg {
+  0% { opacity: 0.28; }
+  50% { opacity: 0.65; }
+  100% { opacity: 0.32; }
+}
+
+@keyframes floatPlanet1 {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+  100% { transform: translateY(6px) rotate(-1deg); }
+}
+
+@keyframes floatPlanet2 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(-5px); }
+}
+
+@keyframes floatPlanet3 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(6px); }
+}
+
+@keyframes pulseLine {
+  0% { stroke-opacity: 0.15; }
+  50% { stroke-opacity: 0.45; }
+  100% { stroke-opacity: 0.2; }
+}
+
+@keyframes pulseNode {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.75; }
+}
+
+/* ACCESSIBILITY: PREFERS-REDUCED-MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .nebula-cloud,
+  .rotate-slow-cw,
+  .rotate-slow-ccw,
+  .zodiac-dial-container,
+  .planet-container,
+  .star-bg,
+  .constellation-line,
+  .constellation-node {
+    animation: none !important;
+  }
+}
+
