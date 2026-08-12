@@ -15,20 +15,6 @@ export default function Navbar({ onOpenModal }) {
           <span>NovaSathi</span>
         </a>
 
-        {/* Navigation Links */}
-        <nav aria-label="Main Navigation">
-          <ul className="nav-links">
-            <li>
-              <a href="#how-it-works" className="nav-link">How It Works</a>
-            </li>
-            <li>
-              <a href="#problem-selector" className="nav-link">Explore Guidance</a>
-            </li>
-            <li>
-              <a href="#testimonials" className="nav-link">Why NovaSathi</a>
-            </li>
-          </ul>
-        </nav>
 
         {/* Primary CTA */}
         <button
