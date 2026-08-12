@@ -59,11 +59,13 @@ export default function AdminReviewsManager({ token }) {
       const res = await fetch('/api/reviews/admin/list', {
         headers: authHeaders(),
       });
-      if (!res.ok) {
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
+        const data = await res.json();
+        setReviews(Array.isArray(data) ? data : []);
+      } else if (!res.ok) {
         throw new Error('Failed to fetch reviews.');
       }
-      const data = await res.json();
-      setReviews(data);
     } catch (err) {
       setError(err.message);
     } finally {

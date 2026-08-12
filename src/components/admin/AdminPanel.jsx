@@ -175,12 +175,12 @@ export default function AdminPanel() {
         return;
       }
 
-      if (listRes.ok) {
+      if (listRes.ok && (listRes.headers.get('content-type') || '').includes('application/json')) {
         const list = await listRes.json();
         setConsultations(list);
         setLastFetch(new Date());
       }
-      if (statsRes.ok) {
+      if (statsRes.ok && (statsRes.headers.get('content-type') || '').includes('application/json')) {
         const s = await statsRes.json();
         setStats(s);
       }
