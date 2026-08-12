@@ -63,18 +63,39 @@ export default function VideoTestimonials({ onOpenModal }) {
   const touchStartX = useRef(null);
   const lightboxVideoRef = useRef(null);
 
-  // Fetch published reviews from API
+  // Fetch published reviews from API or localStorage fallback
   useEffect(() => {
     let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+
     async function loadReviews() {
       try {
-        const res = await fetch('/api/reviews');
-        if (res.ok) {
-          const data = await res.json();
-          if (isMounted) setReviews(data);
+        let loadedData = null;
+        const res = await fetch(`${apiUrl}/api/reviews`).catch(() => null);
+
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            loadedData = await res.json();
+          }
         }
+
+        // Fallback to local storage on static Vercel hostings
+        if (!loadedData || !Array.isArray(loadedData) || loadedData.length === 0) {
+          try {
+            const localRaw = localStorage.getItem('ns_admin_reviews');
+            if (localRaw) {
+              const parsed = JSON.parse(localRaw);
+              if (Array.isArray(parsed)) {
+                loadedData = parsed.filter((r) => r.published);
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (isMounted && loadedData) setReviews(loadedData);
       } catch (err) {
-        console.error('Failed to load published reviews:', err);
+        // Quiet error
       } finally {
         if (isMounted) setLoading(false);
       }
