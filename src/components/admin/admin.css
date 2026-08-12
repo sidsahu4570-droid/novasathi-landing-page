@@ -24,7 +24,7 @@
 .admin-root {
   min-height: 100vh;
   background: linear-gradient(135deg, #0d0b1a 0%, #130d2a 50%, #0d0b1a 100%);
-  font-family: 'Inter', 'Outfit', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--admin-text);
 }
 

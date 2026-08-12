@@ -21,8 +21,8 @@
   --glass-shadow: 0 12px 32px rgba(10, 7, 24, 0.4);
 
   /* Fonts */
-  --font-serif: 'Cinzel', Georgia, serif;
-  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
