@@ -988,14 +988,14 @@ html, body {
     box-shadow: 0 4px 12px rgba(109, 74, 255, 0.35) !important;
   }
 
-  /* Hero Mobile Layout & Atmospheric Readability Scrim */
+  /* Hero Mobile Layout & Localized Radial Atmospheric Readability Zone */
   .hero-section {
     padding: 24px 0 20px 0 !important;
     background: radial-gradient(
-      ellipse at center,
-      rgba(20, 12, 55, 0.78) 0%,
-      rgba(20, 12, 55, 0.52) 50%,
-      rgba(20, 12, 55, 0.1) 80%,
+      ellipse 85% 75% at 50% 45%,
+      rgba(15, 8, 45, 0.72) 0%,
+      rgba(15, 8, 45, 0.45) 55%,
+      rgba(15, 8, 45, 0.1) 85%,
       transparent 100%
     ) !important;
     border-radius: 24px !important;
@@ -1014,7 +1014,7 @@ html, body {
     padding: 0 4px !important;
     word-break: break-word !important;
     color: #FFFFFF !important;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 24px rgba(109, 74, 255, 0.35) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65) !important;
   }
 
   .hero-subheading {
@@ -1022,8 +1022,8 @@ html, body {
     line-height: 1.5 !important;
     margin-bottom: 18px !important;
     padding: 0 4px !important;
-    color: rgba(255, 255, 255, 0.92) !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55) !important;
   }
 
   .hero-cta-group {
@@ -1052,8 +1052,8 @@ html, body {
   .hero-microcopy {
     font-size: 0.8rem !important;
     margin-bottom: 18px !important;
-    color: rgba(248, 244, 234, 0.88) !important;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5) !important;
   }
 
   .hero-trust-badges {
@@ -1066,40 +1066,47 @@ html, body {
     border-radius: 99px !important;
     width: 100% !important;
     max-width: 340px !important;
-    background: rgba(15, 10, 40, 0.55) !important;
+    background: rgba(15, 8, 45, 0.6) !important;
     border: 1px solid rgba(255, 255, 255, 0.14) !important;
     backdrop-filter: blur(8px) !important;
     color: rgba(255, 255, 255, 0.92) !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Section Spacing, Atmospheric Glow & Text Shadows */
+  /* Section Spacing, Atmospheric Radial Glow & Text Shadows */
   .section-problem-selector {
     padding: 18px 0 20px 0 !important;
+    background: radial-gradient(
+      ellipse 90% 80% at 50% 30%,
+      rgba(15, 8, 45, 0.65) 0%,
+      rgba(15, 8, 45, 0.35) 60%,
+      transparent 100%
+    ) !important;
+    border-radius: 20px !important;
   }
 
   .section-title {
     font-size: 1.5rem !important;
     line-height: 1.25 !important;
     color: #FFFFFF !important;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8), 0 0 20px rgba(109, 74, 255, 0.3) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65) !important;
   }
 
   .section-subtitle {
     font-size: 0.84rem !important;
     margin-bottom: 16px !important;
-    color: rgba(255, 255, 255, 0.88) !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55) !important;
   }
 
-  /* Refined Glass Surface Contrast for Cards on Mobile */
+  /* Translucent Glass Surface Contrast for Mobile Cards */
   .problem-card,
   .step-card,
   .trust-strip,
   .testimonial-card,
   .final-cta-card,
   .faq-item {
-    background: rgba(25, 16, 60, 0.76) !important;
+    background: rgba(20, 12, 50, 0.82) !important;
     border: 1px solid rgba(200, 184, 244, 0.2) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
@@ -1121,6 +1128,7 @@ html, body {
     color: rgba(255, 255, 255, 0.88) !important;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
   }
+
 
 
 
