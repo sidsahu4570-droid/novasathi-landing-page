@@ -10,10 +10,10 @@ export default function CosmicBackground() {
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
-        background: '#FAF8FF',
+        background: '#12072E',
       }}
     >
-      {/* LAYER 1: Deep Cosmic Universe Wallpaper — Soft Atmosphere (42% opacity) */}
+      {/* High-Resolution Photorealistic Cosmic Universe Background Wallpaper — 95% Full Photographic Opacity */}
       <div
         style={{
           position: 'absolute',
@@ -22,23 +22,12 @@ export default function CosmicBackground() {
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.42,
-          filter: 'contrast(1.02) saturate(1.10)',
+          opacity: 0.95,
+          filter: 'contrast(1.05) saturate(1.10)',
         }}
       />
 
-      {/* LAYER 2: Central Atmospheric Light Veil — Smooth Readability Mask */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            radial-gradient(ellipse at 50% 30%, rgba(250, 248, 255, 0.84) 0%, rgba(250, 248, 255, 0.65) 35%, rgba(250, 248, 255, 0.25) 65%, rgba(250, 248, 255, 0.05) 88%)
-          `,
-        }}
-      />
-
-      {/* LAYER 3: Outer-Edge Celestial Planets & Zodiac Geometry (Off-Center Decoration) */}
+      {/* Outer-Edge Celestial Planets & Zodiac Geometry (Off-Center Watermarks) */}
       {/* Upper-Right Outer Edge Saturn Planet */}
       <div
         style={{
@@ -47,7 +36,7 @@ export default function CosmicBackground() {
           right: '3%',
           width: '56px',
           height: '56px',
-          opacity: 0.75,
+          opacity: 0.80,
         }}
       >
         <svg viewBox="0 0 60 60" width="100%" height="100%">
@@ -71,7 +60,7 @@ export default function CosmicBackground() {
           left: '2%',
           width: '42px',
           height: '42px',
-          opacity: 0.65,
+          opacity: 0.70,
         }}
       >
         <svg viewBox="0 0 40 40" width="100%" height="100%">
@@ -85,7 +74,7 @@ export default function CosmicBackground() {
         </svg>
       </div>
 
-      {/* Faint Outer Edge Zodiac Wheel */}
+      {/* Faint Outer Edge Zodiac Wheel Watermark */}
       <div
         style={{
           position: 'absolute',

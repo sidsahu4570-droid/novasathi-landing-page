@@ -106,7 +106,15 @@ export default function Hero() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '20px', alignItems: 'center' }} className="hero-grid">
 
           {/* Left — Copy */}
-          <div>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.45)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            padding: '18px 22px',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.60)',
+            boxShadow: '0 8px 32px rgba(18, 7, 46, 0.08)',
+          }}>
             <motion.div custom={0} variants={floatVariants} initial="hidden" animate="visible">
               <button
                 type="button"
