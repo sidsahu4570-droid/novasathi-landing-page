@@ -6,6 +6,7 @@ import ProblemSelector from './components/landing/ProblemSelector';
 import HowItWorks from './components/landing/HowItWorks';
 import TrustStrip from './components/landing/TrustStrip';
 import Testimonials from './components/landing/Testimonials';
+import VideoTestimonials from './components/landing/VideoTestimonials';
 import FinalCTA from './components/landing/FinalCTA';
 import MicroFAQ from './components/landing/MicroFAQ';
 import Footer from './components/landing/Footer';
@@ -49,6 +50,7 @@ export default function App() {
         <HowItWorks />
         <TrustStrip />
         <Testimonials />
+        <VideoTestimonials onOpenModal={handleOpenModal} />
         <FinalCTA onOpenModal={handleOpenModal} />
         <MicroFAQ />
         <Footer />
