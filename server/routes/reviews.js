@@ -14,10 +14,17 @@ const uploadDirThumbnails = path.join(process.cwd(), 'public', 'uploads', 'thumb
 if (!fs.existsSync(uploadDirVideos)) fs.mkdirSync(uploadDirVideos, { recursive: true });
 if (!fs.existsSync(uploadDirThumbnails)) fs.mkdirSync(uploadDirThumbnails, { recursive: true });
 
+// Helper: Check if file is a video
+function isVideoFile(file) {
+  const isVideoMime = file.mimetype && file.mimetype.startsWith('video/');
+  const isVideoExt = /\.(mp4|webm|mov|m4v|mkv|avi)$/i.test(file.originalname);
+  return isVideoMime || isVideoExt;
+}
+
 // Configure Multer disk storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if (file.fieldname === 'video') {
+    if (isVideoFile(file)) {
       cb(null, uploadDirVideos);
     } else {
       cb(null, uploadDirThumbnails);
@@ -26,7 +33,8 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname).toLowerCase();
-    cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+    const prefix = isVideoFile(file) ? 'video' : 'thumb';
+    cb(null, `${prefix}-${uniqueSuffix}${ext}`);
   },
 });
 
@@ -34,12 +42,12 @@ const upload = multer({
   storage,
   limits: { fileSize: 100 * 1024 * 1024 }, // 100MB limit
   fileFilter: (req, file, cb) => {
-    if (file.fieldname === 'video') {
-      const allowedVideo = /\.(mp4|webm|mov|m4v|mkv)$/i;
+    if (isVideoFile(file)) {
+      const allowedVideo = /\.(mp4|webm|mov|m4v|mkv|avi)$/i;
       if (!file.originalname.match(allowedVideo)) {
-        return cb(new Error('Only MP4, WebM, and MOV video files are allowed!'), false);
+        return cb(new Error('Only MP4, WebM, MOV, and AVI video files are allowed!'), false);
       }
-    } else if (file.fieldname === 'thumbnail') {
+    } else {
       const allowedImage = /\.(jpg|jpeg|png|webp|avif)$/i;
       if (!file.originalname.match(allowedImage)) {
         return cb(new Error('Only JPG, PNG, WEBP, and AVIF image files are allowed!'), false);
@@ -142,14 +150,23 @@ router.get('/admin/list', requireAdmin, async (req, res) => {
 router.post(
   '/admin/upload',
   requireAdmin,
-  upload.single('file'),
+  (req, res, next) => {
+    upload.single('file')(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(400).json({ error: `Upload error: ${err.message}` });
+      } else if (err) {
+        return res.status(400).json({ error: err.message });
+      }
+      next();
+    });
+  },
   async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded.' });
       }
 
-      const isVideo = req.file.fieldname === 'video' || req.file.mimetype.startsWith('video/');
+      const isVideo = isVideoFile(req.file);
       const localUrl = `/uploads/${isVideo ? 'videos' : 'thumbnails'}/${req.file.filename}`;
       let finalUrl = localUrl;
       let publicId = '';

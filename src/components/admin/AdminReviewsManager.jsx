@@ -139,15 +139,19 @@ export default function AdminReviewsManager({ token }) {
 
     xhr.addEventListener('load', () => {
       setUploadingVideo(false);
-      if (xhr.status >= 200 && xhr.status < 300) {
+      try {
         const res = JSON.parse(xhr.responseText);
-        setFormVideoUrl(res.url);
-        setFormVideoPublicId(res.publicId || '');
-        setVideoFileInfo({
-          filename: res.filename || file.name,
-          size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
-        });
-      } else {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          setFormVideoUrl(res.url);
+          setFormVideoPublicId(res.publicId || '');
+          setVideoFileInfo({
+            filename: res.filename || file.name,
+            size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
+          });
+        } else {
+          alert(res.error || 'Video upload failed. Please try again.');
+        }
+      } catch (err) {
         alert('Video upload failed. Please try again.');
       }
     });
