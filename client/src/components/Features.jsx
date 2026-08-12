@@ -1,68 +1,56 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { selectServiceAndScroll } from '../utils/navigation'
 
 const features = [
   {
     icon: '⭐',
-    color: 'rgba(172,75,255,0.15)',
-    border: 'rgba(172,75,255,0.25)',
     label: 'Vedic Astrology',
     serviceName: 'Vedic Astrology',
-    title: 'Know what the stars say about your path',
-    desc: 'Deep, personalized Vedic astrology readings based on your birth chart for career & life.',
-    benefit: 'Stop guessing. Start knowing.',
+    title: 'Vedic Astrology',
+    desc: 'Deep birth chart readings for career, relationships & timing.',
+    benefit: 'Know your stars →',
   },
   {
     icon: '🃏',
-    color: 'rgba(249,156,0,0.12)',
-    border: 'rgba(249,156,0,0.25)',
     label: 'Tarot Reading',
     serviceName: 'Tarot Reading',
-    title: 'Uncover hidden forces shaping your life',
-    desc: 'Gain insight into past patterns, present blocks, and future possibilities.',
-    benefit: 'Gain deep clarity.',
+    title: 'Tarot Reading',
+    desc: 'Uncover hidden patterns, present blocks, and future path.',
+    benefit: 'Gain clarity →',
   },
   {
     icon: '🔢',
-    color: 'rgba(0,187,127,0.12)',
-    border: 'rgba(0,187,127,0.25)',
     label: 'Numerology',
     serviceName: 'Numerology',
-    title: 'Decode numbers written in your destiny',
-    desc: 'Reveal your life path, strengths, and optimal timing for major decisions.',
-    benefit: 'Understand yourself deeper.',
+    title: 'Numerology',
+    desc: 'Decode destiny numbers for life decisions & strengths.',
+    benefit: 'Decode numbers →',
   },
   {
     icon: '🏠',
-    color: 'rgba(48,128,255,0.12)',
-    border: 'rgba(48,128,255,0.25)',
     label: 'Vastu Shastra',
     serviceName: 'Vastu',
-    title: 'Align your space for success & peace',
-    desc: 'Transform home or workplace into an energy-aligned environment for growth.',
-    benefit: 'Create supporting space.',
+    title: 'Vastu Shastra',
+    desc: 'Align your home & workspace for success, peace & harmony.',
+    benefit: 'Align your space →',
   },
   {
     icon: '💙',
-    color: 'rgba(255,35,87,0.12)',
-    border: 'rgba(255,35,87,0.25)',
     label: 'Dil Ki Baat',
     serviceName: 'Dil Ki Baat',
-    title: 'Talk freely — without judgment',
-    desc: 'Compassionate peer listeners offering a safe, 100% anonymous space to speak your heart.',
-    benefit: 'Feel heard & lighter.',
+    title: 'Dil Ki Baat',
+    desc: 'Compassionate peer listeners offering 100% anonymous support.',
+    benefit: 'Speak freely →',
   },
   {
     icon: '📱',
-    color: 'rgba(172,75,255,0.15)',
-    border: 'rgba(172,75,255,0.25)',
     label: '24/7 Access',
     serviceName: 'General Inquiry',
-    title: 'Guidance when you need it — 24/7',
-    desc: 'Access verified experts around the clock directly from your phone in seconds.',
-    benefit: 'Help is a tap away.',
+    title: '24/7 Expert Access',
+    desc: 'Connect with verified practitioners in seconds from your phone.',
+    benefit: 'Connect 24/7 →',
   },
 ]
 
@@ -77,27 +65,37 @@ export default function Features() {
       className="ns-section bg-alt"
       style={{ position: 'relative' }}
     >
-      <div id="benefits" style={{ position: 'absolute', top: 0 }} />
+      <div id="pain" style={{ position: 'absolute', top: 0 }} />
+      <div id="transformation" style={{ position: 'absolute', top: 0 }} />
+
       <div className="ns-container">
+
+        {/* Section 02 — Problem + Solution + Services Header */}
         <motion.div
           style={{ textAlign: 'center', marginBottom: '16px' }}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           <div className="ns-label" style={{ marginBottom: '6px' }}>
-            🔮 Core Guidance Services
+            🔮 Services & Solution
           </div>
           <h2 className="section-headline" style={{ marginBottom: '6px', color: 'var(--text-primary)' }}>
-            Everything you need for <span className="gradient-text">clarity & peace</span>
+            From confusion to <span className="gradient-text">complete clarity</span>
           </h2>
-          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto', lineHeight: 1.45 }}>
-            Select any service to start your free 5-minute consultation directly.
-          </p>
+
+          {/* Problem → Solution 1-line bar */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: 'rgba(172, 75, 255, 0.08)', border: '1px solid var(--border-purple)', borderRadius: '50px', fontSize: '12.5px', color: 'var(--text-secondary)', maxWidth: '640px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span style={{ color: '#ff2357', fontWeight: 600 }}>Struggling alone?</span>
+            <span>→</span>
+            <span style={{ color: 'var(--green-active)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <CheckCircle2 size={13} /> NovaSathi brings 24/7 private expert guidance
+            </span>
+          </div>
         </motion.div>
 
-        {/* 3-Column Compact Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
+        {/* 3-Column Compact Services Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '10px' }}>
           {features.map((f, i) => (
             <motion.div
               key={i}
@@ -107,11 +105,11 @@ export default function Features() {
               aria-label={`Learn more about ${f.label}`}
               onClick={() => selectServiceAndScroll(f.serviceName)}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectServiceAndScroll(f.serviceName) } }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              transition={{ duration: 0.3, delay: i * 0.04 }}
               style={{
-                padding: '16px 14px',
+                padding: '14px 12px',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
@@ -119,36 +117,16 @@ export default function Features() {
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <div style={{ width: 34, height: 34, background: f.color, border: `1px solid ${f.border}`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>
-                    {f.icon}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--purple-500)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{f.label}</div>
-                    <h3 style={{ fontSize: '14.5px', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.25 }}>{f.title}</h3>
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '20px', flexShrink: 0 }}>{f.icon}</span>
+                  <h3 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.25 }}>{f.title}</h3>
                 </div>
-
-                <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: '10px' }}>{f.desc}</p>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: '8px' }}>{f.desc}</p>
               </div>
 
-              <div
-                className="action-pill"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justify: 'space-between',
-                  padding: '6px 10px',
-                  background: 'var(--purple-subtle)',
-                  border: '1px solid var(--border-purple)',
-                  borderRadius: '8px',
-                  color: 'var(--text-purple)',
-                  fontSize: '11.5px',
-                  fontWeight: 600,
-                }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11.5px', color: 'var(--purple-500)', fontWeight: 600 }}>
                 <span>{f.benefit}</span>
-                <ArrowRight size={13} />
+                <ArrowRight size={12} />
               </div>
             </motion.div>
           ))}

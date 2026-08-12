@@ -94,16 +94,16 @@ export default function Hero() {
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        paddingTop: '64px',
-        paddingBottom: '16px',
+        paddingTop: '56px',
+        paddingBottom: '12px',
         overflow: 'hidden',
       }}
     >
       <StarField />
-      <CosmicOrb size="400px" color="rgba(172,75,255,0.3)" top="-10%" left="-10%" delay={0} opacity={0.08} />
+      <CosmicOrb size="380px" color="rgba(172,75,255,0.25)" top="-10%" left="-10%" delay={0} opacity={0.08} />
 
-      <div className="ns-container" style={{ paddingTop: '8px', paddingBottom: '8px', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '24px', alignItems: 'center' }} className="hero-grid">
+      <div className="ns-container" style={{ paddingTop: '4px', paddingBottom: '4px', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '20px', alignItems: 'center' }} className="hero-grid">
 
           {/* Left — Copy */}
           <div>
@@ -112,7 +112,7 @@ export default function Hero() {
                 type="button"
                 onClick={() => scrollToSection('reviews')}
                 className="ns-label"
-                style={{ marginBottom: '8px', cursor: 'pointer', background: 'var(--purple-subtle)', border: '1px solid var(--border-purple)', padding: '3px 10px', fontSize: '11px' }}
+                style={{ marginBottom: '6px', cursor: 'pointer', background: 'var(--purple-subtle)', border: '1px solid var(--border-purple)', padding: '2px 8px', fontSize: '10.5px' }}
               >
                 <Star size={10} fill="var(--purple-500)" color="var(--purple-500)" />
                 Trusted by thousands across India →
@@ -125,7 +125,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ marginBottom: '10px', color: 'var(--text-primary)' }}
+              style={{ marginBottom: '8px', color: 'var(--text-primary)' }}
             >
               Get Clarity on Life's{' '}
               <span className="gradient-text">Biggest Questions</span>{' '}
@@ -137,7 +137,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ fontSize: '14.5px', lineHeight: 1.45, color: 'var(--text-secondary)', marginBottom: '14px', maxWidth: '480px' }}
+              style={{ fontSize: '13.5px', lineHeight: 1.4, color: 'var(--text-secondary)', marginBottom: '12px', maxWidth: '460px' }}
             >
               Connect with verified astrologers, tarot readers, and emotional wellness counselors. 
               Get personalized guidance for career, relationships, and life — completely private, 
@@ -149,23 +149,23 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '16px' }}
+              style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}
             >
               <button
                 type="button"
                 onClick={() => selectServiceAndScroll('General Inquiry')}
                 className="btn-primary"
-                style={{ fontSize: '13.5px', padding: '10px 22px' }}
+                style={{ fontSize: '13px', padding: '9px 20px' }}
               >
-                Start Free Consultation <ArrowRight size={15} />
+                Start Free Consultation <ArrowRight size={14} />
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('how-it-works')}
                 className="btn-secondary"
-                style={{ fontSize: '13.5px', padding: '9px 20px' }}
+                style={{ fontSize: '13px', padding: '8px 18px' }}
               >
-                How It Works <ChevronDown size={14} />
+                How It Works <ChevronDown size={13} />
               </button>
             </motion.div>
 
@@ -175,7 +175,7 @@ export default function Hero() {
               variants={floatVariants}
               initial="hidden"
               animate="visible"
-              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}
               className="trust-grid"
             >
               {trustItems.map((item, i) => (
@@ -186,13 +186,13 @@ export default function Hero() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
+                    gap: '6px',
                     color: 'var(--text-secondary)',
-                    fontSize: '13px',
+                    fontSize: '12px',
                     background: 'transparent',
                     border: 'none',
                     cursor: 'pointer',
-                    padding: '4px 0',
+                    padding: '2px 0',
                     textAlign: 'left',
                     transition: 'color 0.2s ease',
                   }}
@@ -212,19 +212,19 @@ export default function Hero() {
             variants={floatVariants}
             initial="hidden"
             animate="visible"
-            style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}
+            style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}
             className="hero-visual"
           >
             {/* Main cosmic card */}
-            <div className="animate-float" style={{ width: '100%', maxWidth: '380px' }}>
-              <div className="ns-card-purple" style={{ padding: '32px', textAlign: 'center', position: 'relative', overflow: 'hidden', backdropFilter: 'blur(20px)' }}>
+            <div className="animate-float" style={{ width: '100%', maxWidth: '340px' }}>
+              <div className="ns-card-purple" style={{ padding: '16px 14px', textAlign: 'center', position: 'relative', overflow: 'hidden', backdropFilter: 'blur(20px)' }}>
                 {/* Cosmic mandala */}
                 <div
                   role="button"
                   tabIndex={0}
                   onClick={() => scrollToSection('showcase')}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection('showcase') }}
-                  style={{ position: 'relative', margin: '0 auto 24px', width: '160px', height: '160px', cursor: 'pointer' }}
+                  style={{ position: 'relative', margin: '0 auto 12px', width: '100px', height: '100px', cursor: 'pointer' }}
                 >
                   <div style={{
                     position: 'absolute', inset: 0, borderRadius: '50%',
@@ -234,21 +234,21 @@ export default function Hero() {
                     animation: 'spin-slow 20s linear infinite',
                   }}>
                     <div style={{
-                      width: '110px', height: '110px', borderRadius: '50%',
+                      width: '70px', height: '70px', borderRadius: '50%',
                       background: 'linear-gradient(135deg, rgba(249,156,0,0.2), rgba(172,75,255,0.2))',
                       border: '2px solid var(--border-amber)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '52px',
+                      fontSize: '32px',
                     }}>
                       🔮
                     </div>
                   </div>
                 </div>
 
-                <div style={{ fontFamily: '"Cinzel", serif', fontSize: '22px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>
+                <div style={{ fontFamily: '"Cinzel", serif', fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
                   Your Spiritual Companion
                 </div>
-                <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '20px' }}>
+                <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
                   Ancient wisdom. Modern platform.
                 </div>
 
