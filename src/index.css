@@ -1039,74 +1039,126 @@ html, body {
 
   /* Section Spacing & Grid Adjustments */
   .section-problem-selector {
-    padding: 20px 0 24px 0 !important;
+    padding: 18px 0 20px 0 !important;
   }
 
   .section-title {
-    font-size: 1.6rem !important;
+    font-size: 1.5rem !important;
     line-height: 1.25 !important;
   }
 
   .section-subtitle {
-    font-size: 0.88rem !important;
-    margin-bottom: 20px !important;
+    font-size: 0.84rem !important;
+    margin-bottom: 16px !important;
   }
 
+  /* Compact 2-Column Mobile Card Grid */
   .problem-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px 8px !important;
+    align-items: stretch !important;
   }
 
   .problem-card {
-    padding: 18px 16px !important;
-    min-height: auto !important;
+    padding: 12px 10px !important;
+    min-height: 135px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .problem-icon-title {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .problem-icon {
+    font-size: 1.2rem !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
   }
 
   .problem-card-title {
-    font-size: 1.05rem !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+    color: var(--color-soft-cream) !important;
   }
 
   .problem-card-desc {
-    font-size: 0.85rem !important;
-    margin-bottom: 12px !important;
+    font-size: 0.72rem !important;
+    line-height: 1.35 !important;
+    color: rgba(248, 244, 234, 0.75) !important;
+    margin-bottom: 8px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .problem-card-cta {
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: var(--color-warm-gold) !important;
+    margin-top: auto !important;
   }
 
   .section-how-it-works {
-    padding: 20px 0 24px 0 !important;
+    padding: 18px 0 20px 0 !important;
   }
 
+  /* Compact How It Works Rows on Mobile */
   .steps-container {
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    gap: 8px !important;
   }
 
   .step-card {
-    padding: 18px 16px !important;
+    padding: 12px 14px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-align: left !important;
   }
 
   .step-number {
-    font-size: 1.8rem !important;
-    margin-bottom: 6px !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .step-title {
+    font-size: 0.88rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .step-desc {
+    font-size: 0.76rem !important;
+    line-height: 1.3 !important;
   }
 
   /* Trust Strip Grid on Mobile */
   .trust-strip-container {
-    padding: 10px 0 18px 0 !important;
+    padding: 8px 0 16px 0 !important;
   }
 
   .trust-strip {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px 8px !important;
-    padding: 14px 12px !important;
-    border-radius: 16px !important;
+    gap: 8px 6px !important;
+    padding: 12px 10px !important;
+    border-radius: 14px !important;
     width: 100% !important;
     text-align: center !important;
   }
 
   .trust-strip-item {
     justify-content: center !important;
-    font-size: 0.74rem !important;
+    font-size: 0.72rem !important;
     letter-spacing: 0.2px !important;
   }
 
@@ -1115,70 +1167,83 @@ html, body {
   }
 
   .section-testimonials {
-    padding: 20px 0 24px 0 !important;
+    padding: 18px 0 20px 0 !important;
   }
 
   .testimonials-grid {
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
+    gap: 8px !important;
   }
 
   .testimonial-card {
-    padding: 18px 16px !important;
+    padding: 12px 14px !important;
+    border-radius: 14px !important;
+  }
+
+  .testimonial-quote {
+    font-size: 0.82rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .stars {
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
   }
 
   .section-final-cta {
-    padding: 20px 0 24px 0 !important;
+    padding: 18px 0 20px 0 !important;
   }
 
   .final-cta-card {
-    padding: 26px 18px !important;
-    border-radius: 18px !important;
+    padding: 22px 16px !important;
+    border-radius: 16px !important;
   }
 
   .final-cta-headline {
-    font-size: 1.55rem !important;
+    font-size: 1.45rem !important;
     line-height: 1.25 !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
   }
 
   .final-cta-sub {
-    font-size: 0.88rem !important;
-    margin-bottom: 16px !important;
+    font-size: 0.84rem !important;
+    margin-bottom: 14px !important;
   }
 
   .final-cta-offer {
-    font-size: 1.35rem !important;
-    margin-bottom: 18px !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 16px !important;
   }
 
   .final-cta-card .btn-primary {
     width: 100% !important;
     max-width: 320px !important;
-    font-size: 0.98rem !important;
-    padding: 13px 20px !important;
+    font-size: 0.95rem !important;
+    padding: 12px 18px !important;
   }
 
   .section-faq {
-    padding: 20px 0 24px 0 !important;
+    padding: 18px 0 20px 0 !important;
   }
 
   .faq-item {
-    padding: 14px 16px !important;
+    padding: 12px 14px !important;
+    border-radius: 12px !important;
   }
 
   .faq-question {
-    font-size: 0.92rem !important;
+    font-size: 0.88rem !important;
     gap: 8px !important;
   }
 
   .faq-answer {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
   }
 
   .footer {
-    padding: 22px 0 20px 0 !important;
+    padding: 18px 0 16px 0 !important;
   }
 
   .footer-inner {
