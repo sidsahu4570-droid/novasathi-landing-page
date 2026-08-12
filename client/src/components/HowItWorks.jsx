@@ -1,140 +1,103 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Clock, Lock, Sparkles } from 'lucide-react'
 import { selectServiceAndScroll, scrollToSection } from '../utils/navigation'
 
+const keyBenefits = [
+  { icon: <Lock size={16} color="var(--purple-500)" />, title: '100% Anonymous', desc: 'Phone masking protects your number.' },
+  { icon: <ShieldCheck size={16} color="var(--purple-500)" />, title: 'Verified Experts', desc: 'Strict background checks.' },
+  { icon: <Sparkles size={16} color="var(--purple-500)" />, title: '5-Min Free Trial', desc: 'Try before paying anything.' },
+  { icon: <Clock size={16} color="var(--purple-500)" />, title: '24/7 Available', desc: 'Connect in seconds, anytime.' },
+]
+
 const steps = [
-  {
-    number: '01',
-    emoji: '📲',
-    title: 'Browse Experts',
-    desc: 'Browse verified astrologers, tarot readers & counselors on any device.',
-    tip: 'No registration barrier.',
-    target: 'showcase',
-  },
-  {
-    number: '02',
-    emoji: '💬',
-    title: 'Free 5-Min Trial',
-    desc: 'Chat or call for 5 minutes free — 100% private, no credit card required.',
-    tip: 'Phone masking protected.',
-    target: 'pricing',
-  },
-  {
-    number: '03',
-    emoji: '🔓',
-    title: 'Unlock Guidance',
-    desc: 'Loved the session? Pay only for what you use — no subscriptions.',
-    tip: 'Pay per session.',
-    target: 'pricing',
-  },
-  {
-    number: '04',
-    emoji: '🌟',
-    title: 'Get Results',
-    desc: 'Walk away with real answers, deep perspective, and peace of mind.',
-    tip: 'Real clarity.',
-    target: 'contact',
-  },
+  { number: '01', emoji: '📲', title: 'Browse Experts', desc: 'Browse verified astrologers & counselors.' },
+  { number: '02', emoji: '💬', title: 'Free 5-Min Trial', desc: 'Chat 5 min free — no credit card needed.' },
+  { number: '03', emoji: '🔓', title: 'Unlock Guidance', desc: 'Pay per session — zero subscriptions.' },
+  { number: '04', emoji: '🌟', title: 'Get Results', desc: 'Walk away with real answers & peace.' },
 ]
 
 export default function HowItWorks() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
     <section
       id="how-it-works"
       ref={ref}
-      className="ns-section bg-alt"
-      style={{ position: 'relative', overflow: 'hidden' }}
+      className="ns-section bg-base"
+      style={{ position: 'relative' }}
     >
-      <div className="ns-container" style={{ position: 'relative', zIndex: 1 }}>
+      <div id="benefits" style={{ position: 'absolute', top: 0 }} />
+      <div id="why-novasathi" style={{ position: 'absolute', top: 0 }} />
+
+      <div className="ns-container">
 
         <motion.div
-          style={{ textAlign: 'center', marginBottom: '28px' }}
-          initial={{ opacity: 0, y: 30 }}
+          style={{ textAlign: 'center', marginBottom: '16px' }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="ns-label" style={{ marginBottom: '10px' }}>
-            🗺️ Simple Process
+          <div className="ns-label" style={{ marginBottom: '6px' }}>
+            ⚡ Why Choose NovaSathi & How It Works
           </div>
-          <h2 className="section-headline" style={{ marginBottom: '10px', color: 'var(--text-primary)' }}>
-            Getting started takes{' '}
-            <span className="gradient-text">less than 2 minutes</span>
+          <h2 className="section-headline" style={{ marginBottom: '4px', color: 'var(--text-primary)' }}>
+            Guidance made <span className="gradient-text">simple, private & fast</span>
           </h2>
-          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto', lineHeight: 1.55 }}>
-            No complicated setup. Just four simple steps from question to clarity.
+          <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', maxWidth: '460px', margin: '0 auto', lineHeight: 1.4 }}>
+            Four key benefits paired with a simple 2-minute process.
           </p>
         </motion.div>
 
-        {/* 4-Step Horizontal Desktop Grid / Compact Mobile Stack */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }} className="how-it-works-grid">
-          {steps.map((step, i) => (
-            <motion.div
+        {/* Top — 4 Benefits Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '10px', marginBottom: '14px' }}>
+          {keyBenefits.map((b, i) => (
+            <div
               key={i}
               className="ns-card"
               role="button"
               tabIndex={0}
-              onClick={() => scrollToSection(step.target)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection(step.target) }}
-              initial={{ opacity: 0, y: 25 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              style={{
-                padding: '20px',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                justify: 'space-between',
-                position: 'relative',
-              }}
+              onClick={() => scrollToSection('pricing')}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') scrollToSection('pricing') }}
+              style={{ padding: '10px 12px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
             >
+              <div style={{ padding: '6px', background: 'var(--purple-subtle)', borderRadius: '8px', border: '1px solid var(--border-purple)', flexShrink: 0 }}>
+                {b.icon}
+              </div>
               <div>
-                {/* Step header */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                  <div style={{
-                    width: 36, height: 36,
-                    borderRadius: '50%',
-                    background: 'var(--purple-subtle)',
-                    border: '1.5px solid var(--border-purple)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '13px', fontWeight: 800, color: 'var(--purple-500)',
-                  }}>
-                    {step.number}
-                  </div>
-                  <div style={{ fontSize: '24px' }}>{step.emoji}</div>
-                </div>
-
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>{step.title}</h3>
-                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '14px' }}>{step.desc}</p>
+                <div style={{ fontSize: '12.5px', fontWeight: 700, color: 'var(--text-primary)' }}>{b.title}</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.3 }}>{b.desc}</div>
               </div>
-
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '4px 8px', background: 'rgba(0,187,127,0.08)', border: '1px solid rgba(0,187,127,0.2)', borderRadius: '6px' }}>
-                <span style={{ color: 'var(--green-active)', fontSize: '11px' }}>✓</span>
-                <span style={{ fontSize: '11px', color: 'var(--green-active)', fontWeight: 600 }}>{step.tip}</span>
-              </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Compact CTA */}
-        <motion.div
-          style={{ textAlign: 'center', marginTop: '28px' }}
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-        >
-          <button
-            type="button"
-            onClick={() => selectServiceAndScroll('General Inquiry')}
-            className="btn-primary"
-            style={{ fontSize: '14.5px', padding: '12px 30px' }}
-          >
-            Start Free Consultation <ArrowRight size={16} />
-          </button>
-        </motion.div>
+        {/* Bottom — 4 Steps Horizontal Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '10px' }}>
+          {steps.map((s, i) => (
+            <div
+              key={i}
+              className="ns-card-purple"
+              role="button"
+              tabIndex={0}
+              onClick={() => selectServiceAndScroll('General Inquiry')}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') selectServiceAndScroll('General Inquiry') }}
+              style={{ padding: '12px 14px', cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--purple-500)', padding: '2px 6px', background: 'var(--purple-subtle)', borderRadius: '4px', border: '1px solid var(--border-purple)' }}>
+                    STEP {s.number}
+                  </span>
+                  <span style={{ fontSize: '18px' }}>{s.emoji}</span>
+                </div>
+                <h3 style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '3px' }}>{s.title}</h3>
+                <p style={{ fontSize: '11.5px', color: 'var(--text-secondary)', lineHeight: 1.35, margin: 0 }}>{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

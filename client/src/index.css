@@ -84,18 +84,18 @@ body {
    LAYOUT HELPERS — HYPER-COMPACT DENSE SYSTEM (50% SCALE REDUCTION)
    ============================================ */
 .ns-container {
-  max-width: 1120px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 16px;
   width: 100%;
 }
 
 .ns-section {
-  padding: 38px 16px;
+  padding: 28px 16px;
 }
 
 .ns-section-alt {
-  padding: 38px 16px;
+  padding: 28px 16px;
   background-color: var(--bg-alt);
 }
 
@@ -458,27 +458,27 @@ select:-webkit-autofill:focus {
    ============================================ */
 @media (max-width: 768px) {
   .ns-section, .ns-section-alt {
-    padding: 48px 16px !important;
+    padding: 20px 12px !important;
   }
 
   .ns-container {
-    padding: 0 14px !important;
+    padding: 0 12px !important;
   }
 
   .hero-headline {
-    font-size: 1.85rem !important;
-    line-height: 1.2 !important;
+    font-size: 1.65rem !important;
+    line-height: 1.18 !important;
   }
 
   .section-headline {
-    font-size: 1.45rem !important;
-    line-height: 1.25 !important;
+    font-size: 1.35rem !important;
+    line-height: 1.22 !important;
   }
 
   /* Compact spacing for section headers on mobile */
   .ns-section > div > div:first-child,
   .ns-section-alt > div > div:first-child {
-    margin-bottom: 32px !important;
+    margin-bottom: 14px !important;
   }
 
   /* Mobile horizontal scroll for expert cards in showcase mockup */
@@ -486,21 +486,21 @@ select:-webkit-autofill:focus {
     display: flex !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    gap: 12px !important;
-    padding-bottom: 12px !important;
+    gap: 10px !important;
+    padding-bottom: 8px !important;
     -webkit-overflow-scrolling: touch;
   }
 
   .expert-cards-grid > * {
-    min-width: 230px !important;
-    max-width: 260px !important;
+    min-width: 210px !important;
+    max-width: 240px !important;
     scroll-snap-align: start !important;
     flex-shrink: 0 !important;
   }
 
   /* Card padding adjustments on mobile */
   .ns-card, .ns-card-purple, .ns-card-amber {
-    padding: 24px 20px !important;
+    padding: 14px 12px !important;
   }
 }
 
