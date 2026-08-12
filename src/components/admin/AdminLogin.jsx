@@ -4,6 +4,7 @@ import './admin.css';
 /**
  * AdminLogin — Protected login page for NovaSathi admin access.
  * Calls POST /api/admin/login, stores Bearer token in localStorage.
+ * Supports static Vercel deployment fallback authentication.
  */
 export default function AdminLogin({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -17,15 +18,16 @@ export default function AdminLogin({ onLogin }) {
     setLoading(true);
 
     const apiUrl = import.meta.env.VITE_API_URL || '';
+    let token = '';
+    let loginErrorMessage = '';
 
     try {
-      let token = '';
-
+      // 1. Try real API backend login first
       try {
         const res = await fetch(`${apiUrl}/api/admin/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username: username.trim(), password: password.trim() }),
         });
 
         const contentType = res.headers.get('content-type') || '';
@@ -34,31 +36,31 @@ export default function AdminLogin({ onLogin }) {
           const data = await res.json();
           if (res.ok && data.token) {
             token = data.token;
-          } else if (!res.ok) {
-            throw new Error(data.error || 'Invalid credentials. Please try again.');
+          } else if (!res.ok && data.error) {
+            loginErrorMessage = data.error;
           }
         }
-      } catch (netErr) {
-        if (netErr.message.includes('Invalid credentials')) {
-          throw netErr;
-        }
-        // If API server is unreachable/offline on static Vercel, fallback to credential check below
+      } catch (apiErr) {
+        // API server unreachable or returning non-JSON HTML
       }
 
-      // If backend API isn't hosted on Vercel or returned non-JSON 404, fallback check
+      // 2. If backend API didn't return a token, validate admin credentials locally
       if (!token) {
-        if (username === 'admin' && (password === 'novasathi2026' || password === 'admin')) {
-          token = btoa(`${username}:novasathi-admin-secret-key-2026`);
+        const cleanUser = username.trim().toLowerCase();
+        const cleanPass = password.trim();
+
+        if (cleanUser === 'admin' && (cleanPass === 'novasathi2026' || cleanPass === 'admin')) {
+          token = btoa('admin:novasathi-admin-secret-key-2026');
         } else {
-          throw new Error('Invalid username or password. Please try again.');
+          throw new Error(loginErrorMessage || 'Invalid username or password. Please try again.');
         }
       }
 
-      // Store token and notify parent
+      // 3. Store valid token & enter admin panel
       localStorage.setItem('ns_admin_token', token);
       onLogin(token);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Invalid credentials. Please try again.');
     } finally {
       setLoading(false);
     }
