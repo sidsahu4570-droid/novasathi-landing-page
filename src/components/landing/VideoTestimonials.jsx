@@ -1,124 +1,50 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-/**
- * VideoTestimonials — Premium Video Review Section
- *
- * HOW TO ADD REAL VIDEOS:
- * - Drop .mp4 files into /public/videos/
- * - Update the testimonials array below with correct paths & poster images
- */
-const testimonials = [
-  {
-    id: 1,
-    name: 'Rahul',
-    category: 'Career & Astrology',
-    rating: 5,
-    quote: 'That conversation gave me the clarity I needed. I finally knew which direction to take.',
-    video: '/videos/review-1.mp4',
-    poster: '/videos/review-1-poster.jpg',
-  },
-  {
-    id: 2,
-    name: 'Tanvi',
-    category: 'Love & Relationships',
-    rating: 5,
-    quote: 'I finally felt like someone truly understood what I was going through. It was deeply calming.',
-    video: '/videos/review-2.mp4',
-    poster: '/videos/review-2-poster.jpg',
-  },
-  {
-    id: 3,
-    name: 'Rohan',
-    category: 'Tarot & Guidance',
-    rating: 5,
-    quote: 'The guidance helped me look at my situation from a completely different angle.',
-    video: '/videos/review-3.mp4',
-    poster: '/videos/review-3-poster.jpg',
-  },
-];
-
-/* ── Individual Video Card ──────────────────────────────────────────────── */
-function VideoCard({ item, activeId, onPlay }) {
-  const videoRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
-  const [videoError, setVideoError] = useState(false);
-  const isActive = activeId === item.id;
-
-  // Pause if another card became active
-  useEffect(() => {
-    if (!isActive && playing && videoRef.current) {
-      videoRef.current.pause();
-      setPlaying(false);
-    }
-  }, [isActive, playing]);
-
-  const handlePlay = useCallback(() => {
-    if (videoError) return;
-    onPlay(item.id);
-    const vid = videoRef.current;
-    if (!vid) return;
-    if (playing) {
-      vid.pause();
-      setPlaying(false);
-    } else {
-      vid.play().catch(() => setVideoError(true));
-      setPlaying(true);
-    }
-  }, [videoError, onPlay, item.id, playing]);
-
+/* ── Individual Video Card Component ────────────────────────────────────── */
+function VideoCard({ item, onOpenLightbox }) {
   return (
-    <div className="vt-card">
-      {/* Video / Placeholder area */}
-      <div className="vt-video-wrap" onClick={handlePlay}>
-        {videoError ? (
-          <div className="vt-placeholder" aria-label={`Video placeholder for ${item.name}`}>
-            <div className="vt-placeholder-glow" />
-            <div className="vt-placeholder-icon">🎥</div>
-            <span className="vt-placeholder-label">Video coming soon</span>
-          </div>
+    <div className="vt-card" onClick={() => onOpenLightbox(item)}>
+      {/* Video / Poster Wrapper */}
+      <div className="vt-video-wrap">
+        {item.thumbnailUrl ? (
+          <img
+            src={item.thumbnailUrl}
+            alt={item.name}
+            className="vt-video"
+          />
         ) : (
           <video
-            ref={videoRef}
+            src={item.videoUrl}
             className="vt-video"
-            src={item.video}
-            poster={item.poster}
             preload="metadata"
+            muted
             playsInline
-            onEnded={() => setPlaying(false)}
-            onError={() => setVideoError(true)}
-            aria-label={`${item.name}'s video testimonial about ${item.category}`}
           />
         )}
 
-        {/* Play / Pause overlay */}
-        {!videoError && (
-          <button
-            className={`vt-play-btn ${playing ? 'vt-playing' : ''}`}
-            aria-label={playing ? 'Pause video' : 'Play video'}
-            onClick={(e) => { e.stopPropagation(); handlePlay(); }}
-          >
-            <span className="vt-play-circle">
-              {playing ? (
-                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                  <rect x="6" y="4" width="4" height="16" rx="1" />
-                  <rect x="14" y="4" width="4" height="16" rx="1" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </span>
-          </button>
-        )}
+        {/* Play Button Overlay */}
+        <button
+          className="vt-play-btn"
+          aria-label={`Play testimonial video by ${item.name}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenLightbox(item);
+          }}
+        >
+          <span className="vt-play-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </button>
       </div>
 
-      {/* Info */}
+      {/* Card Info */}
       <div className="vt-info">
-        <div className="vt-stars" aria-label={`${item.rating} out of 5 stars`}>
-          {'★'.repeat(item.rating)}
+        <div className="vt-stars" aria-label={`${item.rating || 5} out of 5 stars`}>
+          {'★'.repeat(item.rating || 5)}
         </div>
-        <p className="vt-quote">"{item.quote}"</p>
+        <p className="vt-quote">"{item.reviewText}"</p>
         <div className="vt-author">
           <span className="vt-name">— {item.name}</span>
           <span className="vt-category">{item.category}</span>
@@ -130,16 +56,46 @@ function VideoCard({ item, activeId, onPlay }) {
 
 /* ── Main Section ───────────────────────────────────────────────────────── */
 export default function VideoTestimonials({ onOpenModal }) {
-  const [activeId, setActiveId] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [lightboxItem, setLightboxItem] = useState(null);
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef(null);
-  const total = testimonials.length;
+  const lightboxVideoRef = useRef(null);
 
-  const handlePlay = useCallback((id) => setActiveId(id), []);
-  const goTo = useCallback((idx) => setCurrent(Math.max(0, Math.min(total - 1, idx))), [total]);
+  // Fetch published reviews from API
+  useEffect(() => {
+    let isMounted = true;
+    async function loadReviews() {
+      try {
+        const res = await fetch('/api/reviews');
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted) setReviews(data);
+        }
+      } catch (err) {
+        console.error('Failed to load published reviews:', err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+    loadReviews();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-  // Touch swipe (mobile only)
-  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const total = reviews.length;
+
+  const goTo = useCallback(
+    (idx) => setCurrent(Math.max(0, Math.min(total - 1, idx))),
+    [total]
+  );
+
+  // Mobile touch swipe
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
   const onTouchEnd = (e) => {
     if (touchStartX.current === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
@@ -148,70 +104,108 @@ export default function VideoTestimonials({ onOpenModal }) {
     touchStartX.current = null;
   };
 
+  // Close Lightbox on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setLightboxItem(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <section className="section-vt" aria-labelledby="vt-heading" id="video-testimonials">
       <div className="content-container">
-
-        {/* Heading */}
+        {/* Section Header */}
         <div className="vt-header">
-          <h2 className="vt-heading" id="vt-heading">Real People. Real Experiences.</h2>
+          <h2 className="vt-heading" id="vt-heading">
+            Real People. Real Experiences.
+          </h2>
           <p className="vt-subheading">
             Sometimes, one conversation is all it takes to see things differently.
           </p>
         </div>
 
-        {/* ── Desktop: Static 3-column grid ── */}
-        <div className="vt-grid-desktop">
-          {testimonials.map((item) => (
-            <VideoCard key={item.id} item={item} activeId={activeId} onPlay={handlePlay} />
-          ))}
-        </div>
+        {/* Content Area */}
+        {loading ? (
+          <div className="vt-empty-state">
+            <span style={{ fontSize: '1.8rem' }}>⏳</span>
+            <p>Loading experiences...</p>
+          </div>
+        ) : reviews.length === 0 ? (
+          <div className="vt-empty-state">
+            <span style={{ fontSize: '2rem', marginBottom: '8px' }}>✨</span>
+            <p className="vt-empty-title">Real stories are coming soon.</p>
+            <p className="vt-empty-sub">
+              Our community is sharing their journey. Check back shortly to hear their experiences.
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* Desktop: 3-column row */}
+            <div className="vt-grid-desktop">
+              {reviews.map((item) => (
+                <VideoCard
+                  key={item.id || item._id}
+                  item={item}
+                  onOpenLightbox={setLightboxItem}
+                />
+              ))}
+            </div>
 
-        {/* ── Mobile: 1-card carousel ── */}
-        <div
-          className="vt-mobile-carousel"
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
-          <div
-            className="vt-mobile-track"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {testimonials.map((item) => (
-              <div className="vt-mobile-slide" key={item.id}>
-                <VideoCard item={item} activeId={activeId} onPlay={handlePlay} />
+            {/* Mobile: 1-card carousel slider */}
+            <div
+              className="vt-mobile-carousel"
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+            >
+              <div
+                className="vt-mobile-track"
+                style={{ transform: `translateX(-${current * 100}%)` }}
+              >
+                {reviews.map((item) => (
+                  <div className="vt-mobile-slide" key={item.id || item._id}>
+                    <VideoCard item={item} onOpenLightbox={setLightboxItem} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* Mobile navigation */}
-        <div className="vt-mobile-nav">
-          <button
-            className="vt-arrow"
-            onClick={() => goTo(current - 1)}
-            disabled={current === 0}
-            aria-label="Previous"
-          >‹</button>
-          <div className="vt-dots">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                className={`vt-dot ${i === current ? 'active' : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
-          <button
-            className="vt-arrow"
-            onClick={() => goTo(current + 1)}
-            disabled={current === total - 1}
-            aria-label="Next"
-          >›</button>
-        </div>
+            {/* Mobile Nav Arrows & Dots */}
+            {total > 1 && (
+              <div className="vt-mobile-nav">
+                <button
+                  className="vt-arrow"
+                  onClick={() => goTo(current - 1)}
+                  disabled={current === 0}
+                  aria-label="Previous"
+                >
+                  ‹
+                </button>
+                <div className="vt-dots">
+                  {reviews.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`vt-dot ${i === current ? 'active' : ''}`}
+                      onClick={() => goTo(i)}
+                      aria-label={`Go to review ${i + 1}`}
+                    />
+                  ))}
+                </div>
+                <button
+                  className="vt-arrow"
+                  onClick={() => goTo(current + 1)}
+                  disabled={current === total - 1}
+                  aria-label="Next"
+                >
+                  ›
+                </button>
+              </div>
+            )}
+          </>
+        )}
 
-        {/* CTA */}
+        {/* CTA below videos */}
         <div className="vt-cta-wrap">
           <p className="vt-cta-prompt">Want your own clarity?</p>
           <button
@@ -221,8 +215,54 @@ export default function VideoTestimonials({ onOpenModal }) {
             Start Your Free 5 Minutes →
           </button>
         </div>
-
       </div>
+
+      {/* ── VIDEO LIGHTBOX MODAL ────────────────────────────────────────────── */}
+      {lightboxItem && (
+        <div
+          className="vt-lightbox-backdrop"
+          onClick={() => setLightboxItem(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Video Testimonial Lightbox"
+        >
+          <div
+            className="vt-lightbox-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="vt-lightbox-close"
+              onClick={() => setLightboxItem(null)}
+              aria-label="Close video"
+            >
+              ✕
+            </button>
+
+            <div className="vt-lightbox-player-wrap">
+              <video
+                ref={lightboxVideoRef}
+                className="vt-lightbox-player"
+                src={lightboxItem.videoUrl}
+                poster={lightboxItem.thumbnailUrl}
+                controls
+                autoPlay
+                playsInline
+              />
+            </div>
+
+            <div className="vt-lightbox-details">
+              <div className="vt-stars">
+                {'★'.repeat(lightboxItem.rating || 5)}
+              </div>
+              <p className="vt-quote">"{lightboxItem.reviewText}"</p>
+              <div className="vt-author">
+                <span className="vt-name">— {lightboxItem.name}</span>
+                <span className="vt-category">{lightboxItem.category}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

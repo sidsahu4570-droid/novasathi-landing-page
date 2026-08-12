@@ -2,8 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
 import consultationRoutes from './routes/consultations.js';
 import adminAuthRoutes from './routes/adminAuth.js';
+import reviewRoutes from './routes/reviews.js';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -15,8 +17,12 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '10kb' }));
 
+// Serve static uploads folder (video/image files)
+app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')));
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/consultations', consultationRoutes);
+app.use('/api/reviews', reviewRoutes);
 app.use('/api/admin', adminAuthRoutes);
 
 // Health check

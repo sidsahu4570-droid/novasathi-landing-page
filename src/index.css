@@ -1933,3 +1933,102 @@ html, body {
   }
 }
 
+/* ── Lightbox Modal & Empty State ── */
+.vt-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(23, 17, 46, 0.45);
+  border: 1px dashed rgba(200, 184, 244, 0.2);
+  border-radius: 16px;
+  color: rgba(248, 244, 234, 0.7);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.vt-empty-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.vt-empty-sub {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: rgba(248, 244, 234, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.vt-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 7, 24, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: vtFadeIn 0.25s ease-out;
+}
+
+@keyframes vtFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.vt-lightbox-card {
+  position: relative;
+  background: #15112b;
+  border: 1px solid rgba(200, 184, 244, 0.25);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 640px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(109, 74, 255, 0.2);
+}
+
+.vt-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(13, 11, 26, 0.8);
+  border: 1px solid rgba(200, 184, 244, 0.3);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.vt-lightbox-close:hover {
+  background: rgba(255, 107, 107, 0.3);
+  border-color: rgba(255, 107, 107, 0.6);
+}
+
+.vt-lightbox-player-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.vt-lightbox-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.vt-lightbox-details {
+  padding: 20px 24px;
+}
+
+

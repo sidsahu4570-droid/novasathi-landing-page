@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import AdminLogin from './AdminLogin';
+import AdminReviewsManager from './AdminReviewsManager';
 import './admin.css';
 
 const STATUS_LABELS = {
@@ -146,12 +147,12 @@ function RequestCard({ item, token, onStatusUpdate }) {
 // ── Admin Panel Root ────────────────────────────────────────────────────────
 export default function AdminPanel() {
   const [token, setToken] = useState(() => localStorage.getItem('ns_admin_token') || '');
+  const [activeTab, setActiveTab] = useState('consultations'); // 'consultations' | 'reviews'
   const [consultations, setConsultations] = useState([]);
   const [stats, setStats] = useState({ pending: 0, called: 0, connected: 0, no_answer: 0, completed: 0, cancelled: 0 });
   const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(false);
   const [lastFetch, setLastFetch] = useState(null);
-  const [prevPending, setPrevPending] = useState(null);
   const pollRef = useRef(null);
 
   const authHeaders = useCallback(() => ({
@@ -170,7 +171,6 @@ export default function AdminPanel() {
       ]);
 
       if (listRes.status === 401 || listRes.status === 403) {
-        // Token expired or invalid — log out
         handleLogout();
         return;
       }
@@ -191,13 +191,13 @@ export default function AdminPanel() {
 
   // Initial load + polling
   useEffect(() => {
-    if (!token) return;
+    if (!token || activeTab !== 'consultations') return;
     setLoading(true);
     fetchData().finally(() => setLoading(false));
 
     pollRef.current = setInterval(fetchData, POLL_INTERVAL);
     return () => clearInterval(pollRef.current);
-  }, [token, filter, fetchData]);
+  }, [token, filter, activeTab, fetchData]);
 
   const handleLogin = (newToken) => setToken(newToken);
 
@@ -211,7 +211,7 @@ export default function AdminPanel() {
     setConsultations((prev) =>
       prev.map((c) => (c._id === id ? { ...c, ...updated } : c))
     );
-    fetchData(); // re-fetch stats too
+    fetchData();
   };
 
   if (!token) return <AdminLogin onLogin={handleLogin} />;
@@ -225,8 +225,6 @@ export default function AdminPanel() {
     { key: 'completed', label: `🟢 Completed (${stats.completed})` },
   ];
 
-  const newPending = stats.pending > 0 && stats.pending;
-
   return (
     <div className="admin-root">
       {/* ── Header ── */}
@@ -235,11 +233,24 @@ export default function AdminPanel() {
           <img src="/logo.jpg" alt="NovaSathi" />
           <div>
             <p className="admin-header-title">NovaSathi Admin</p>
-            <p className="admin-header-sub">Consultation Requests</p>
+            <div className="admin-nav-tabs">
+              <button
+                className={`admin-nav-tab ${activeTab === 'consultations' ? 'active' : ''}`}
+                onClick={() => setActiveTab('consultations')}
+              >
+                📞 Consultations {stats.pending > 0 && `(${stats.pending})`}
+              </button>
+              <button
+                className={`admin-nav-tab ${activeTab === 'reviews' ? 'active' : ''}`}
+                onClick={() => setActiveTab('reviews')}
+              >
+                🎥 Review Videos
+              </button>
+            </div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {stats.pending > 0 && (
+          {stats.pending > 0 && activeTab === 'consultations' && (
             <span className="admin-new-badge">
               🔔 {stats.pending} Pending
             </span>
@@ -250,70 +261,77 @@ export default function AdminPanel() {
         </div>
       </header>
 
-      {/* ── Main ── */}
+      {/* ── Main Section ── */}
       <main className="admin-main">
-        {/* Stats Bar */}
-        <div className="admin-stats-bar">
-          {[
-            { label: 'Pending', count: stats.pending, color: '#ffd166' },
-            { label: 'Called', count: stats.called, color: '#74b9ff' },
-            { label: 'Connected', count: stats.connected, color: '#a29bfe' },
-            { label: 'No Answer', count: stats.no_answer, color: '#ff6b6b' },
-            { label: 'Completed', count: stats.completed, color: '#6bcf7f' },
-            { label: 'Cancelled', count: stats.cancelled, color: 'rgba(255,255,255,0.4)' },
-          ].map((s) => (
-            <div key={s.label} className="admin-stat-card">
-              <div className="admin-stat-count" style={{ color: s.color }}>{s.count}</div>
-              <div className="admin-stat-label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Filter Tabs */}
-        <div className="admin-filter-bar">
-          {FILTERS.map((f) => (
-            <button
-              key={f.key}
-              className={`admin-filter-tab ${filter === f.key ? 'active' : ''}`}
-              onClick={() => setFilter(f.key)}
-            >
-              {f.label}
-            </button>
-          ))}
-          <span className="admin-refresh-info">
-            {lastFetch ? `Updated ${formatTime(lastFetch.toISOString())}` : 'Loading...'}
-          </span>
-        </div>
-
-        {/* Request List */}
-        {loading ? (
-          <div className="admin-empty">
-            <div className="admin-empty-icon">⏳</div>
-            <div className="admin-empty-title">Loading requests...</div>
-          </div>
-        ) : consultations.length === 0 ? (
-          <div className="admin-empty">
-            <div className="admin-empty-icon">🌌</div>
-            <div className="admin-empty-title">No consultation requests yet</div>
-            <p style={{ fontSize: '0.85rem', marginTop: '4px' }}>
-              {filter !== 'all'
-                ? `No requests with status "${filter}".`
-                : 'Requests will appear here once users submit from the landing page.'}
-            </p>
-          </div>
+        {activeTab === 'reviews' ? (
+          <AdminReviewsManager token={token} />
         ) : (
-          <div className="admin-requests-list">
-            {consultations.map((item) => (
-              <RequestCard
-                key={item._id}
-                item={item}
-                token={token}
-                onStatusUpdate={handleStatusUpdate}
-              />
-            ))}
-          </div>
+          <>
+            {/* Stats Bar */}
+            <div className="admin-stats-bar">
+              {[
+                { label: 'Pending', count: stats.pending, color: '#ffd166' },
+                { label: 'Called', count: stats.called, color: '#74b9ff' },
+                { label: 'Connected', count: stats.connected, color: '#a29bfe' },
+                { label: 'No Answer', count: stats.no_answer, color: '#ff6b6b' },
+                { label: 'Completed', count: stats.completed, color: '#6bcf7f' },
+                { label: 'Cancelled', count: stats.cancelled, color: 'rgba(255,255,255,0.4)' },
+              ].map((s) => (
+                <div key={s.label} className="admin-stat-card">
+                  <div className="admin-stat-count" style={{ color: s.color }}>{s.count}</div>
+                  <div className="admin-stat-label">{s.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="admin-filter-bar">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  className={`admin-filter-tab ${filter === f.key ? 'active' : ''}`}
+                  onClick={() => setFilter(f.key)}
+                >
+                  {f.label}
+                </button>
+              ))}
+              <span className="admin-refresh-info">
+                {lastFetch ? `Updated ${formatTime(lastFetch.toISOString())}` : 'Loading...'}
+              </span>
+            </div>
+
+            {/* Request List */}
+            {loading ? (
+              <div className="admin-empty">
+                <div className="admin-empty-icon">⏳</div>
+                <div className="admin-empty-title">Loading requests...</div>
+              </div>
+            ) : consultations.length === 0 ? (
+              <div className="admin-empty">
+                <div className="admin-empty-icon">🌌</div>
+                <div className="admin-empty-title">No consultation requests yet</div>
+                <p style={{ fontSize: '0.85rem', marginTop: '4px' }}>
+                  {filter !== 'all'
+                    ? `No requests with status "${filter}".`
+                    : 'Requests will appear here once users submit from the landing page.'}
+                </p>
+              </div>
+            ) : (
+              <div className="admin-requests-list">
+                {consultations.map((item) => (
+                  <RequestCard
+                    key={item._id}
+                    item={item}
+                    token={token}
+                    onStatusUpdate={handleStatusUpdate}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </main>
     </div>
   );
 }
+
