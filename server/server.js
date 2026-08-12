@@ -29,22 +29,31 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ─── MongoDB Connection ────────────────────────────────────────────────────────
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/novasathi';
+// ─── Start HTTP server first, then connect to MongoDB ─────────────────────────
+app.listen(PORT, () => {
+  console.log(`🚀 NovaSathi API running on http://localhost:${PORT}`);
+  console.log(`📋 Admin panel: http://localhost:3000/admin`);
+});
 
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log(`✅ MongoDB connected: ${MONGODB_URI}`);
-    app.listen(PORT, () => {
-      console.log(`🚀 NovaSathi API running on http://localhost:${PORT}`);
-      console.log(`📋 Admin panel: http://localhost:3000/admin`);
+// ─── MongoDB Connection (with retry) ──────────────────────────────────────────
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/novasathi';
+
+mongoose.set('strictQuery', false);
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
     });
-  })
-  .catch((err) => {
+    console.log(`✅ MongoDB connected: ${MONGODB_URI}`);
+  } catch (err) {
     console.error('❌ MongoDB connection failed:', err.message);
-    process.exit(1);
-  });
+    console.log('⏳ Retrying MongoDB connection in 5 seconds...');
+    setTimeout(connectDB, 5000);
+  }
+};
+
+connectDB();
 
 // ─── Graceful Shutdown ─────────────────────────────────────────────────────────
 process.on('SIGINT', async () => {
