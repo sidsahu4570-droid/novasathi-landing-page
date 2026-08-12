@@ -10,15 +10,22 @@ import FinalCTA from './components/landing/FinalCTA';
 import MicroFAQ from './components/landing/MicroFAQ';
 import Footer from './components/landing/Footer';
 import ConsultationModal from './components/landing/ConsultationModal';
+import AdminPanel from './components/admin/AdminPanel';
 
 /**
- * NovaSathi Landing Page Root Application
- * Integrates the intact living Cosmic Background (z-index: 0)
- * with the compact high-conversion landing page overlay (z-index: 10).
+ * NovaSathi Root Application
+ * Routes /admin to the admin panel; all other paths show the landing page.
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTopic, setModalTopic] = useState('Love & Relationships');
+
+  // Simple client-side routing without a router library
+  const isAdminRoute = window.location.pathname.startsWith('/admin');
+
+  if (isAdminRoute) {
+    return <AdminPanel />;
+  }
 
   const handleOpenModal = (topic) => {
     if (topic && topic !== 'Hero' && topic !== 'General' && topic !== 'Final CTA') {
