@@ -1,5 +1,6 @@
 import React from 'react'
 import CosmicNebula from './CosmicNebula'
+import CosmicOrbits from './CosmicOrbits'
 import CosmicStars from './CosmicStars'
 import CosmicConstellations from './CosmicConstellations'
 import ZodiacWheel from './ZodiacWheel'
@@ -18,19 +19,22 @@ export default function CosmicBackground() {
         background: '#FAF8FF',
       }}
     >
-      {/* 1. Soft Blurred Radial Nebula Clouds */}
+      {/* 1. Layer 1: Soft Procedural Nebula Clouds */}
       <CosmicNebula />
 
-      {/* 2. Procedural SVG Twinkling Star Field */}
+      {/* 2. Layer 2: Celestial Guidance Orbits Flow */}
+      <CosmicOrbits />
+
+      {/* 3. Layer 3: 3-Level Star Hierarchy & Moon Phases */}
       <CosmicStars />
 
-      {/* 3. Subtle Line-Art Constellations */}
+      {/* 4. Layer 4: Subtle Line-Art Constellations */}
       <CosmicConstellations />
 
-      {/* 4. Rotating Outer-Edge Zodiac Wheel */}
+      {/* 5. Layer 5: Single Master Zodiac Wheel Diagram */}
       <ZodiacWheel />
 
-      {/* 5. Abstract Edge Celestial Planets & Moon */}
+      {/* 6. Layer 6: Abstract Intentional Planets & Moon */}
       <CosmicPlanets />
     </div>
   )
