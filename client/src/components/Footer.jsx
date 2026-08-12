@@ -29,8 +29,8 @@ export default function Footer() {
     <footer
       ref={ref}
       style={{
-        background: '#03040a',
-        borderTop: '1px solid var(--border-default)',
+        background: 'linear-gradient(180deg, #F4F0FF 0%, #FAF8FF 100%)',
+        borderTop: '1px solid rgba(109, 74, 255, 0.12)',
         padding: '24px 16px 16px',
         position: 'relative',
         overflow: 'hidden',

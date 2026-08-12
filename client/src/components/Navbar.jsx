@@ -34,8 +34,10 @@ export default function Navbar() {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'navbar-scrolled' : ''}`}
         style={{
-          background: scrolled ? 'rgba(6, 7, 15, 0.92)' : 'transparent',
-          borderBottom: scrolled ? '1px solid var(--border-default)' : 'none',
+          background: scrolled ? 'rgba(255, 255, 255, 0.88)' : 'rgba(250, 248, 255, 0.65)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid rgba(109, 74, 255, 0.12)',
         }}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

@@ -8,45 +8,43 @@
    ============================================ */
 
 :root {
-  /* ── DARK ASTROLOGY BACKGROUNDS ─────────── */
-  --bg-base:        #050507;   /* primary near-black tone */
-  --bg-alt:         #0A0A10;   /* secondary deep dark tone */
-  --bg-surface:     #101018;   /* cards, panels */
-  --bg-surface-2:   #151520;   /* elevated surface */
-  --bg-overlay:     rgba(5, 5, 7, 0.90);
+  /* ── LIGHT COSMIC BACKGROUNDS ───────────── */
+  --bg-base:        #FAF8FF;   /* light lavender universe base */
+  --bg-alt:         #F4F0FF;   /* pale violet secondary tone */
+  --bg-surface:     rgba(255, 255, 255, 0.85); /* glass cards */
+  --bg-surface-2:   rgba(255, 255, 255, 0.95);
+  --bg-overlay:     rgba(250, 248, 255, 0.92);
 
-  /* ── COSMIC ACCENTS ───────────────────────── */
-  --purple-500:     #6D4AFF;   /* deep cosmic purple */
-  --purple-600:     #8B5CF6;   /* violet accent */
-  --purple-700:     #5b38db;   /* deep shade */
-  --purple-glow:    rgba(109, 74, 255, 0.30);
-  --purple-subtle:  rgba(109, 74, 255, 0.10);
-  --purple-border:  rgba(109, 74, 255, 0.25);
+  /* ── COSMIC PURPLE & GOLD ACCENTS ───────── */
+  --purple-500:     #6D4AFF;   /* main purple accent */
+  --purple-600:     #5B38DB;   /* deeper purple */
+  --purple-700:     #4A29C7;
+  --purple-glow:    rgba(109, 74, 255, 0.15);
+  --purple-subtle:  rgba(109, 74, 255, 0.08);
+  --purple-border:  rgba(109, 74, 255, 0.18);
 
-  --amber-500:      #D6B56A;   /* soft astrology gold */
-  --amber-600:      #b8974d;   /* deeper gold */
-  --amber-glow:     rgba(214, 181, 106, 0.30);
-  --amber-subtle:   rgba(214, 181, 106, 0.10);
-  --amber-border:   rgba(214, 181, 106, 0.25);
+  --amber-500:      #C89B3C;   /* soft astrology gold */
+  --amber-600:      #B3862B;
+  --amber-glow:     rgba(200, 155, 60, 0.20);
+  --amber-subtle:   rgba(200, 155, 60, 0.08);
+  --amber-border:   rgba(200, 155, 60, 0.20);
 
-  --highlight:      #B79CFF;   /* soft cosmic highlight */
+  /* ── HIGH-LEGIBILITY LIGHT THEME TEXT ────── */
+  --text-primary:   #171329;   /* deep navy heading text */
+  --text-secondary: #5E5870;   /* soft purple-gray body copy */
+  --text-muted:     #867E96;   /* muted captions */
+  --text-purple:    #6D4AFF;
+  --text-amber:     #C89B3C;
 
-  /* ── TEXT ─────────────────────────────────── */
-  --text-primary:   #F5F3FF;   /* crisp cosmic white */
-  --text-secondary: #A7A3B5;   /* soft muted purple-gray */
-  --text-muted:     #777383;   /* subtle dark muted */
-  --text-purple:    #B79CFF;
-  --text-amber:     #D6B56A;
-
-  /* ── BORDERS ──────────────────────────────── */
-  --border-default: #252535;
-  --border-purple:  rgba(109, 74, 255, 0.30);
-  --border-amber:   rgba(214, 181, 106, 0.25);
-  --border-subtle:  rgba(37, 37, 53, 0.60);
+  /* ── BORDERS & SHADOWS ────────────────────── */
+  --border-default: rgba(109, 74, 255, 0.12);
+  --border-purple:  rgba(109, 74, 255, 0.22);
+  --border-amber:   rgba(200, 155, 60, 0.22);
+  --border-subtle:  rgba(109, 74, 255, 0.06);
 
   /* ── GREEN (success) ──────────────────────── */
-  --green-active:   #00bb7f;
-  --green-glow:     rgba(0, 187, 127, 0.4);
+  --green-active:   #00a86b;
+  --green-glow:     rgba(0, 168, 107, 0.25);
 }
 
 /* ============================================
@@ -211,32 +209,45 @@ body {
    CARD SYSTEM
    ============================================ */
 
+/* ============================================
+   CARD SYSTEM — LIGHT COSMIC GLASSMORPHISM
+   ============================================ */
+
 /* Standard surface card */
 .ns-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(109, 74, 255, 0.12);
   border-radius: 16px;
   transition: all 0.28s ease;
+  box-shadow: 0 10px 30px rgba(109, 74, 255, 0.05);
 }
 
 .ns-card:hover {
-  border-color: var(--border-purple);
+  border-color: rgba(109, 74, 255, 0.35);
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 24px var(--purple-subtle);
+  box-shadow: 0 16px 40px rgba(109, 74, 255, 0.12);
 }
 
-/* Purple-tinted card */
+/* Purple-tinted glass card */
 .ns-card-purple {
-  background: linear-gradient(135deg, rgba(172, 75, 255, 0.08), rgba(152, 16, 250, 0.04));
-  border: 1px solid var(--border-purple);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 240, 255, 0.92));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(109, 74, 255, 0.20);
   border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(109, 74, 255, 0.07);
 }
 
-/* Amber-tinted card */
+/* Amber-tinted glass card */
 .ns-card-amber {
-  background: rgba(249, 156, 0, 0.06);
-  border: 1px solid var(--border-amber);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(254, 249, 235, 0.92));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 155, 60, 0.22);
   border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(200, 155, 60, 0.07);
 }
 
 /* ============================================
@@ -247,8 +258,8 @@ body {
   align-items: center;
   gap: 7px;
   padding: 5px 14px;
-  background: var(--purple-subtle);
-  border: 1px solid var(--border-purple);
+  background: rgba(109, 74, 255, 0.08);
+  border: 1px solid rgba(109, 74, 255, 0.20);
   border-radius: 50px;
   color: var(--purple-500);
   font-size: 12px;
@@ -262,8 +273,8 @@ body {
   align-items: center;
   gap: 7px;
   padding: 5px 14px;
-  background: var(--amber-subtle);
-  border: 1px solid var(--border-amber);
+  background: rgba(200, 155, 60, 0.08);
+  border: 1px solid rgba(200, 155, 60, 0.20);
   border-radius: 50px;
   color: var(--amber-500);
   font-size: 12px;
@@ -279,33 +290,33 @@ body {
 .bg-alt     { background-color: var(--bg-alt); }
 .bg-surface { background-color: var(--bg-surface); }
 
-/* Radial glow helpers */
+/* Radial cosmic overlays */
 .bg-glow-purple {
-  background: radial-gradient(ellipse at 50% 0%, rgba(172, 75, 255, 0.10) 0%, transparent 65%),
+  background: radial-gradient(ellipse at 50% 0%, rgba(109, 74, 255, 0.08) 0%, transparent 65%),
               var(--bg-base);
 }
 
 .bg-glow-amber {
-  background: radial-gradient(ellipse at 50% 50%, rgba(249, 156, 0, 0.07) 0%, transparent 60%),
+  background: radial-gradient(ellipse at 50% 50%, rgba(200, 155, 60, 0.07) 0%, transparent 60%),
               var(--bg-alt);
 }
 
 .bg-hero {
   background:
-    radial-gradient(ellipse at 25% 60%, rgba(172, 75, 255, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(249, 156, 0, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 30% 40%, rgba(109, 74, 255, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 30%, rgba(200, 155, 60, 0.08) 0%, transparent 50%),
     var(--bg-base);
 }
 
 /* ============================================
-   NAVBAR
+   NAVBAR — LIGHT GLASSMORPHIC
    ============================================ */
 .navbar-scrolled {
-  background: rgba(6, 7, 15, 0.90);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-default);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(109, 74, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(109, 74, 255, 0.06);
 }
 
 /* ============================================
@@ -315,13 +326,13 @@ body {
 .form-input {
   width: 100% !important;
   box-sizing: border-box !important;
-  padding: 13px 16px !important;
-  background-color: #10121e !important;
-  border: 1px solid var(--border-default) !important;
-  border-radius: 12px !important;
-  color: #f5f5f7 !important;
+  padding: 11px 14px !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(109, 74, 255, 0.20) !important;
+  border-radius: 10px !important;
+  color: #171329 !important;
   font-family: inherit !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   transition: all 0.25s ease !important;
   outline: none !important;
   appearance: none;
@@ -330,14 +341,14 @@ body {
 
 .ns-input:focus,
 .form-input:focus {
-  border-color: rgba(172, 75, 255, 0.6) !important;
-  background-color: #1a1c2e !important;
-  box-shadow: 0 0 0 3px rgba(172, 75, 255, 0.15) !important;
+  border-color: var(--purple-500) !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 3px rgba(109, 74, 255, 0.12) !important;
 }
 
 .ns-input::placeholder,
 .form-input::placeholder {
-  color: rgba(245, 245, 247, 0.45) !important;
+  color: #867E96 !important;
   opacity: 1 !important;
 }
 
