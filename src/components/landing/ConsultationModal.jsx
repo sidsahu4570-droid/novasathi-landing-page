@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 /**
  * ConsultationModal — Low-Friction First Session Trigger
- * Pops up when visitor clicks any CTA or Problem Selector Card.
- * Allows quick selection of guidance topic and direct entry into their free 5-minute session.
+ * Features official circular NovaSathi logo badge and topic selector.
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
@@ -45,7 +44,13 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
 
         {!submitted ? (
           <>
-            <h3 className="modal-title">Start Your Free 5 Minutes</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+              <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" style={{ width: '40px', height: '40px' }} />
+              <div>
+                <h3 className="modal-title" style={{ fontSize: '1.4rem', marginBottom: '2px' }}>Start Your Free 5 Minutes</h3>
+                <span style={{ fontSize: '0.8rem', color: 'var(--color-warm-gold)' }}>NovaSathi — The Safe Space</span>
+              </div>
+            </div>
             <p className="modal-sub">
               Choose what's on your mind. We'll connect you to a verified expert instantly.
             </p>
@@ -99,7 +104,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           </>
         ) : (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '12px' }}>✨</div>
+            <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" style={{ width: '50px', height: '50px', marginBottom: '14px' }} />
             <h3 className="modal-title" style={{ color: 'var(--color-warm-gold)' }}>Connecting You...</h3>
             <p className="modal-sub">
               Preparing your private 5-minute session for <strong>{selectedTopic}</strong> via <strong>{medium}</strong>.

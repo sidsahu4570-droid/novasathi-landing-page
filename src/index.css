@@ -316,13 +316,29 @@ html, body {
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   color: var(--color-soft-cream);
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+.logo-img-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(212, 168, 79, 0.6);
+  box-shadow: 0 0 12px rgba(109, 74, 255, 0.4), inset 0 0 6px rgba(212, 168, 79, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.logo-link:hover .logo-img-circle {
+  transform: scale(1.08) rotate(3deg);
+  box-shadow: 0 0 18px rgba(212, 168, 79, 0.8), 0 0 12px rgba(109, 74, 255, 0.6);
 }
 
 .logo-sparkle {

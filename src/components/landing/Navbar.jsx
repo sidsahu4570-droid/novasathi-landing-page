@@ -1,17 +1,17 @@
 import React from 'react';
 
 /**
- * Navbar — Transparent Glassmorphic Header
- * Compact header sitting over the cosmic background with logo, navigation links,
- * and the primary "Talk to an Expert — FREE" call-to-action button.
+ * Navbar — Transparent Glassmorphic Header with Circular Logo
+ * Displays the official NovaSathi circular logo image, navigation links,
+ * and the primary "Talk to an Expert — FREE" CTA button.
  */
 export default function Navbar({ onOpenModal }) {
   return (
     <header className="navbar" role="banner">
       <div className="content-container navbar-inner">
-        {/* Logo */}
+        {/* Circular Logo */}
         <a href="#" className="logo-link">
-          <span className="logo-sparkle">✦</span>
+          <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" />
           <span>NovaSathi</span>
         </a>
 
