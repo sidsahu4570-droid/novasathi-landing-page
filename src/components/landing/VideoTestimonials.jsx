@@ -140,7 +140,7 @@ export default function VideoTestimonials({ onOpenModal }) {
         {/* Section Header */}
         <div className="vt-header">
           <h2 className="vt-heading" id="vt-heading">
-            Real People. Real Experiences.
+            HEAR IT FROM PEOPLE WHO WERE WHERE YOU ARE.
           </h2>
           <p className="vt-subheading">
             Sometimes, one conversation is all it takes to see things differently.

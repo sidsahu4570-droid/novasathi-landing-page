@@ -4,9 +4,10 @@ import Navbar from './components/landing/Navbar';
 import Hero from './components/landing/Hero';
 import ProblemSelector from './components/landing/ProblemSelector';
 import HowItWorks from './components/landing/HowItWorks';
-import TrustStrip from './components/landing/TrustStrip';
-import Testimonials from './components/landing/Testimonials';
+import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
+import RiskReversal from './components/landing/RiskReversal';
+import PricingTransparency from './components/landing/PricingTransparency';
 import FinalCTA from './components/landing/FinalCTA';
 import MicroFAQ from './components/landing/MicroFAQ';
 import Footer from './components/landing/Footer';
@@ -22,14 +23,14 @@ function checkIsAdminRoute() {
 
 /**
  * NovaSathi Root Application
- * Routes /admin or #admin to the admin panel; all other paths show the landing page.
+ * Restructured into a high-converting 2-scroll consultation funnel.
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTopic, setModalTopic] = useState('Love & Relationships');
   const [isAdminRoute, setIsAdminRoute] = useState(checkIsAdminRoute);
 
-  // Listen for live URL/hash changes
+  // Listen for live URL/hash changes for admin route
   React.useEffect(() => {
     const handleLocationChange = () => {
       setIsAdminRoute(checkIsAdminRoute());
@@ -60,15 +61,16 @@ export default function App() {
       {/* Living Celestial Background (Preserved Intact) */}
       <CosmicBackground />
 
-      {/* Compact High-Conversion Overlay */}
+      {/* High-Converting 2-Scroll Consultation Funnel Overlay */}
       <div className="landing-overlay">
         <Navbar onOpenModal={handleOpenModal} />
         <Hero onOpenModal={handleOpenModal} />
         <ProblemSelector onOpenModal={handleOpenModal} />
         <HowItWorks />
-        <TrustStrip />
-        <Testimonials />
+        <ExpertProfiles onOpenModal={handleOpenModal} />
         <VideoTestimonials onOpenModal={handleOpenModal} />
+        <RiskReversal />
+        <PricingTransparency />
         <FinalCTA onOpenModal={handleOpenModal} />
         <MicroFAQ />
         <Footer />

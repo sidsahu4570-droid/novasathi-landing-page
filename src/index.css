@@ -2049,4 +2049,289 @@ html, body {
   padding: 20px 24px;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   RESTRUCTURED CONSULTATION FUNNEL STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Section Spacing (Compact 2-Scroll Target) ── */
+.section-problem-selector,
+.section-how-it-works,
+.section-experts,
+.section-vt,
+.section-risk-reversal,
+.section-pricing-transparency,
+.section-final-cta,
+.section-faq {
+  padding: 42px 0 38px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-headline-quote {
+  font-style: italic;
+  color: var(--color-warm-gold);
+}
+
+.hero-br-desktop {
+  display: block;
+}
+
+/* ── Expert Profiles Section ── */
+.experts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.expert-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.expert-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.expert-avatar-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(109, 74, 255, 0.2);
+  border: 1px solid rgba(200, 184, 244, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expert-avatar-icon {
+  font-size: 1.6rem;
+}
+
+.expert-status-badge {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #6bcf7f;
+  background: rgba(107, 207, 127, 0.12);
+  border: 1px solid rgba(107, 207, 127, 0.3);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.expert-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+}
+
+.expert-category {
+  font-size: 0.8rem;
+  color: var(--color-warm-gold);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.expert-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: rgba(248, 244, 234, 0.85);
+  margin-bottom: 10px;
+}
+
+.expert-stars {
+  color: #ffd700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.expert-score {
+  font-weight: 600;
+  color: #fff;
+}
+
+.expert-exp {
+  color: rgba(248, 244, 234, 0.6);
+}
+
+.expert-specialties {
+  font-size: 0.82rem;
+  color: rgba(248, 244, 234, 0.72);
+  line-height: 1.45;
+  margin-bottom: 18px;
+}
+
+.expert-cta {
+  width: 100% !important;
+  font-size: 0.88rem !important;
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+}
+
+/* ── Risk Reversal Section ── */
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.risk-card {
+  padding: 22px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.risk-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.risk-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.risk-desc {
+  font-size: 0.85rem;
+  color: rgba(248, 244, 234, 0.8);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── Pricing Transparency Section ── */
+.pricing-card {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 30px 28px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(33, 24, 64, 0.75) 0%, rgba(23, 17, 46, 0.85) 100%);
+  border: 1px solid rgba(212, 168, 79, 0.3);
+}
+
+.pricing-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+  letter-spacing: 0.05em;
+  background: rgba(212, 168, 79, 0.15);
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.pricing-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.pricing-text {
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: rgba(248, 244, 234, 0.88);
+  margin-bottom: 16px;
+}
+
+.pricing-highlight {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6bcf7f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ── Final CTA Section Updates ── */
+.final-cta-btn {
+  font-size: 1.08rem !important;
+  padding: 15px 36px !important;
+}
+
+.final-cta-microcopy {
+  font-size: 0.85rem;
+  color: rgba(200, 184, 244, 0.75);
+  margin: 16px 0 14px 0;
+}
+
+.final-cta-topics-bar {
+  font-size: 0.8rem;
+  color: rgba(248, 244, 234, 0.55);
+  letter-spacing: 0.02em;
+}
+
+.final-cta-topics-bar span {
+  color: rgba(248, 244, 234, 0.78);
+  font-weight: 500;
+}
+
+/* ── Mobile Responsive Rules ── */
+@media (max-width: 768px) {
+  .section-problem-selector,
+  .section-how-it-works,
+  .section-experts,
+  .section-vt,
+  .section-risk-reversal,
+  .section-pricing-transparency,
+  .section-final-cta,
+  .section-faq {
+    padding: 30px 0 26px 0;
+  }
+
+  .hero-br-desktop {
+    display: none;
+  }
+
+  .experts-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .expert-card {
+    padding: 18px;
+  }
+
+  .risk-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .risk-card {
+    padding: 18px 14px;
+  }
+
+  .pricing-card {
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    box-sizing: border-box;
+    padding: 22px 18px;
+  }
+}
+
+
 

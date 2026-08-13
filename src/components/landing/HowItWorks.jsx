@@ -1,31 +1,31 @@
 import React from 'react';
 
 /**
- * HowItWorks — Section 4 (3-Step Clear Progression)
- * Lowers cognitive effort by explaining the exact 3 steps to start.
+ * HowItWorks — Section 3 ("What happens in your first 5 minutes?")
+ * Exactly 3 compact, low-friction steps.
  */
 export default function HowItWorks() {
   const steps = [
     {
       num: '01',
-      title: "Tell us what's on your mind",
-      desc: "Choose what you're dealing with from love, career, astrology, or emotional guidance."
+      title: "TELL US WHAT'S ON YOUR MIND",
+      desc: "Choose what you're dealing with — love, career, astrology, relationships or emotional guidance.",
     },
     {
       num: '02',
-      title: "Choose someone who understands",
-      desc: "Connect with a verified expert through private chat, call or video."
+      title: 'CHOOSE SOMEONE WHO UNDERSTANDS',
+      desc: 'Connect with a verified expert through private chat, call or video.',
     },
     {
       num: '03',
-      title: "Start with 5 FREE minutes",
-      desc: "Try the experience first with zero commitment. Continue only if you want to."
-    }
+      title: 'START WITH 5 FREE MINUTES',
+      desc: 'Try the experience with zero commitment. Continue only if you want to.',
+    },
   ];
 
   return (
     <section id="how-it-works" className="section-how-it-works content-container">
-      <h2 className="section-title">You don't have to figure everything out alone.</h2>
+      <h2 className="section-title">What happens in your first 5 minutes?</h2>
       <p className="section-subtitle">
         Getting clarity is simple, private, and risk-free.
       </p>

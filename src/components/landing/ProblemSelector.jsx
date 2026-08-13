@@ -1,27 +1,26 @@
 import React from 'react';
 
 /**
- * ProblemSelector — Section 3 (Personal Identification Cards)
- * 6 compact interactive glass cards allowing visitors to identify what is on their mind
- * and immediately launch a targeted 5-minute consultation modal.
+ * ProblemSelector — Section 2 ("What's on your mind right now?")
+ * 6 compact interactive choices connecting directly to ConsultationModal with topic pre-selected.
  */
 export default function ProblemSelector({ onOpenModal }) {
-  const problemCards = [
+  const choices = [
     {
       id: 'love',
       icon: '❤️',
       title: 'Love & Relationships',
-      desc: 'Understand compatibility, relationships and emotional situations.',
+      desc: 'Understand compatibility, emotions and what comes next.',
       cta: 'Explore Love →',
-      topic: 'Love & Relationships'
+      topic: 'Love & Relationships',
     },
     {
       id: 'career',
       icon: '💼',
       title: 'Career & Money',
-      desc: "Get perspective when you're unsure about your next move.",
+      desc: 'Get another perspective before making your next move.',
       cta: 'Find Career Clarity →',
-      topic: 'Career & Money'
+      topic: 'Career & Money',
     },
     {
       id: 'astrology',
@@ -29,7 +28,7 @@ export default function ProblemSelector({ onOpenModal }) {
       title: 'Future & Astrology',
       desc: 'Explore your birth chart, timing and personal guidance.',
       cta: 'Discover Your Path →',
-      topic: 'Future & Astrology'
+      topic: 'Future & Astrology',
     },
     {
       id: 'tarot',
@@ -37,7 +36,7 @@ export default function ProblemSelector({ onOpenModal }) {
       title: 'Tarot & Numerology',
       desc: 'Look at your situation from another perspective.',
       cta: 'Explore Guidance →',
-      topic: 'Tarot & Numerology'
+      topic: 'Tarot & Numerology',
     },
     {
       id: 'vastu',
@@ -45,27 +44,27 @@ export default function ProblemSelector({ onOpenModal }) {
       title: 'Vastu & Life Energy',
       desc: 'Bring more alignment to your space and everyday life.',
       cta: 'Explore Vastu →',
-      topic: 'Vastu & Life Energy'
+      topic: 'Vastu & Life Energy',
     },
     {
       id: 'support',
       icon: '💜',
       title: 'Someone to Talk To',
-      desc: 'Talk privately with someone who listens without judgment.',
+      desc: "Sometimes you don't need an answer. You need someone who listens.",
       cta: 'Talk Privately →',
-      topic: 'Someone to Talk To'
-    }
+      topic: 'Someone to Talk To',
+    },
   ];
 
   return (
     <section id="problem-selector" className="section-problem-selector content-container">
-      <h2 className="section-title">What are you looking for clarity about?</h2>
+      <h2 className="section-title">What's on your mind right now?</h2>
       <p className="section-subtitle">
-        Start with what's on your mind. We'll help you find the right kind of guidance.
+        Start with what's bothering you. We'll help you find the right kind of guidance.
       </p>
 
       <div className="problem-grid">
-        {problemCards.map((card) => (
+        {choices.map((card) => (
           <div
             key={card.id}
             className="glass-card problem-card"
