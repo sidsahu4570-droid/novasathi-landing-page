@@ -6,6 +6,7 @@ import path from 'path';
 import consultationRoutes from './routes/consultations.js';
 import adminAuthRoutes from './routes/adminAuth.js';
 import reviewRoutes from './routes/reviews.js';
+import offerRoutes from './routes/offer.js';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -23,6 +24,7 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'public', 'uploads')
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/consultations', consultationRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/offer', offerRoutes);
 app.use('/api/admin', adminAuthRoutes);
 
 // Health check

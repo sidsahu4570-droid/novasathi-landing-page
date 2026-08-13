@@ -1,27 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
- * Hero — Restructured High-Converting Hero Section
- * Primary headline: "When your mind won't stop asking 'What should I do?' Start there."
- * Immediate free 5-minute offer + trust strip.
+ * Hero — Upgraded Psychological Conversion Hero Section
+ * Main headline: "Some answers are easier when you don't have to figure them out alone."
+ * Live availability badge + real offer urgency integration.
  */
 export default function Hero({ onOpenModal }) {
+  const [offer, setOffer] = useState({
+    active: true,
+    title: 'YOUR FIRST 5 MINUTES ARE FREE',
+    remainingSlots: 12,
+    showRemainingSlots: true,
+    urgencyMessage: 'Limited introductory sessions available today',
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+
+    async function loadOffer() {
+      try {
+        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (isMounted) setOffer(data);
+            return;
+          }
+        }
+        // Fallback to local storage on static Vercel
+        const saved = localStorage.getItem('ns_offer_settings');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          const rem = Math.max(0, Number(parsed.dailyLimit) - Number(parsed.sessionsUsed));
+          if (isMounted) setOffer({ ...parsed, remainingSlots: rem });
+        }
+      } catch (e) {}
+    }
+    loadOffer();
+    return () => { isMounted = false; };
+  }, []);
+
   return (
     <section className="hero-section content-container" aria-label="Hero Introduction">
-      {/* Low-Risk Highlight Pill */}
+      {/* Offer Pill with optional live remaining session badge */}
       <div className="hero-offer-badge">
-        <span>✨</span> YOUR FIRST 5 MINUTES ARE FREE
+        <span>✨</span> {offer.title || 'YOUR FIRST 5 MINUTES ARE FREE'}
+        {offer.active && offer.showRemainingSlots && offer.remainingSlots > 0 && (
+          <span className="hero-remaining-chip">
+            🔥 {offer.remainingSlots} sessions left today
+          </span>
+        )}
       </div>
 
-      {/* Main Customer-Focused Headline */}
+      {/* Main Emotional Headline */}
       <h1 className="hero-headline">
-        When your mind won't stop asking <br className="hero-br-desktop" />
-        <span className="hero-headline-quote">"What should I do?"</span> Start there.
+        Some answers are easier <br className="hero-br-desktop" />
+        when you don't have to figure them out alone.
       </h1>
 
-      {/* Supporting Copy */}
+      {/* Subheadline */}
       <p className="hero-subheading">
-        Private guidance for love, career, relationships and life's difficult decisions — from someone who understands.
+        Get private guidance for love, career, relationships, astrology and difficult decisions — from someone who understands.
       </p>
 
       {/* CTA Button Group */}
@@ -38,21 +79,21 @@ export default function Hero({ onOpenModal }) {
         </a>
       </div>
 
-      {/* Supporting Microcopy */}
+      {/* Microcopy */}
       <p className="hero-microcopy">
         ₹0 to start • Private conversation • No commitment
       </p>
 
-      {/* Hero Trust Strip */}
+      {/* Hero Live Availability & Trust Strip */}
       <div className="hero-trust-badges">
+        <div className="hero-trust-item live-indicator">
+          <span className="pulse-dot">🟢</span> EXPERTS AVAILABLE NOW
+        </div>
         <div className="hero-trust-item">
           <span>🔒</span> Private & Secure
         </div>
         <div className="hero-trust-item">
           <span>✓</span> Verified Experts
-        </div>
-        <div className="hero-trust-item">
-          <span>🟢</span> Available Now
         </div>
         <div className="hero-trust-item">
           <span>✨</span> ₹0 to Start

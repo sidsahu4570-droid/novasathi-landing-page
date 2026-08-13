@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import CosmicBackground from './components/cosmic/CosmicBackground';
 import Navbar from './components/landing/Navbar';
 import Hero from './components/landing/Hero';
+import WhyPeopleStart from './components/landing/WhyPeopleStart';
 import ProblemSelector from './components/landing/ProblemSelector';
 import HowItWorks from './components/landing/HowItWorks';
 import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
+import WhatYouGet from './components/landing/WhatYouGet';
+import WhyStartNow from './components/landing/WhyStartNow';
 import RiskReversal from './components/landing/RiskReversal';
-import PricingTransparency from './components/landing/PricingTransparency';
+import IntroOfferCard from './components/landing/IntroOfferCard';
 import FinalCTA from './components/landing/FinalCTA';
 import MicroFAQ from './components/landing/MicroFAQ';
 import Footer from './components/landing/Footer';
+import StickyMobileCTA from './components/landing/StickyMobileCTA';
 import ConsultationModal from './components/landing/ConsultationModal';
 import AdminPanel from './components/admin/AdminPanel';
 
@@ -23,7 +27,7 @@ function checkIsAdminRoute() {
 
 /**
  * NovaSathi Root Application
- * Restructured into a high-converting 2-scroll consultation funnel.
+ * Upgraded Conversion Psychology Sequence (Section 18).
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -48,7 +52,7 @@ export default function App() {
   }
 
   const handleOpenModal = (topic) => {
-    if (topic && topic !== 'Hero' && topic !== 'General' && topic !== 'Final CTA') {
+    if (topic && topic !== 'Hero' && topic !== 'General' && topic !== 'Final CTA' && topic !== 'Value Block' && topic !== 'Why Start Now' && topic !== 'Intro Offer Box' && topic !== 'Sticky Mobile Bar') {
       setModalTopic(topic);
     } else {
       setModalTopic('Love & Relationships');
@@ -61,20 +65,26 @@ export default function App() {
       {/* Living Celestial Background (Preserved Intact) */}
       <CosmicBackground />
 
-      {/* High-Converting 2-Scroll Consultation Funnel Overlay */}
+      {/* Conversion Psychology Landing Page Overlay */}
       <div className="landing-overlay">
         <Navbar onOpenModal={handleOpenModal} />
         <Hero onOpenModal={handleOpenModal} />
+        <WhyPeopleStart />
         <ProblemSelector onOpenModal={handleOpenModal} />
         <HowItWorks />
         <ExpertProfiles onOpenModal={handleOpenModal} />
         <VideoTestimonials onOpenModal={handleOpenModal} />
+        <WhatYouGet onOpenModal={handleOpenModal} />
+        <WhyStartNow onOpenModal={handleOpenModal} />
         <RiskReversal />
-        <PricingTransparency />
+        <IntroOfferCard onOpenModal={handleOpenModal} />
         <FinalCTA onOpenModal={handleOpenModal} />
         <MicroFAQ />
         <Footer />
       </div>
+
+      {/* Sticky Mobile CTA Bar */}
+      <StickyMobileCTA onOpenModal={handleOpenModal} />
 
       {/* Interactive Free 5-Minute Session Modal */}
       <ConsultationModal

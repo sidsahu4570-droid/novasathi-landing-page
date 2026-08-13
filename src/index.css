@@ -2333,5 +2333,381 @@ html, body {
   }
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   PSYCHOLOGY CONVERSION UPGRADE STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.section-why-start,
+.section-what-you-get,
+.section-why-start-now,
+.section-intro-offer {
+  padding: 42px 0 38px 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Hero Remaining Sessions Chip & Live Pulse */
+.hero-remaining-chip {
+  background: rgba(255, 107, 107, 0.18);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  color: #ff6b6b;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  margin-left: 8px;
+}
+
+.pulse-dot {
+  display: inline-block;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* ── Why People Start Section ── */
+.why-start-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.why-start-card {
+  padding: 24px 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.why-start-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.why-start-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.why-start-desc {
+  font-size: 0.88rem;
+  color: rgba(248, 244, 234, 0.82);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── What You Get Section ── */
+.value-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(33, 24, 64, 0.8) 0%, rgba(23, 17, 46, 0.9) 100%);
+  border: 1px solid rgba(212, 168, 79, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.value-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.value-sub {
+  font-size: 0.92rem;
+  color: rgba(248, 244, 234, 0.7);
+  margin-bottom: 22px;
+}
+
+.value-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+  text-align: left;
+  margin-bottom: 26px;
+}
+
+.value-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: rgba(248, 244, 234, 0.9);
+}
+
+.value-check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(107, 207, 127, 0.2);
+  color: #6bcf7f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.value-anchor-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid rgba(200, 184, 244, 0.15);
+}
+
+.price-tag {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+}
+
+/* ── Why Start Now Section ── */
+.why-now-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.why-now-card {
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.why-now-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.why-now-title {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+  margin-bottom: 6px;
+}
+
+.why-now-desc {
+  font-size: 0.82rem;
+  color: rgba(248, 244, 234, 0.8);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── Intro Offer Card ── */
+.intro-offer-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  text-align: center;
+  position: relative;
+}
+
+.intro-offer-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #15112b;
+  background: var(--color-warm-gold);
+  padding: 4px 14px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.intro-offer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.intro-offer-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.intro-offer-sub {
+  font-size: 0.82rem;
+  color: var(--color-warm-gold);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 2px 0 0 0;
+}
+
+.intro-offer-price-badge {
+  background: rgba(212, 168, 79, 0.15);
+  border: 1px solid var(--color-warm-gold);
+  border-radius: 16px;
+  padding: 8px 20px;
+}
+
+.price-zero {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-warm-gold);
+}
+
+.intro-offer-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.feature-item {
+  font-size: 0.88rem;
+  color: rgba(248, 244, 234, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feature-item span {
+  color: #6bcf7f;
+  font-weight: bold;
+}
+
+.intro-countdown-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  padding: 8px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.countdown-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.countdown-digits {
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  letter-spacing: 1px;
+}
+
+.intro-offer-btn {
+  width: 100% !important;
+  font-size: 1.05rem !important;
+  padding: 14px 24px !important;
+}
+
+.intro-offer-footer-note {
+  font-size: 0.78rem;
+  color: rgba(248, 244, 234, 0.6);
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+/* ── Sticky Mobile Bar ── */
+.sticky-mobile-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sticky-mobile-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(19, 14, 40, 0.92);
+    border-top: 1px solid rgba(212, 168, 79, 0.3);
+    backdrop-filter: blur(12px);
+    padding: 10px 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .sticky-mobile-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sticky-mobile-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sticky-badge {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-warm-gold);
+  }
+
+  .sticky-sub {
+    font-size: 0.72rem;
+    color: rgba(248, 244, 234, 0.65);
+  }
+
+  .sticky-mobile-btn {
+    font-size: 0.82rem !important;
+    padding: 8px 16px !important;
+    border-radius: 99px !important;
+    white-space: nowrap;
+  }
+
+  .why-start-grid,
+  .why-now-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    margin: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .value-card,
+  .intro-offer-card {
+    width: calc(100% - 32px) !important;
+    margin: 0 16px !important;
+    box-sizing: border-box !important;
+    padding: 22px 18px !important;
+  }
+
+  .value-checklist,
+  .intro-offer-features {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
 
 

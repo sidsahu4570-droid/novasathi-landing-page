@@ -1,56 +1,56 @@
 import React from 'react';
 
 /**
- * ProblemSelector — Section 2 ("What's on your mind right now?")
- * 6 compact interactive choices connecting directly to ConsultationModal with topic pre-selected.
+ * ProblemSelector — Section 5 ("What keeps coming back to your mind?")
+ * 6 psychological entry point cards connecting directly to ConsultationModal with topic pre-selected.
  */
 export default function ProblemSelector({ onOpenModal }) {
   const choices = [
     {
       id: 'love',
       icon: '❤️',
-      title: 'Love & Relationships',
-      desc: 'Understand compatibility, emotions and what comes next.',
+      title: 'LOVE & RELATIONSHIPS',
+      desc: '"Should I stay, move on, or say what I really feel?"',
       cta: 'Explore Love →',
       topic: 'Love & Relationships',
     },
     {
       id: 'career',
       icon: '💼',
-      title: 'Career & Money',
-      desc: 'Get another perspective before making your next move.',
+      title: 'CAREER & MONEY',
+      desc: '"Am I making the right move with my career or money?"',
       cta: 'Find Career Clarity →',
       topic: 'Career & Money',
     },
     {
       id: 'astrology',
       icon: '🔮',
-      title: 'Future & Astrology',
-      desc: 'Explore your birth chart, timing and personal guidance.',
+      title: 'FUTURE & ASTROLOGY',
+      desc: '"What does my chart say about the phase I\'m going through?"',
       cta: 'Discover Your Path →',
       topic: 'Future & Astrology',
     },
     {
       id: 'tarot',
       icon: '🃏',
-      title: 'Tarot & Numerology',
-      desc: 'Look at your situation from another perspective.',
+      title: 'TAROT & NUMEROLOGY',
+      desc: '"What perspective am I missing?"',
       cta: 'Explore Guidance →',
       topic: 'Tarot & Numerology',
     },
     {
       id: 'vastu',
       icon: '🏠',
-      title: 'Vastu & Life Energy',
-      desc: 'Bring more alignment to your space and everyday life.',
+      title: 'VASTU & LIFE ENERGY',
+      desc: '"Could my surroundings be affecting my peace and progress?"',
       cta: 'Explore Vastu →',
       topic: 'Vastu & Life Energy',
     },
     {
       id: 'support',
       icon: '💜',
-      title: 'Someone to Talk To',
-      desc: "Sometimes you don't need an answer. You need someone who listens.",
+      title: 'SOMEONE TO TALK TO',
+      desc: '"I don\'t need advice. I just need someone who listens."',
       cta: 'Talk Privately →',
       topic: 'Someone to Talk To',
     },
@@ -58,9 +58,9 @@ export default function ProblemSelector({ onOpenModal }) {
 
   return (
     <section id="problem-selector" className="section-problem-selector content-container">
-      <h2 className="section-title">What's on your mind right now?</h2>
+      <h2 className="section-title">What keeps coming back to your mind?</h2>
       <p className="section-subtitle">
-        Start with what's bothering you. We'll help you find the right kind of guidance.
+        Sometimes you already know the question. You just need someone to help you see it clearly.
       </p>
 
       <div className="problem-grid">

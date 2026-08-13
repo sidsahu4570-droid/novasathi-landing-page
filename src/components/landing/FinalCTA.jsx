@@ -1,24 +1,22 @@
 import React from 'react';
 
 /**
- * FinalCTA — Section 8 (Final Emotional CTA Block)
- * Primary headline: "You don't have to figure everything out alone."
- * Connects directly to ConsultationModal.
+ * FinalCTA — Section 14 (Final Emotional & Action-Oriented Decision Block)
  */
 export default function FinalCTA({ onOpenModal }) {
   return (
     <section className="section-final-cta content-container" id="final-cta">
       <div className="glass-card glass-card-gold final-cta-card">
         <h2 className="final-cta-headline">
-          You don't have to figure everything out alone.
+          Whatever is on your mind, start there.
         </h2>
 
         <p className="final-cta-sub">
-          Whatever is on your mind — start there.
+          You don't need to know exactly what you need yet. Tell us what's bothering you and we'll help you find the right kind of guidance.
         </p>
 
         <div className="final-cta-offer">
-          ✨ 5 MINUTES ARE ON US
+          ✨ YOUR FIRST 5 MINUTES ARE FREE
         </div>
 
         <button
@@ -29,12 +27,8 @@ export default function FinalCTA({ onOpenModal }) {
         </button>
 
         <p className="final-cta-microcopy">
-          ₹0 to start • Private & secure • Chat, call or video
+          ₹0 to start • Private • No commitment
         </p>
-
-        <div className="final-cta-topics-bar">
-          <span>Love</span> • <span>Career</span> • <span>Relationships</span> • <span>Astrology</span> • <span>Tarot</span> • <span>Someone to Talk To</span>
-        </div>
       </div>
     </section>
   );

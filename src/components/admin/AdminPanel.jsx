@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import AdminLogin from './AdminLogin';
 import AdminReviewsManager from './AdminReviewsManager';
+import AdminOfferManager from './AdminOfferManager';
 import './admin.css';
 
 const STATUS_LABELS = {
@@ -273,6 +274,12 @@ export default function AdminPanel() {
               >
                 🎥 Review Videos
               </button>
+              <button
+                className={`admin-nav-tab ${activeTab === 'offer' ? 'active' : ''}`}
+                onClick={() => setActiveTab('offer')}
+              >
+                ✨ Offer & Urgency
+              </button>
             </div>
           </div>
         </div>
@@ -290,7 +297,9 @@ export default function AdminPanel() {
 
       {/* ── Main Section ── */}
       <main className="admin-main">
-        {activeTab === 'reviews' ? (
+        {activeTab === 'offer' ? (
+          <AdminOfferManager token={token} />
+        ) : activeTab === 'reviews' ? (
           <AdminReviewsManager token={token} />
         ) : (
           <>
