@@ -56,7 +56,7 @@ export default function App() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', width: '100vw', position: 'relative', overflowX: 'hidden' }}>
+    <main style={{ minHeight: '100vh', width: '100%', maxWidth: '100%', position: 'relative', overflowX: 'hidden' }}>
       {/* Living Celestial Background (Preserved Intact) */}
       <CosmicBackground />
 
