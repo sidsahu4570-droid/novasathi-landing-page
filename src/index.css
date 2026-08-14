@@ -1013,8 +1013,13 @@ body, html {
 
   /* Hero Mobile Layout */
   .hero-section {
-    padding: 24px 0 20px 0 !important;
+    padding: 21px 0 20px 0 !important;
     background: transparent !important;
+  }
+
+  .hero-top-banner-wrap {
+    margin-top: 2px !important;
+    margin-bottom: 14px !important;
   }
 
   .hero-offer-badge {
@@ -3019,8 +3024,8 @@ body, html {
 .hero-top-banner-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 18px;
+  margin-top: 9px;
+  margin-bottom: 16px;
 }
 
 .hero-top-urgency-banner {
