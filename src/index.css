@@ -1078,7 +1078,7 @@ body, html {
   .value-card-desc,
   .what-get-desc,
   .risk-card-desc {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.45 !important;
     font-weight: 400 !important;
     color: rgba(255, 255, 255, 0.95) !important;
@@ -1140,7 +1140,7 @@ body, html {
   }
 
   .problem-card-desc {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.45 !important;
     color: rgba(248, 244, 234, 0.95) !important;
     margin-bottom: 14px !important;
@@ -1267,7 +1267,7 @@ body, html {
   }
 
   .problem-card-desc {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.45 !important;
     color: rgba(248, 244, 234, 0.95) !important;
     margin-bottom: 12px !important;
@@ -1329,7 +1329,7 @@ body, html {
   }
 
   .step-desc {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.45 !important;
     color: rgba(248, 244, 234, 0.95) !important;
     font-weight: 400 !important;
@@ -1398,7 +1398,7 @@ body, html {
   }
 
   .testimonial-quote {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.45 !important;
     color: rgba(248, 244, 234, 0.95) !important;
     font-style: italic !important;
@@ -1437,7 +1437,7 @@ body, html {
   }
 
   .final-cta-sub {
-    font-size: 1.37rem !important;
+    font-size: 1.18rem !important;
     margin-bottom: 14px !important;
   }
 
