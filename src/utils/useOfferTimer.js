@@ -2,44 +2,51 @@ import { useState, useEffect } from 'react';
 
 /**
  * Custom Hook: useOfferTimer
- * Accepts authoritative endDate from backend (e.g. Admin closing time: "2026-08-14T23:59:59.999Z")
- * Calculates real remaining time (Hours, Minutes, Seconds) until that exact timestamp.
- * Every visitor sees the EXACT same remaining countdown time.
+ * Maintains a strict 10-minute decreasing countdown timer (00 Hours : MM Minutes : SS Seconds, e.g. "00 : 09 : 58").
+ * Ensures hours is ALWAYS "00" and duration is 10 minutes maximum.
+ * Synchronized per visitor session via sessionStorage target.
  */
 export default function useOfferTimer(endDate) {
-  const calculateTimeLeft = () => {
-    if (!endDate) {
-      // Default to end of current day if missing
-      const fallbackEnd = new Date();
-      fallbackEnd.setHours(23, 59, 59, 999);
-      const diff = Math.max(0, fallbackEnd.getTime() - Date.now());
-      return { diff, isExpired: diff <= 0 };
+  const getInitialTarget = () => {
+    let target = sessionStorage.getItem('ns_offer_10m_target');
+    if (!target) {
+      target = Date.now() + 10 * 60 * 1000; // 10 minutes from now
+      sessionStorage.setItem('ns_offer_10m_target', target);
     }
-
-    const targetTime = new Date(endDate).getTime();
-    const diff = Math.max(0, targetTime - Date.now());
-    return { diff, isExpired: diff <= 0 };
+    const diff = Math.max(0, Math.floor((Number(target) - Date.now()) / 1000));
+    return diff > 0 ? diff : 600;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
+  const [secondsLeft, setSecondsLeft] = useState(getInitialTarget);
 
   useEffect(() => {
-    setTimeLeft(calculateTimeLeft());
-
     const interval = setInterval(() => {
-      const state = calculateTimeLeft();
-      setTimeLeft(state);
+      let target = sessionStorage.getItem('ns_offer_10m_target');
+      if (!target) {
+        target = Date.now() + 10 * 60 * 1000;
+        sessionStorage.setItem('ns_offer_10m_target', target);
+      }
+
+      let diff = Math.floor((Number(target) - Date.now()) / 1000);
+
+      if (diff <= 0) {
+        // Reset 10 minutes when expired
+        const newTarget = Date.now() + 10 * 60 * 1000;
+        sessionStorage.setItem('ns_offer_10m_target', newTarget);
+        diff = 600;
+      }
+
+      setSecondsLeft(diff);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [endDate]);
+  }, []);
 
-  const totalSecs = Math.floor(timeLeft.diff / 1000);
-  const hrs = Math.floor(totalSecs / 3600);
-  const mins = Math.floor((totalSecs % 3600) / 60);
-  const secs = totalSecs % 60;
+  const hrs = 0;
+  const mins = Math.floor(secondsLeft / 60);
+  const secs = secondsLeft % 60;
 
-  const hrsStr = String(hrs).padStart(2, '0');
+  const hrsStr = '00';
   const minsStr = String(mins).padStart(2, '0');
   const secsStr = String(secs).padStart(2, '0');
 
@@ -55,6 +62,6 @@ export default function useOfferTimer(endDate) {
     secondsStr: secsStr,
     formattedMs,
     formattedHms,
-    isExpired: timeLeft.isExpired,
+    isExpired: secondsLeft <= 0,
   };
 }

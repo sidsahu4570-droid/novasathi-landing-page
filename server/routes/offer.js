@@ -7,9 +7,6 @@ const router = express.Router();
 async function getOrCreateOffer() {
   let offer = await OfferSettings.findOne();
   if (!offer) {
-    const end = new Date();
-    end.setHours(23, 59, 59, 999);
-
     offer = new OfferSettings({
       active: true,
       title: 'Your First 5 Minutes Are Free',
@@ -20,7 +17,7 @@ async function getOrCreateOffer() {
       showRemainingSlots: true,
       isDemoMode: false,
       urgencyMessage: 'Limited introductory sessions available today',
-      endDate: end,
+      endDate: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
     });
     await offer.save();
   }
@@ -29,7 +26,7 @@ async function getOrCreateOffer() {
 
 /**
  * GET /api/offer
- * Returns live active offer, remaining slots, experts available, and exact countdown end time.
+ * Returns live active offer, remaining slots, experts available, and 10-min countdown end time.
  */
 router.get('/', async (req, res) => {
   try {

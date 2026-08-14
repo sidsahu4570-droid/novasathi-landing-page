@@ -12,12 +12,7 @@ const offerSettingsSchema = new mongoose.Schema(
     },
     endDate: {
       type: Date,
-      default: () => {
-        // Default to end of current day (11:59:59 PM)
-        const d = new Date();
-        d.setHours(23, 59, 59, 999);
-        return d;
-      },
+      default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 minutes countdown target
     },
     dailyLimit: {
       type: Number,
