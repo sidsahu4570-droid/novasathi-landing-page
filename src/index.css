@@ -1023,7 +1023,11 @@ body, html {
   }
 
   .hero-available-signal-wrap {
-    margin-bottom: 18px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-urgency-card-container {
+    margin: 12px 0 24px 0 !important;
   }
 
   .hero-offer-badge {
@@ -3062,7 +3066,7 @@ body, html {
 .hero-available-signal-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 22.8px;
+  margin-bottom: 21.6px;
 }
 
 /* ── 2, 3, 4. MAIN URGENCY COMPONENT (GIANT NUMBER HOOK) ── */
@@ -3070,7 +3074,7 @@ body, html {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 24px 0 32px 0;
+  margin: 18px 0 32px 0;
 }
 
 .hero-urgency-card {
