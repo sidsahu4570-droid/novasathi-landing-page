@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
  * YouDontHaveToWait — Requirement 12
- * High-converting mid-page section reinforcing immediate expert availability and session limits.
  */
 export default function YouDontHaveToWait({ onOpenModal }) {
-  const { formattedHms } = useTenMinTimer();
   const [offer, setOffer] = useState({
     remainingSlots: 12,
     expertsAvailableCount: 3,
+    endDate: null,
+    active: true,
   });
+
+  const { formattedHms, isExpired } = useOfferTimer(offer.endDate);
 
   useEffect(() => {
     let isMounted = true;
@@ -31,8 +33,9 @@ export default function YouDontHaveToWait({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = offer.remainingSlots;
+  const remaining = Math.max(0, Number(offer.remainingSlots));
   const expertsCount = offer.expertsAvailableCount || 3;
+  const isDisabled = remaining <= 0 || isExpired || !offer.active;
 
   return (
     <section className="section-you-dont-wait content-container" id="available-now-section">
@@ -55,15 +58,18 @@ export default function YouDontHaveToWait({ onOpenModal }) {
 
           <div className="wait-status-item">
             <span>⏳</span>
-            <span>Today's introductory window closes in <strong>{formattedHms}</strong></span>
+            <span>
+              {isExpired ? 'Today\'s introductory window is closed' : `Today's introductory window closes in ${formattedHms}`}
+            </span>
           </div>
         </div>
 
         <button
           className="btn-primary btn-gold wait-cta-btn"
           onClick={() => onOpenModal('You Dont Have To Wait')}
+          disabled={isDisabled}
         >
-          TALK TO AN EXPERT NOW →
+          {isDisabled ? 'TODAY\'S OFFER CLOSED' : 'TALK TO AN EXPERT NOW →'}
         </button>
       </div>
     </section>

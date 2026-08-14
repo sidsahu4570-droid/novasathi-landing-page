@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
- * StickyBottomBar — Desktop & Mobile Sticky Bottom Action Bar (Requirement 10)
+ * StickyBottomBar — Desktop & Mobile Sticky Bottom Action Bar
  */
 export default function StickyMobileCTA({ onOpenModal }) {
-  const { formattedHms, formatted } = useTenMinTimer();
   const [visible, setVisible] = useState(false);
-  const [remaining, setRemaining] = useState(12);
+  const [offer, setOffer] = useState({
+    remainingSlots: 12,
+    endDate: null,
+    active: true,
+  });
+
+  const { formattedHms, formattedMs, isExpired } = useOfferTimer(offer.endDate);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +36,7 @@ export default function StickyMobileCTA({ onOpenModal }) {
           const contentType = res.headers.get('content-type') || '';
           if (contentType.includes('application/json')) {
             const data = await res.json();
-            if (isMounted && data.remainingSlots !== undefined) {
-              setRemaining(data.remainingSlots);
-            }
+            if (isMounted) setOffer(data);
           }
         }
       } catch (e) {}
@@ -43,6 +46,9 @@ export default function StickyMobileCTA({ onOpenModal }) {
   }, []);
 
   if (!visible) return null;
+
+  const remaining = Math.max(0, Number(offer.remainingSlots));
+  const isDisabled = remaining <= 0 || isExpired || !offer.active;
 
   return (
     <div className="sticky-bottom-action-bar">
@@ -55,14 +61,15 @@ export default function StickyMobileCTA({ onOpenModal }) {
             </span>
             <span className="sticky-divider">•</span>
             <span className="sticky-timer-text">
-              ⏳ <strong>{formattedHms}</strong>
+              ⏳ <strong>{isExpired ? 'Offer Closed' : formattedHms}</strong>
             </span>
           </div>
           <button
             className="btn-primary btn-gold sticky-action-btn"
             onClick={() => onOpenModal('Sticky Bottom Bar')}
+            disabled={isDisabled}
           >
-            START MY FREE 5 MINUTES →
+            {isDisabled ? 'CLOSED' : 'START MY FREE 5 MINUTES →'}
           </button>
         </div>
 
@@ -72,13 +79,16 @@ export default function StickyMobileCTA({ onOpenModal }) {
             <span className="sticky-badge">
               🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
             </span>
-            <span className="sticky-sub">⏳ Closes in {formatted}</span>
+            <span className="sticky-sub">
+              ⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedMs}`}
+            </span>
           </div>
           <button
             className="btn-primary btn-gold sticky-mobile-btn"
             onClick={() => onOpenModal('Sticky Mobile Bar')}
+            disabled={isDisabled}
           >
-            START NOW →
+            {isDisabled ? 'CLOSED' : 'START NOW →'}
           </button>
         </div>
       </div>

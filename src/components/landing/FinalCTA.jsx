@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
  * FinalCTA — Requirement 18
- * High-Converting Final Urgency Box ("STILL THINKING ABOUT IT?")
  */
 export default function FinalCTA({ onOpenModal }) {
-  const { formattedHms } = useTenMinTimer();
   const [offer, setOffer] = useState({
     active: true,
     remainingSlots: 12,
+    endDate: null,
   });
+
+  const { formattedHms, isExpired } = useOfferTimer(offer.endDate);
 
   useEffect(() => {
     let isMounted = true;
@@ -31,8 +32,8 @@ export default function FinalCTA({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = offer.remainingSlots;
-  const isFull = remaining <= 0;
+  const remaining = Math.max(0, Number(offer.remainingSlots));
+  const isDisabled = remaining <= 0 || isExpired || !offer.active;
 
   return (
     <section className="section-final-cta content-container">
@@ -40,14 +41,13 @@ export default function FinalCTA({ onOpenModal }) {
         <h2 className="final-cta-headline">STILL THINKING ABOUT IT?</h2>
 
         <p className="final-cta-sub" style={{ color: 'var(--color-warm-gold)', fontWeight: '700', fontSize: '1.15rem' }}>
-          {isFull ? 'TODAY\'S FREE SESSIONS ARE FULL' : '🔥 FREE SESSIONS ARE STILL AVAILABLE TODAY'}
+          {isDisabled ? 'TODAY\'S FREE INTRODUCTORY SESSIONS ARE CLOSED' : '🔥 FREE SESSIONS ARE STILL AVAILABLE TODAY'}
         </p>
 
-        {!isFull && (
+        {!isDisabled && (
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            justifyIn: 'center',
             justifyContent: 'center',
             gap: '12px',
             fontSize: '1rem',
@@ -64,9 +64,9 @@ export default function FinalCTA({ onOpenModal }) {
         <button
           onClick={() => onOpenModal('Final CTA')}
           className="btn-primary btn-gold final-cta-btn"
-          disabled={isFull}
+          disabled={isDisabled}
         >
-          {isFull ? 'VIEW AVAILABLE OPTIONS →' : 'START MY FREE 5 MINUTES →'}
+          {isDisabled ? 'TODAY\'S OFFER CLOSED' : 'START MY FREE 5 MINUTES →'}
         </button>
 
         <p className="final-cta-microcopy">

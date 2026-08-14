@@ -1,11 +1,37 @@
-import React from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import React, { useState, useEffect } from 'react';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
- * WhyStartNow — Premium Urgency Card (Requirement 6) with 10-minute decreasing timer
+ * WhyStartNow — Premium Urgency Card (Requirement 6)
  */
 export default function WhyStartNow({ onOpenModal }) {
-  const { formatted: timerFormatted } = useTenMinTimer();
+  const [offer, setOffer] = useState({
+    remainingSlots: 12,
+    endDate: null,
+  });
+
+  const { formattedHms, isExpired } = useOfferTimer(offer.endDate);
+
+  useEffect(() => {
+    let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    async function loadOffer() {
+      try {
+        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (isMounted) setOffer(data);
+          }
+        }
+      } catch (e) {}
+    }
+    loadOffer();
+    return () => { isMounted = false; };
+  }, []);
+
+  const remaining = Math.max(0, Number(offer.remainingSlots));
 
   const points = [
     {
@@ -16,12 +42,14 @@ export default function WhyStartNow({ onOpenModal }) {
     {
       icon: '🔥',
       title: 'LIMITED FREE INTRODUCTORY SESSIONS',
-      desc: 'Only a limited number of free first sessions are available today.',
+      desc: `${remaining} free introductory sessions remain available today.`,
     },
     {
       icon: '⏳',
       title: "TODAY'S INTRODUCTORY OFFER",
-      desc: `Your free 5-minute introductory session closes in ${timerFormatted}.`,
+      desc: isExpired
+        ? "Today's free introductory session window has closed."
+        : `Your free introductory session window closes in ${formattedHms}.`,
     },
   ];
 

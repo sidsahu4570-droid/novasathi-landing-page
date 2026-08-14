@@ -7,16 +7,20 @@ const router = express.Router();
 async function getOrCreateOffer() {
   let offer = await OfferSettings.findOne();
   if (!offer) {
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+
     offer = new OfferSettings({
       active: true,
       title: 'Your First 5 Minutes Are Free',
-      dailyLimit: 50,
-      sessionsUsed: 38,
+      dailyLimit: 12,
+      sessionsUsed: 0,
       expertsAvailableCount: 3,
       showCountdown: true,
       showRemainingSlots: true,
+      isDemoMode: false,
       urgencyMessage: 'Limited introductory sessions available today',
-      endDate: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
+      endDate: end,
     });
     await offer.save();
   }
@@ -25,7 +29,7 @@ async function getOrCreateOffer() {
 
 /**
  * GET /api/offer
- * Returns live active offer, remaining slots, experts available, and 10-min countdown end time.
+ * Returns live active offer, remaining slots, experts available, and exact countdown end time.
  */
 router.get('/', async (req, res) => {
   try {
@@ -42,6 +46,7 @@ router.get('/', async (req, res) => {
       expertsAvailableCount: offer.expertsAvailableCount || 3,
       showCountdown: offer.showCountdown,
       showRemainingSlots: offer.showRemainingSlots,
+      isDemoMode: Boolean(offer.isDemoMode),
       urgencyMessage: offer.urgencyMessage,
     });
   } catch (err) {
@@ -67,17 +72,19 @@ router.patch('/admin/update', requireAdmin, async (req, res) => {
       expertsAvailableCount,
       showCountdown,
       showRemainingSlots,
+      isDemoMode,
       urgencyMessage,
     } = req.body;
 
     if (active !== undefined) offer.active = Boolean(active);
     if (title !== undefined) offer.title = String(title).trim();
     if (endDate !== undefined) offer.endDate = endDate ? new Date(endDate) : offer.endDate;
-    if (dailyLimit !== undefined) offer.dailyLimit = Number(dailyLimit) || 0;
-    if (sessionsUsed !== undefined) offer.sessionsUsed = Number(sessionsUsed) || 0;
+    if (dailyLimit !== undefined) offer.dailyLimit = Number(dailyLimit) >= 0 ? Number(dailyLimit) : offer.dailyLimit;
+    if (sessionsUsed !== undefined) offer.sessionsUsed = Number(sessionsUsed) >= 0 ? Number(sessionsUsed) : offer.sessionsUsed;
     if (expertsAvailableCount !== undefined) offer.expertsAvailableCount = Number(expertsAvailableCount) || 0;
     if (showCountdown !== undefined) offer.showCountdown = Boolean(showCountdown);
     if (showRemainingSlots !== undefined) offer.showRemainingSlots = Boolean(showRemainingSlots);
+    if (isDemoMode !== undefined) offer.isDemoMode = Boolean(isDemoMode);
     if (urgencyMessage !== undefined) offer.urgencyMessage = String(urgencyMessage).trim();
 
     await offer.save();

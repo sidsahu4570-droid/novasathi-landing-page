@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
  * ConsultationModal — Requirements 14 & 15
- * High-converting urgency modal with remaining session count, countdown timer, contact fields, and instant confirmation checklist screen.
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
-  const { formattedHms } = useTenMinTimer();
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
   const [medium, setMedium] = useState('Chat');
   const [name, setName] = useState('');
@@ -15,7 +13,12 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [phoneError, setPhoneError] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
-  const [remaining, setRemaining] = useState(12);
+  const [offer, setOffer] = useState({
+    remainingSlots: 12,
+    endDate: null,
+  });
+
+  const { formattedHms, isExpired } = useOfferTimer(offer.endDate);
 
   useEffect(() => {
     if (defaultTopic) setSelectedTopic(defaultTopic);
@@ -34,9 +37,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           const contentType = res.headers.get('content-type') || '';
           if (contentType.includes('application/json')) {
             const data = await res.json();
-            if (isMounted && data.remainingSlots !== undefined) {
-              setRemaining(data.remainingSlots);
-            }
+            if (isMounted) setOffer(data);
           }
         }
       } catch (e) {}
@@ -121,6 +122,8 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
     }
   };
 
+  const remaining = Math.max(0, Number(offer.remainingSlots));
+
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -128,12 +131,12 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           ✕
         </button>
 
-        {/* ── Top Modal Urgency Banner (Requirement 14) ── */}
+        {/* ── Top Modal Urgency Banner ── */}
         <div className="modal-urgency-banner">
           <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
           <div className="modal-urgency-sub">
             <span>🔥 {remaining} sessions remaining today</span> •{' '}
-            <span>⏳ {formattedHms} remaining</span>
+            <span>⏳ {isExpired ? 'Offer Closed' : `${formattedHms} remaining`}</span>
           </div>
         </div>
 
@@ -189,7 +192,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
             </button>
           </div>
         ) : (
-          /* ── FORM STATE (REQUIREMENT 14) ── */
+          /* ── FORM STATE ── */
           <>
             {status === 'error' && (
               <div style={{

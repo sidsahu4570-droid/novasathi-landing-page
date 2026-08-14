@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+/**
+ * AdminOfferManager — Introductory Session Availability & Capacity Control
+ */
 export default function AdminOfferManager({ token }) {
   const [offer, setOffer] = useState({
     active: true,
     title: 'Your First 5 Minutes Are Free',
     endDate: '',
-    dailyLimit: 50,
-    sessionsUsed: 38,
+    dailyLimit: 12,
+    sessionsUsed: 0,
     expertsAvailableCount: 3,
     showCountdown: true,
     showRemainingSlots: true,
+    isDemoMode: false,
     urgencyMessage: 'Limited introductory sessions available today',
   });
 
@@ -51,7 +55,7 @@ export default function AdminOfferManager({ token }) {
   }, [fetchOfferSettings]);
 
   const handleSave = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setSaving(true);
     setMsg('');
 
@@ -75,9 +79,21 @@ export default function AdminOfferManager({ token }) {
     } finally {
       localStorage.setItem('ns_offer_settings', JSON.stringify(offer));
       setSaving(false);
-      setMsg('✨ Free Session Offer and Real Urgency settings saved!');
+      setMsg('✨ Introductory Session Capacity and Offer settings saved!');
       setTimeout(() => setMsg(''), 4000);
     }
+  };
+
+  // Quick action helper for demo mode simulation
+  const handleSimulateClaim = () => {
+    setOffer((prev) => {
+      const newUsed = Number(prev.sessionsUsed || 0) + 1;
+      return { ...prev, sessionsUsed: newUsed };
+    });
+  };
+
+  const handleResetInventory = () => {
+    setOffer((prev) => ({ ...prev, sessionsUsed: 0 }));
   };
 
   const remaining = Math.max(0, Number(offer.dailyLimit) - Number(offer.sessionsUsed));
@@ -86,9 +102,9 @@ export default function AdminOfferManager({ token }) {
     <div className="arm-container">
       <div className="arm-top-bar">
         <div>
-          <h2 className="arm-title">FREE SESSION OFFER & REAL URGENCY CONTROL</h2>
+          <h2 className="arm-title">INTRODUCTORY SESSION AVAILABILITY CONTROL</h2>
           <p className="arm-sub">
-            Manage live free session capacity, real-time remaining slots, expert availability numbers, and countdown closing time.
+            Manage real daily session capacity, sessions claimed, real-time remaining inventory, expert availability, and closing countdown time.
           </p>
         </div>
       </div>
@@ -102,7 +118,8 @@ export default function AdminOfferManager({ token }) {
         </div>
       ) : (
         <form onSubmit={handleSave} className="aom-card">
-          <div className="aom-form-group switch-group">
+          {/* OFFER ACTIVE TOGGLE */}
+          <div className="aom-form-group switch-group" style={{ marginBottom: '20px' }}>
             <label className="arm-switch-label">
               <input
                 type="checkbox"
@@ -110,15 +127,18 @@ export default function AdminOfferManager({ token }) {
                 onChange={(e) => setOffer({ ...offer, active: e.target.checked })}
               />
               <span className="arm-slider" />
-              <span style={{ marginLeft: '12px', fontSize: '1rem', fontWeight: 600 }}>
-                Free 5-Minute Session Offer Active (ON / OFF)
+              <span style={{ marginLeft: '12px', fontSize: '1rem', fontWeight: 700, color: '#fff' }}>
+                Offer Status: {offer.active ? '🟢 ACTIVE (ON)' : '🔴 INACTIVE (OFF)'}
               </span>
             </label>
           </div>
 
+          {/* CAPACITY AND INVENTORY ROW */}
           <div className="arm-form-row">
             <div className="arm-form-group flex-1">
-              <label>Daily Free Sessions Capacity</label>
+              <label style={{ color: 'var(--color-warm-gold)', fontWeight: '700' }}>
+                Daily Session Capacity
+              </label>
               <input
                 type="number"
                 className="admin-input"
@@ -129,7 +149,9 @@ export default function AdminOfferManager({ token }) {
             </div>
 
             <div className="arm-form-group flex-1">
-              <label>Sessions Used Today</label>
+              <label style={{ color: '#ff6b6b', fontWeight: '700' }}>
+                Sessions Claimed Today
+              </label>
               <input
                 type="number"
                 className="admin-input"
@@ -140,22 +162,26 @@ export default function AdminOfferManager({ token }) {
             </div>
 
             <div className="arm-form-group flex-1">
-              <label>Free Sessions Remaining Today</label>
+              <label style={{ color: '#6bcf7f', fontWeight: '700' }}>
+                Sessions Remaining Today
+              </label>
               <input
                 type="text"
                 className="admin-input"
                 value={`${remaining} remaining`}
                 disabled
                 style={{
-                  opacity: 0.9,
-                  color: remaining <= 5 ? '#ff6b6b' : '#6bcf7f',
+                  opacity: 0.95,
+                  color: remaining <= 3 ? '#ff6b6b' : '#6bcf7f',
                   fontWeight: 'bold',
+                  fontSize: '1.05rem',
                 }}
               />
             </div>
           </div>
 
-          <div className="arm-form-row">
+          {/* EXPERT AVAILABILITY AND CLOSING TIME */}
+          <div className="arm-form-row" style={{ marginTop: '16px' }}>
             <div className="arm-form-group flex-1">
               <label>Experts Available Now Count</label>
               <input
@@ -168,7 +194,7 @@ export default function AdminOfferManager({ token }) {
             </div>
 
             <div className="arm-form-group flex-2">
-              <label>Offer Closing Date & Time (for Countdown)</label>
+              <label>Offer Closing Time (Authoritative Countdown End Time)</label>
               <input
                 type="datetime-local"
                 className="admin-input"
@@ -178,7 +204,8 @@ export default function AdminOfferManager({ token }) {
             </div>
           </div>
 
-          <div className="arm-form-row">
+          {/* DISPLAY TOGGLES */}
+          <div className="arm-form-row" style={{ marginTop: '16px' }}>
             <div className="arm-form-group flex-1 switch-group">
               <label className="arm-switch-label">
                 <input
@@ -188,7 +215,7 @@ export default function AdminOfferManager({ token }) {
                 />
                 <span className="arm-slider" />
                 <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
-                  Show Remaining Sessions Badge
+                  Show Remaining Sessions Counter
                 </span>
               </label>
             </div>
@@ -202,20 +229,60 @@ export default function AdminOfferManager({ token }) {
                 />
                 <span className="arm-slider" />
                 <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
-                  Show Live Offer Closing Countdown
+                  Show Closing Countdown
                 </span>
               </label>
             </div>
           </div>
 
-          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+          {/* DEMO MODE SECTION */}
+          <div style={{
+            marginTop: '24px',
+            padding: '16px 20px',
+            background: 'rgba(212, 168, 79, 0.08)',
+            border: '1px dashed rgba(212, 168, 79, 0.4)',
+            borderRadius: '14px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+              <div>
+                <span style={{ fontWeight: '700', color: 'var(--color-warm-gold)', fontSize: '0.95rem' }}>
+                  🧪 DEMO MODE (Simulation & Testing Only)
+                </span>
+                <p style={{ fontSize: '0.82rem', color: 'rgba(248,244,234,0.7)', margin: '4px 0 0 0' }}>
+                  Simulate dynamic session claims or reset capacity for testing without modifying real customer submissions.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  type="button"
+                  onClick={handleSimulateClaim}
+                  className="admin-badge admin-badge-mode"
+                  style={{ cursor: 'pointer', padding: '8px 14px', background: 'rgba(255,107,107,0.2)', border: '1px solid #ff6b6b' }}
+                >
+                  ⚡ SIMULATE 1 CLAIM (12 → 11)
+                </button>
+                <button
+                  type="button"
+                  onClick={handleResetInventory}
+                  className="admin-badge admin-badge-status completed"
+                  style={{ cursor: 'pointer', padding: '8px 14px' }}
+                >
+                  🔄 RESET TO 0 CLAIMS
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* SAVE BUTTON */}
+          <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
             <button
               type="submit"
               className="admin-login-btn"
-              style={{ width: 'auto', padding: '12px 32px' }}
+              style={{ width: 'auto', padding: '14px 36px', fontSize: '1rem' }}
               disabled={saving}
             >
-              {saving ? 'Saving...' : 'SAVE OFFER SETTINGS'}
+              {saving ? 'Saving...' : 'SAVE SETTINGS →'}
             </button>
           </div>
         </form>

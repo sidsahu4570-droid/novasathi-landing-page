@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import useTenMinTimer from '../../utils/useTenMinTimer';
+import useOfferTimer from '../../utils/useOfferTimer';
 
 /**
  * Hero — Psychological Action-Oriented Urgency & Immediate Consultation Funnel First Viewport
+ * Connected to Real Backend Availability & Authoritative Offer Closing Time
  */
 export default function Hero({ onOpenModal }) {
-  const { hoursStr, minutesStr, secondsStr, formattedHms } = useTenMinTimer();
-
   const [offer, setOffer] = useState({
     active: true,
     title: 'YOUR FIRST 5 MINUTES ARE FREE',
     remainingSlots: 12,
-    dailyLimit: 20,
+    dailyLimit: 12,
     expertsAvailableCount: 3,
     showRemainingSlots: true,
     showCountdown: true,
+    endDate: null,
   });
 
   useEffect(() => {
@@ -44,17 +44,22 @@ export default function Hero({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = offer.remainingSlots;
-  const total = offer.dailyLimit || 20;
+  const { hoursStr, minutesStr, secondsStr, formattedHms, isExpired } = useOfferTimer(offer.endDate);
+
+  const remaining = Math.max(0, Number(offer.remainingSlots));
+  const total = Math.max(1, Number(offer.dailyLimit) || 12);
   const expertsCount = offer.expertsAvailableCount || 3;
   const isFull = remaining <= 0;
+  const isDisabled = isFull || isExpired || !offer.active;
 
   // Calculate real progress percentage from backend data
   const percent = Math.min(100, Math.max(0, Math.round((remaining / total) * 100)));
 
-  // Requirement 17: Inventory-based urgency header text
+  // Inventory-based urgency header text
   let bannerText = '🔥 LIMITED INTRODUCTORY SESSIONS AVAILABLE TODAY';
-  if (remaining <= 0) {
+  if (!offer.active || isExpired) {
+    bannerText = "TODAY'S INTRODUCTORY SESSIONS ARE CLOSED";
+  } else if (remaining <= 0) {
     bannerText = "TODAY'S FREE INTRODUCTORY SESSIONS ARE FULL";
   } else if (remaining <= 4) {
     bannerText = `🔥 ONLY ${remaining} FREE SESSIONS LEFT TODAY`;
@@ -107,7 +112,9 @@ export default function Hero({ onOpenModal }) {
           {/* LARGE REMAINING NUMBER */}
           <div className="hero-giant-number-box">
             <span className="hero-giant-number">{remaining}</span>
-            <span className="hero-giant-label">FREE SESSIONS LEFT TODAY</span>
+            <span className="hero-giant-label">
+              {isFull ? 'SESSIONS REMAINING TODAY' : 'FREE SESSIONS LEFT TODAY'}
+            </span>
           </div>
 
           {/* 3. VISUAL AVAILABILITY BAR */}
@@ -122,14 +129,16 @@ export default function Hero({ onOpenModal }) {
                 style={{ width: `${percent}%` }}
               ></div>
             </div>
-            <div className="hero-progress-sub">{remaining} of {total} sessions remaining today</div>
+            <div className="hero-progress-sub">
+              {remaining} of {total} sessions remaining today
+            </div>
           </div>
 
           {/* 4. REAL COUNTDOWN BOXES */}
           {offer.showCountdown && (
             <div className="hero-countdown-container">
               <div className="hero-countdown-title">
-                ⏳ TODAY'S FREE SESSION WINDOW CLOSES IN
+                {isExpired ? "TODAY'S INTRODUCTORY WINDOW CLOSED" : "⏳ TODAY'S FREE SESSION WINDOW CLOSES IN"}
               </div>
               <div className="hero-timer-boxes-row">
                 <div className="timer-box">
@@ -154,9 +163,13 @@ export default function Hero({ onOpenModal }) {
           <button
             onClick={() => onOpenModal('Hero Urgency Box')}
             className="btn-primary btn-gold hero-urgency-card-btn"
-            disabled={isFull}
+            disabled={isDisabled}
           >
-            {isFull ? 'VIEW AVAILABLE OPTIONS →' : 'START MY FREE 5 MINUTES →'}
+            {isExpired
+              ? "TODAY'S INTRODUCTORY SESSIONS ARE CLOSED"
+              : isFull
+              ? "TODAY'S FREE SESSIONS ARE FULL"
+              : 'START MY FREE 5 MINUTES →'}
           </button>
 
           {/* Microcopy below button */}
@@ -164,7 +177,7 @@ export default function Hero({ onOpenModal }) {
             <div className="micro-info-line">
               <span>🔥 {remaining} sessions remaining today</span>
               <span>•</span>
-              <span>⏳ Closes in {formattedHms}</span>
+              <span>⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedHms}`}</span>
             </div>
             <div className="micro-info-sub">
               ₹0 to start • Private • No commitment
@@ -185,9 +198,9 @@ export default function Hero({ onOpenModal }) {
         <button
           className="btn-primary btn-gold act-now-btn"
           onClick={() => onOpenModal('Act Now Strip')}
-          disabled={isFull}
+          disabled={isDisabled}
         >
-          {isFull ? 'VIEW OPTIONS →' : 'START NOW →'}
+          {isDisabled ? 'CLOSED →' : 'START NOW →'}
         </button>
       </div>
     </section>

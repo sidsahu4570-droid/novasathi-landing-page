@@ -12,15 +12,20 @@ const offerSettingsSchema = new mongoose.Schema(
     },
     endDate: {
       type: Date,
-      default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 minutes timer
+      default: () => {
+        // Default to end of current day (11:59:59 PM)
+        const d = new Date();
+        d.setHours(23, 59, 59, 999);
+        return d;
+      },
     },
     dailyLimit: {
       type: Number,
-      default: 50,
+      default: 12,
     },
     sessionsUsed: {
       type: Number,
-      default: 38,
+      default: 0,
     },
     expertsAvailableCount: {
       type: Number,
@@ -33,6 +38,10 @@ const offerSettingsSchema = new mongoose.Schema(
     showRemainingSlots: {
       type: Boolean,
       default: true,
+    },
+    isDemoMode: {
+      type: Boolean,
+      default: false,
     },
     urgencyMessage: {
       type: String,
