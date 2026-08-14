@@ -1061,7 +1061,7 @@ body, html {
   }
 
   .section-subtitle {
-    font-size: 1.1rem !important;
+    font-size: 1.22rem !important;
     line-height: 1.45 !important;
     margin-bottom: 18px !important;
     font-weight: 500 !important;
@@ -1074,11 +1074,138 @@ body, html {
   .why-now-point-desc,
   .wait-sub,
   .testimonial-quote,
-  .faq-answer {
-    font-size: 1.02rem !important;
-    line-height: 1.45 !important;
-    color: rgba(255, 255, 255, 0.95) !important;
+  .faq-answer,
+  .value-card-desc,
+  .what-get-desc,
+  .risk-card-desc {
+    font-size: 1.18rem !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.92) !important;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
+  }
+
+  /* Mobile Card Outer Margins & 2-Column Grid Fix */
+  .section-problem-selector,
+  .section-how-it-works,
+  .trust-strip-container,
+  .section-testimonials,
+  .section-final-cta,
+  .section-faq {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 1x1 Mobile Problem Card Grid with 16px Outer Margins */
+  .problem-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .problem-card {
+    padding: 18px 20px !important;
+    min-height: auto !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+
+  .problem-icon-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .problem-icon {
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .problem-card-title {
+    font-size: 1.18rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: var(--color-soft-cream) !important;
+  }
+
+  .problem-card-desc {
+    font-size: 1.18rem !important;
+    line-height: 1.5 !important;
+    color: rgba(248, 244, 234, 0.92) !important;
+    margin-bottom: 14px !important;
+    display: block !important;
+    overflow: visible !important;
+    font-weight: 400 !important;
+  }
+
+  .problem-card-cta {
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    color: var(--color-warm-gold) !important;
+    margin-top: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .section-how-it-works {
+    padding: 22px 0 24px 0 !important;
+  }
+
+  /* How It Works Steps with 16px Outer Margins */
+  .steps-container {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .step-card {
+    padding: 18px 20px !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 6px !important;
+  }
+
+  .step-number {
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    color: var(--color-warm-gold) !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .step-title {
+    font-size: 1.18rem !important;
+    font-weight: 700 !important;
+    color: var(--color-soft-cream) !important;
+    margin-bottom: 4px !important;
+    line-height: 1.3 !important;
+  }
+
+  .step-desc {
+    font-size: 1.18rem !important;
+    line-height: 1.5 !important;
+    color: rgba(248, 244, 234, 0.92) !important;
+    font-weight: 400 !important;
   }
 
 
