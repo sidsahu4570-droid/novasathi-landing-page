@@ -4,6 +4,7 @@ import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * Hero — Psychological Action-Oriented Urgency & Immediate Consultation Funnel First Viewport
+ * Powered by Roboto Condensed Typography System
  */
 export default function Hero({ onOpenModal }) {
   const { demoSessionsRemaining, demoCapacity, demoPercent } = useDemoAvailability();
@@ -70,7 +71,7 @@ export default function Hero({ onOpenModal }) {
 
       {/* ── 5. Hero Headline & Copy ── */}
       <h1 className="hero-headline">
-        Still thinking about the same question? <br />
+        STILL THINKING ABOUT THE SAME QUESTION? <br />
         <span className="hero-headline-sub">
           Talk to someone who understands — before today's free sessions fill up.
         </span>
@@ -97,12 +98,19 @@ export default function Hero({ onOpenModal }) {
             <span>🔥 LIMITED TODAY</span>
           </div>
 
-          {/* LARGE REMAINING NUMBER */}
+          {/* LARGE REMAINING NUMBER (900 Weight, 800 Label, 700 Sub) */}
           <div className="hero-giant-number-box">
             <span className="hero-giant-number">{demoSessionsRemaining}</span>
-            <span className="hero-giant-label">
-              {isFull ? 'SESSIONS REMAINING TODAY' : 'FREE SESSIONS LEFT TODAY'}
-            </span>
+            <div className="hero-giant-label">
+              {isFull ? (
+                <span className="label-bold-800">SESSIONS REMAINING TODAY</span>
+              ) : (
+                <>
+                  <span className="label-bold-800">FREE SESSIONS</span>{' '}
+                  <span className="label-bold-700">LEFT TODAY</span>
+                </>
+              )}
+            </div>
           </div>
 
           {/* 3. VISUAL AVAILABILITY BAR */}
@@ -147,7 +155,7 @@ export default function Hero({ onOpenModal }) {
             </div>
           )}
 
-          {/* 6. CTA DIRECTLY CONNECTED TO URGENCY */}
+          {/* 6. CTA DIRECTLY CONNECTED TO URGENCY (800 Weight) */}
           <button
             onClick={() => onOpenModal('Hero Urgency Box')}
             className="btn-primary btn-gold hero-urgency-card-btn"
