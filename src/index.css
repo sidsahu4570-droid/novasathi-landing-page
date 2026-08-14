@@ -391,7 +391,7 @@ body, html {
 
 .nav-cta {
   font-size: 0.775rem;
-  padding: 6px 16px;
+  padding: 5px 15px;
 }
 
 /* ----------------------------------------------------
@@ -1005,7 +1005,7 @@ body, html {
 
   .nav-cta {
     font-size: 0.655rem !important;
-    padding: 4px 10px !important;
+    padding: 3px 9px !important;
     white-space: nowrap !important;
     border-radius: 99px !important;
     box-shadow: 0 4px 12px rgba(109, 74, 255, 0.35) !important;
@@ -1568,7 +1568,7 @@ body, html {
   }
   .nav-cta {
     font-size: 0.60rem !important;
-    padding: 3px 8px !important;
+    padding: 2px 7px !important;
   }
   .hero-headline {
     font-size: 1.55rem !important;
