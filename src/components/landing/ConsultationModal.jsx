@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * ConsultationModal — Low-Friction First Session Trigger
- * Features phone number collection and real backend submission.
+ * ConsultationModal — Action-Oriented Low-Friction Consultation Trigger
+ * Section 12 specification: "Your free 5 minutes are ready."
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
@@ -47,7 +47,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   };
 
   const handlePhoneChange = (e) => {
-    // Allow only digits and limit to 10
     const val = e.target.value.replace(/\D/g, '').slice(0, 10);
     setPhone(val);
     if (phoneError) setPhoneError('');
@@ -56,7 +55,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate phone before submit
     const err = validatePhone(phone);
     if (err) {
       setPhoneError(err);
@@ -104,7 +102,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <div style={{ fontSize: '3rem', marginBottom: '10px' }}>✅</div>
             <h3 className="modal-title" style={{ color: 'var(--color-warm-gold)', marginBottom: '10px' }}>
-              Request Received!
+              Your 5 Free Minutes Are Ready!
             </h3>
             <p className="modal-sub" style={{ marginBottom: '8px' }}>
               {modeMessages[medium]}
@@ -123,20 +121,23 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
         ) : (
           /* ── FORM STATE ── */
           <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-              <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" style={{ width: '40px', height: '40px' }} />
-              <div>
-                <h3 className="modal-title" style={{ fontSize: '1.4rem', marginBottom: '2px' }}>
-                  Start Your Free 5 Minutes
-                </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--color-warm-gold)' }}>
-                  NovaSathi — The Safe Space
-                </span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" style={{ width: '38px', height: '38px' }} />
+                <div>
+                  <h3 className="modal-title" style={{ fontSize: '1.35rem', marginBottom: '1px' }}>
+                    Your free 5 minutes are ready.
+                  </h3>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-warm-gold)' }}>
+                    NovaSathi — Safe & Private Guidance
+                  </span>
+                </div>
               </div>
             </div>
-            <p className="modal-sub">
-              Choose what's on your mind. We'll connect you to a verified expert instantly.
-            </p>
+
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', color: '#6bcf7f', background: 'rgba(107, 207, 127, 0.12)', padding: '3px 10px', borderRadius: '12px', marginBottom: '16px' }}>
+              🟢 Experts available now
+            </div>
 
             {status === 'error' && (
               <div style={{
@@ -154,8 +155,8 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
 
             <form onSubmit={handleSubmit}>
               {/* Topic Selector */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '500' }}>
-                Select Topic:
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                What would you like clarity about?
               </label>
               <div className="modal-topic-select">
                 {topics.map((t) => (
@@ -172,10 +173,10 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
               </div>
 
               {/* Mode Selector */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '500' }}>
-                Preferred Mode:
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                Choose how you'd like to connect:
               </label>
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
                 {['Chat', 'Call', 'Video'].map((m) => (
                   <button
                     key={m}
@@ -191,7 +192,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
               </div>
 
               {/* Phone Number Input */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '500' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
                 Your Mobile Number:
               </label>
               <div style={{
@@ -201,7 +202,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 border: `1px solid ${phoneError ? 'rgba(255,80,80,0.6)' : 'rgba(196,166,255,0.25)'}`,
                 borderRadius: '10px',
                 overflow: 'hidden',
-                marginBottom: phoneError ? '6px' : '20px',
+                marginBottom: phoneError ? '6px' : '18px',
                 transition: 'border-color 0.2s',
               }}>
                 <span style={{
@@ -250,17 +251,18 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 disabled={status === 'loading'}
                 style={{
                   width: '100%',
-                  fontSize: '1.05rem',
+                  fontSize: '1.08rem',
                   padding: '14px',
                   opacity: status === 'loading' ? 0.7 : 1,
                   cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+                  fontWeight: '700',
                 }}
               >
-                {status === 'loading' ? 'Sending Request...' : 'Connect Now (5 Min Free) →'}
+                {status === 'loading' ? 'Connecting...' : 'CONNECT NOW — 5 MIN FREE →'}
               </button>
 
-              <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'rgba(248, 244, 234, 0.6)', marginTop: '14px' }}>
-                🔒 100% Confidential • No Commitment Required
+              <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'rgba(248, 244, 234, 0.65)', marginTop: '12px' }}>
+                ₹0 to start • Private • No commitment
               </p>
             </form>
           </>
