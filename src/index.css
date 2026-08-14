@@ -1024,7 +1024,7 @@ body, html {
   }
 
   .hero-top-urgency-banner {
-    font-size: 0.86rem !important;
+    font-size: 0.82rem !important;
     padding: 6px 16px !important;
   }
 
@@ -3052,7 +3052,7 @@ body, html {
   background: linear-gradient(90deg, rgba(255, 75, 75, 0.25) 0%, rgba(212, 168, 79, 0.25) 100%);
   border: 1px solid rgba(255, 107, 107, 0.5);
   color: #ff6b6b;
-  font-size: 0.9rem;
+  font-size: 0.835rem;
   font-weight: 800 !important;
   padding: 8px 24px;
   border-radius: 99px;
