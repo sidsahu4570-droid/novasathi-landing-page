@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
  * ConsultationModal — Requirements 12, 13, 14
- * High-converting urgency modal with name, phone, optional whatsapp, and confirmation flow.
+ * High-converting urgency modal with 10-minute decreasing timer, contact fields, and confirmation flow.
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
+  const { formatted: timerFormatted } = useTenMinTimer();
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
   const [medium, setMedium] = useState('Chat');
   const [name, setName] = useState('');
@@ -14,7 +16,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
   const [remaining, setRemaining] = useState(12);
-  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 27, seconds: 18 });
 
   useEffect(() => {
     if (defaultTopic) setSelectedTopic(defaultTopic);
@@ -33,17 +34,8 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           const contentType = res.headers.get('content-type') || '';
           if (contentType.includes('application/json')) {
             const data = await res.json();
-            if (isMounted) {
-              if (data.remainingSlots !== undefined) setRemaining(data.remainingSlots);
-              if (data.endDate) {
-                const diff = new Date(data.endDate) - new Date();
-                if (diff > 0) {
-                  const hours = Math.floor(diff / (1000 * 60 * 60));
-                  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                  setTimeLeft({ hours, minutes, seconds });
-                }
-              }
+            if (isMounted && data.remainingSlots !== undefined) {
+              setRemaining(data.remainingSlots);
             }
           }
         }
@@ -136,14 +128,12 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           ✕
         </button>
 
-        {/* ── Top Modal Urgency Banner (Requirement 12) ── */}
+        {/* ── Top Modal Urgency Banner (10-Min Decreasing Timer) ── */}
         <div className="modal-urgency-banner">
           <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
           <div className="modal-urgency-sub">
             <span>🔥 {remaining} free sessions remaining today</span> •{' '}
-            <span>
-              ⏳ Offer closes in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </span>
+            <span>⏳ Offer closes in {timerFormatted}</span>
           </div>
         </div>
 
@@ -243,7 +233,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* 3. Customer Information (Requirement 14) */}
+              {/* 3. Customer Information */}
               <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
                 3. Where can our expert reach you?
               </label>

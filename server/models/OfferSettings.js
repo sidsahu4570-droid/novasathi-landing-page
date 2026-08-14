@@ -12,7 +12,7 @@ const offerSettingsSchema = new mongoose.Schema(
     },
     endDate: {
       type: Date,
-      default: () => new Date(Date.now() + 4 * 3600 * 1000 + 27 * 60 * 1000), // Default ~4 hours 27 min
+      default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 minutes timer
     },
     dailyLimit: {
       type: Number,

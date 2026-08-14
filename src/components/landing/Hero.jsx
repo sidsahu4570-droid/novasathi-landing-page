@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
  * Hero — Upgraded Immediate-Action Urgency & Availability Section
+ * 10-Minute Decreasing Timer ("10:00" -> "09:59" -> "09:58"...)
  */
 export default function Hero({ onOpenModal }) {
+  const { formatted: timerFormatted } = useTenMinTimer();
   const [offer, setOffer] = useState({
     active: true,
     title: 'YOUR FIRST 5 MINUTES ARE FREE',
@@ -11,10 +14,7 @@ export default function Hero({ onOpenModal }) {
     expertsAvailableCount: 3,
     showRemainingSlots: true,
     showCountdown: true,
-    endDate: null,
   });
-
-  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 27, seconds: 18 });
 
   useEffect(() => {
     let isMounted = true;
@@ -42,26 +42,6 @@ export default function Hero({ onOpenModal }) {
     loadOffer();
     return () => { isMounted = false; };
   }, []);
-
-  // Ticking countdown timer
-  useEffect(() => {
-    if (!offer.endDate) return;
-
-    const timer = setInterval(() => {
-      const diff = new Date(offer.endDate) - new Date();
-      if (diff <= 0) {
-        clearInterval(timer);
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        setTimeLeft({ hours, minutes, seconds });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [offer.endDate]);
 
   const remaining = offer.remainingSlots;
   const expertsCount = offer.expertsAvailableCount || 3;
@@ -100,13 +80,11 @@ export default function Hero({ onOpenModal }) {
           </div>
         )}
 
-        {/* 3. Real Closing Countdown Timer */}
+        {/* 3. 10-Minute Decreasing Countdown Timer */}
         {offer.active && offer.showCountdown && (
           <div className="hero-countdown-badge">
             <span>⏳</span> FREE SESSIONS CLOSE IN{' '}
-            <strong className="hero-timer-digits">
-              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </strong>
+            <strong className="hero-timer-digits">{timerFormatted}</strong>
           </div>
         )}
       </div>
@@ -139,9 +117,7 @@ export default function Hero({ onOpenModal }) {
           <div className="micro-urgency-row">
             <span>🔥 {remaining} free sessions remaining today</span>
             <span>•</span>
-            <span>
-              ⏳ Offer closes in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </span>
+            <span>⏳ Offer closes in {timerFormatted}</span>
           </div>
         )}
         <p className="hero-microcopy">

@@ -16,7 +16,7 @@ async function getOrCreateOffer() {
       showCountdown: true,
       showRemainingSlots: true,
       urgencyMessage: 'Limited introductory sessions available today',
-      endDate: new Date(Date.now() + 4 * 3600 * 1000 + 27 * 60 * 1000),
+      endDate: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
     });
     await offer.save();
   }
@@ -25,7 +25,7 @@ async function getOrCreateOffer() {
 
 /**
  * GET /api/offer
- * Returns live active offer, remaining slots, experts available, and countdown end time.
+ * Returns live active offer, remaining slots, experts available, and 10-min countdown end time.
  */
 router.get('/', async (req, res) => {
   try {

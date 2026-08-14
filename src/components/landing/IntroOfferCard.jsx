@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
- * IntroOfferCard — Section 10 (Premium Offer Box with optional live countdown)
+ * IntroOfferCard — Section 10 (Premium Offer Box with 10-minute decreasing countdown)
  */
 export default function IntroOfferCard({ onOpenModal }) {
+  const { formatted: timerFormatted } = useTenMinTimer();
   const [offer, setOffer] = useState({
     active: true,
-    showCountdown: false,
-    endDate: null,
+    showCountdown: true,
   });
-
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     let isMounted = true;
@@ -37,26 +36,6 @@ export default function IntroOfferCard({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  // Countdown timer logic
-  useEffect(() => {
-    if (!offer.showCountdown || !offer.endDate) return;
-
-    const timer = setInterval(() => {
-      const diff = new Date(offer.endDate) - new Date();
-      if (diff <= 0) {
-        clearInterval(timer);
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
-      } else {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        setTimeLeft({ hours, minutes, seconds });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [offer.showCountdown, offer.endDate]);
-
   if (!offer.active) return null;
 
   return (
@@ -81,12 +60,10 @@ export default function IntroOfferCard({ onOpenModal }) {
           <div className="feature-item"><span>✓</span> No commitment</div>
         </div>
 
-        {offer.showCountdown && offer.endDate && (
+        {offer.showCountdown && (
           <div className="intro-countdown-wrap">
-            <span className="countdown-label">Offer ends in:</span>
-            <span className="countdown-digits">
-              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </span>
+            <span className="countdown-label">Offer closes in:</span>
+            <span className="countdown-digits">{timerFormatted}</span>
           </div>
         )}
 
