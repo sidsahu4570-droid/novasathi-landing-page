@@ -390,8 +390,8 @@ body, html {
 }
 
 .nav-cta {
-  font-size: 0.9rem;
-  padding: 9px 20px;
+  font-size: 0.775rem;
+  padding: 6px 16px;
 }
 
 /* ----------------------------------------------------
@@ -1004,8 +1004,8 @@ body, html {
   }
 
   .nav-cta {
-    font-size: 0.78rem !important;
-    padding: 7px 12px !important;
+    font-size: 0.655rem !important;
+    padding: 4px 10px !important;
     white-space: nowrap !important;
     border-radius: 99px !important;
     box-shadow: 0 4px 12px rgba(109, 74, 255, 0.35) !important;
@@ -1567,8 +1567,8 @@ body, html {
     font-size: 1.1rem !important;
   }
   .nav-cta {
-    font-size: 0.72rem !important;
-    padding: 6px 10px !important;
+    font-size: 0.60rem !important;
+    padding: 3px 8px !important;
   }
   .hero-headline {
     font-size: 1.55rem !important;
