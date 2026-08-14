@@ -423,7 +423,7 @@ body, html {
 
 .hero-headline {
   font-family: var(--font-serif);
-  font-size: 3.08rem;
+  font-size: 2.95rem;
   font-weight: 700;
   line-height: 1.15;
   background: linear-gradient(180deg, #FFFFFF 0%, #E2D9F8 60%, #C8B8F4 100%);
@@ -1040,7 +1040,7 @@ body, html {
   }
 
   .hero-headline {
-    font-size: clamp(2.18rem, 7.5vw, 2.78rem) !important;
+    font-size: clamp(2.05rem, 7.5vw, 2.65rem) !important;
     line-height: 1.14 !important;
     margin-bottom: 14px !important;
     padding: 0 8px !important;
