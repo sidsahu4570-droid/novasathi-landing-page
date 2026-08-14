@@ -1,27 +1,30 @@
 import React from 'react';
+import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
- * WhyStartNow — Premium Urgency Card (Requirement 6)
+ * WhyStartNow — Premium Urgency Card (Requirement 6) with 10-minute decreasing timer
  */
-const points = [
-  {
-    icon: '🟢',
-    title: 'EXPERTS ARE AVAILABLE',
-    desc: 'Connect while verified experts are available.',
-  },
-  {
-    icon: '🔥',
-    title: 'LIMITED FREE INTRODUCTORY SESSIONS',
-    desc: 'Only a limited number of free first sessions are available today.',
-  },
-  {
-    icon: '⏳',
-    title: "TODAY'S OFFER",
-    desc: 'Your free introductory session is available until the configured closing time.',
-  },
-];
-
 export default function WhyStartNow({ onOpenModal }) {
+  const { formatted: timerFormatted } = useTenMinTimer();
+
+  const points = [
+    {
+      icon: '🟢',
+      title: 'EXPERTS ARE AVAILABLE NOW',
+      desc: 'Connect immediately while verified experts are available online.',
+    },
+    {
+      icon: '🔥',
+      title: 'LIMITED FREE INTRODUCTORY SESSIONS',
+      desc: 'Only a limited number of free first sessions are available today.',
+    },
+    {
+      icon: '⏳',
+      title: "TODAY'S INTRODUCTORY OFFER",
+      desc: `Your free 5-minute introductory session closes in ${timerFormatted}.`,
+    },
+  ];
+
   return (
     <section className="section-why-start-now content-container" id="why-start-now">
       <div className="glass-card glass-card-gold why-now-card-box">

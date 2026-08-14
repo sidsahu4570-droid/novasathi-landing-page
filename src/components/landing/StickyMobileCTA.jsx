@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
  * StickyMobileCTA — Requirement 11
- * Mobile sticky bottom bar displaying remaining sessions and immediate CTA.
+ * Mobile sticky bottom bar displaying remaining sessions, 10-minute decreasing countdown timer, and immediate CTA.
  */
 export default function StickyMobileCTA({ onOpenModal }) {
+  const { formatted: timerFormatted } = useTenMinTimer();
   const [visible, setVisible] = useState(false);
   const [remaining, setRemaining] = useState(12);
 
@@ -47,8 +49,10 @@ export default function StickyMobileCTA({ onOpenModal }) {
     <div className="sticky-mobile-bar">
       <div className="sticky-mobile-inner">
         <div className="sticky-mobile-info">
-          <span className="sticky-badge">🔥 5 MINUTES FREE</span>
-          <span className="sticky-sub">{remaining > 0 ? `${remaining} sessions left today` : 'Free introductory session'}</span>
+          <span className="sticky-badge">🔥 5 MIN FREE • ⏳ {timerFormatted}</span>
+          <span className="sticky-sub">
+            {remaining > 0 ? `${remaining} sessions left today` : 'Free session ending soon'}
+          </span>
         </div>
         <button
           className="btn-primary btn-gold sticky-mobile-btn"

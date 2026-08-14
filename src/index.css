@@ -2678,14 +2678,20 @@ html, body {
   }
 
   .sticky-badge {
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     font-weight: 700;
     color: var(--color-warm-gold);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.01em;
   }
 
   .sticky-sub {
-    font-size: 0.72rem;
-    color: rgba(248, 244, 234, 0.65);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 2px;
   }
 
   .sticky-mobile-btn {
