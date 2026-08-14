@@ -78,7 +78,7 @@ export default function Hero({ onOpenModal }) {
       </h1>
 
       <p className="hero-subheading">
-        Get private guidance from a verified expert about love, career, relationships, astrology or life's difficult decisions.
+        Get private guidance for love, career, relationships, astrology or life's difficult decisions — from someone who understands.
       </p>
 
       {/* ── 7. Available Now Signal ── */}
