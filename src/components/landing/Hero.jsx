@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * Hero — Psychological Action-Oriented Urgency & Immediate Consultation Funnel First Viewport
- * Connected to Real Backend Availability & Authoritative Offer Closing Time
  */
 export default function Hero({ onOpenModal }) {
+  const { demoSessionsRemaining, demoCapacity, demoPercent } = useDemoAvailability();
+
   const [offer, setOffer] = useState({
     active: true,
     title: 'YOUR FIRST 5 MINUTES ARE FREE',
-    remainingSlots: 12,
-    dailyLimit: 12,
     expertsAvailableCount: 3,
-    showRemainingSlots: true,
     showCountdown: true,
     endDate: null,
   });
@@ -32,12 +31,6 @@ export default function Hero({ onOpenModal }) {
             return;
           }
         }
-        const saved = localStorage.getItem('ns_offer_settings');
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          const rem = Math.max(0, Number(parsed.dailyLimit) - Number(parsed.sessionsUsed));
-          if (isMounted) setOffer({ ...parsed, remainingSlots: rem });
-        }
       } catch (e) {}
     }
     loadOffer();
@@ -46,25 +39,20 @@ export default function Hero({ onOpenModal }) {
 
   const { hoursStr, minutesStr, secondsStr, formattedHms, isExpired } = useOfferTimer(offer.endDate);
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
-  const total = Math.max(1, Number(offer.dailyLimit) || 12);
   const expertsCount = offer.expertsAvailableCount || 3;
-  const isFull = remaining <= 0;
+  const isFull = demoSessionsRemaining <= 0;
   const isDisabled = isFull || isExpired || !offer.active;
-
-  // Calculate real progress percentage from backend data
-  const percent = Math.min(100, Math.max(0, Math.round((remaining / total) * 100)));
 
   // Inventory-based urgency header text
   let bannerText = '🔥 LIMITED INTRODUCTORY SESSIONS AVAILABLE TODAY';
   if (!offer.active || isExpired) {
     bannerText = "TODAY'S INTRODUCTORY SESSIONS ARE CLOSED";
-  } else if (remaining <= 0) {
+  } else if (demoSessionsRemaining <= 0) {
     bannerText = "TODAY'S FREE INTRODUCTORY SESSIONS ARE FULL";
-  } else if (remaining <= 4) {
-    bannerText = `🔥 ONLY ${remaining} FREE SESSIONS LEFT TODAY`;
-  } else if (remaining <= 9) {
-    bannerText = `🔥 ONLY ${remaining} FREE SESSIONS LEFT TODAY`;
+  } else if (demoSessionsRemaining <= 4) {
+    bannerText = `🔥 ONLY ${demoSessionsRemaining} FREE SESSIONS LEFT TODAY`;
+  } else if (demoSessionsRemaining <= 9) {
+    bannerText = `🔥 ONLY ${demoSessionsRemaining} FREE SESSIONS LEFT TODAY`;
   }
 
   const scrollToExperts = (e) => {
@@ -111,7 +99,7 @@ export default function Hero({ onOpenModal }) {
 
           {/* LARGE REMAINING NUMBER */}
           <div className="hero-giant-number-box">
-            <span className="hero-giant-number">{remaining}</span>
+            <span className="hero-giant-number">{demoSessionsRemaining}</span>
             <span className="hero-giant-label">
               {isFull ? 'SESSIONS REMAINING TODAY' : 'FREE SESSIONS LEFT TODAY'}
             </span>
@@ -121,16 +109,16 @@ export default function Hero({ onOpenModal }) {
           <div className="hero-progress-wrap">
             <div className="hero-progress-header">
               <span>FREE SESSION AVAILABILITY</span>
-              <span className="hero-progress-pct">{percent}% remaining</span>
+              <span className="hero-progress-pct">{demoPercent}% remaining</span>
             </div>
             <div className="hero-progress-bar-track">
               <div
                 className="hero-progress-bar-fill"
-                style={{ width: `${percent}%` }}
+                style={{ width: `${demoPercent}%` }}
               ></div>
             </div>
             <div className="hero-progress-sub">
-              {remaining} of {total} sessions remaining today
+              {demoSessionsRemaining} of {demoCapacity} sessions remaining today
             </div>
           </div>
 
@@ -175,7 +163,7 @@ export default function Hero({ onOpenModal }) {
           {/* Microcopy below button */}
           <div className="hero-card-micro-info">
             <div className="micro-info-line">
-              <span>🔥 {remaining} sessions remaining today</span>
+              <span>🔥 {demoSessionsRemaining} sessions remaining today</span>
               <span>•</span>
               <span>⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedHms}`}</span>
             </div>
@@ -191,7 +179,7 @@ export default function Hero({ onOpenModal }) {
         <div className="act-now-strip-left">
           <span className="act-now-badge">🔥 AVAILABLE RIGHT NOW</span>
           <div className="act-now-text">
-            <strong>{remaining} free introductory sessions remain today.</strong>
+            <strong>{demoSessionsRemaining} free introductory sessions remain today.</strong>
             <span> ⏳ Today's introductory window closes in {formattedHms}</span>
           </div>
         </div>

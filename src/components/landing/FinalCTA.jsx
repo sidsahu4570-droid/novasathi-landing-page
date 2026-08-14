@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * FinalCTA — Requirement 18
  */
 export default function FinalCTA({ onOpenModal }) {
+  const { demoSessionsRemaining } = useDemoAvailability();
+
   const [offer, setOffer] = useState({
     active: true,
-    remainingSlots: 12,
     endDate: null,
   });
 
@@ -32,8 +34,7 @@ export default function FinalCTA({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
-  const isDisabled = remaining <= 0 || isExpired || !offer.active;
+  const isDisabled = demoSessionsRemaining <= 0 || isExpired || !offer.active;
 
   return (
     <section className="section-final-cta content-container">
@@ -55,7 +56,7 @@ export default function FinalCTA({ onOpenModal }) {
             color: 'rgba(255, 255, 255, 0.95)',
             marginBottom: '20px',
           }}>
-            <span>🔥 {remaining} sessions remaining</span>
+            <span>🔥 {demoSessionsRemaining} sessions remaining</span>
             <span>•</span>
             <span>⏳ {formattedHms}</span>
           </div>

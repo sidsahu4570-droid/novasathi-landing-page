@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * ConsultationModal — Requirements 14 & 15
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
+  const { demoSessionsRemaining } = useDemoAvailability();
+
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
   const [medium, setMedium] = useState('Chat');
   const [name, setName] = useState('');
@@ -14,7 +17,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
   const [offer, setOffer] = useState({
-    remainingSlots: 12,
     endDate: null,
   });
 
@@ -24,7 +26,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
     if (defaultTopic) setSelectedTopic(defaultTopic);
   }, [defaultTopic]);
 
-  // Load offer settings & remaining slots
+  // Load offer settings
   useEffect(() => {
     if (!isOpen) return;
     let isMounted = true;
@@ -122,8 +124,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
     }
   };
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
-
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -135,13 +135,13 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
         <div className="modal-urgency-banner">
           <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
           <div className="modal-urgency-sub">
-            <span>🔥 {remaining} sessions remaining today</span> •{' '}
+            <span>🔥 {demoSessionsRemaining} sessions remaining today</span> •{' '}
             <span>⏳ {isExpired ? 'Offer Closed' : `${formattedHms} remaining`}</span>
           </div>
         </div>
 
         {status === 'success' ? (
-          /* ── REQUIREMENT 15: AFTER SUBMISSION CONFIRMATION SCREEN ── */
+          /* ── AFTER SUBMISSION CONFIRMATION SCREEN ── */
           <div style={{ textAlign: 'left', padding: '16px 4px' }}>
             <h3 className="modal-title" style={{ color: '#6bcf7f', marginBottom: '6px', fontSize: '1.35rem' }}>
               🔥 YOUR SESSION REQUEST IS IN

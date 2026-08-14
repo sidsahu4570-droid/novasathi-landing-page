@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * StickyBottomBar — Desktop & Mobile Sticky Bottom Action Bar
  */
 export default function StickyMobileCTA({ onOpenModal }) {
+  const { demoSessionsRemaining } = useDemoAvailability();
   const [visible, setVisible] = useState(false);
   const [offer, setOffer] = useState({
-    remainingSlots: 12,
     endDate: null,
     active: true,
   });
@@ -47,8 +48,7 @@ export default function StickyMobileCTA({ onOpenModal }) {
 
   if (!visible) return null;
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
-  const isDisabled = remaining <= 0 || isExpired || !offer.active;
+  const isDisabled = demoSessionsRemaining <= 0 || isExpired || !offer.active;
 
   return (
     <div className="sticky-bottom-action-bar">
@@ -57,7 +57,7 @@ export default function StickyMobileCTA({ onOpenModal }) {
         <div className="sticky-desktop-content">
           <div className="sticky-desktop-info">
             <span className="sticky-fire-badge">
-              🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT TODAY` : 'SESSIONS FULL TODAY'}
+              🔥 {demoSessionsRemaining > 0 ? `${demoSessionsRemaining} FREE SESSIONS LEFT TODAY` : 'SESSIONS FULL TODAY'}
             </span>
             <span className="sticky-divider">•</span>
             <span className="sticky-timer-text">
@@ -77,7 +77,7 @@ export default function StickyMobileCTA({ onOpenModal }) {
         <div className="sticky-mobile-content">
           <div className="sticky-mobile-info">
             <span className="sticky-badge">
-              🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
+              🔥 {demoSessionsRemaining > 0 ? `${demoSessionsRemaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
             </span>
             <span className="sticky-sub">
               ⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedMs}`}

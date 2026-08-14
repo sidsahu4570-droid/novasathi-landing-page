@@ -18,6 +18,7 @@ import Footer from './components/landing/Footer';
 import StickyMobileCTA from './components/landing/StickyMobileCTA';
 import ConsultationModal from './components/landing/ConsultationModal';
 import AdminPanel from './components/admin/AdminPanel';
+import { DemoAvailabilityProvider } from './context/DemoAvailabilityContext';
 
 function checkIsAdminRoute() {
   const path = window.location.pathname.toLowerCase();
@@ -62,38 +63,40 @@ export default function App() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', width: '100%', maxWidth: '100%', position: 'relative', overflowX: 'hidden' }}>
-      {/* Living Celestial Background (Preserved Intact) */}
-      <CosmicBackground />
+    <DemoAvailabilityProvider>
+      <main style={{ minHeight: '100vh', width: '100%', maxWidth: '100%', position: 'relative', overflowX: 'hidden' }}>
+        {/* Living Celestial Background (Preserved Intact) */}
+        <CosmicBackground />
 
-      {/* Conversion Psychology Landing Page Overlay */}
-      <div className="landing-overlay">
-        <Navbar onOpenModal={handleOpenModal} />
-        <Hero onOpenModal={handleOpenModal} />
-        <WhyPeopleStart />
-        <ProblemSelector onOpenModal={handleOpenModal} />
-        <YouDontHaveToWait onOpenModal={handleOpenModal} />
-        <HowItWorks />
-        <ExpertProfiles onOpenModal={handleOpenModal} />
-        <VideoTestimonials onOpenModal={handleOpenModal} />
-        <WhatYouGet onOpenModal={handleOpenModal} />
-        <WhyStartNow onOpenModal={handleOpenModal} />
-        <RiskReversal />
-        <IntroOfferCard onOpenModal={handleOpenModal} />
-        <FinalCTA onOpenModal={handleOpenModal} />
-        <MicroFAQ />
-        <Footer />
-      </div>
+        {/* Conversion Psychology Landing Page Overlay */}
+        <div className="landing-overlay">
+          <Navbar onOpenModal={handleOpenModal} />
+          <Hero onOpenModal={handleOpenModal} />
+          <WhyPeopleStart />
+          <ProblemSelector onOpenModal={handleOpenModal} />
+          <YouDontHaveToWait onOpenModal={handleOpenModal} />
+          <HowItWorks />
+          <ExpertProfiles onOpenModal={handleOpenModal} />
+          <VideoTestimonials onOpenModal={handleOpenModal} />
+          <WhatYouGet onOpenModal={handleOpenModal} />
+          <WhyStartNow onOpenModal={handleOpenModal} />
+          <RiskReversal />
+          <IntroOfferCard onOpenModal={handleOpenModal} />
+          <FinalCTA onOpenModal={handleOpenModal} />
+          <MicroFAQ />
+          <Footer />
+        </div>
 
-      {/* Desktop & Mobile Sticky Bottom Action Bar */}
-      <StickyMobileCTA onOpenModal={handleOpenModal} />
+        {/* Desktop & Mobile Sticky Bottom Action Bar */}
+        <StickyMobileCTA onOpenModal={handleOpenModal} />
 
-      {/* Interactive Free 5-Minute Session Modal */}
-      <ConsultationModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        defaultTopic={modalTopic}
-      />
-    </main>
+        {/* Interactive Free 5-Minute Session Modal */}
+        <ConsultationModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          defaultTopic={modalTopic}
+        />
+      </main>
+    </DemoAvailabilityProvider>
   );
 }

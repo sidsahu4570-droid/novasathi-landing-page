@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * WhyStartNow — Premium Urgency Card (Requirement 6)
  */
 export default function WhyStartNow({ onOpenModal }) {
+  const { demoSessionsRemaining } = useDemoAvailability();
+
   const [offer, setOffer] = useState({
-    remainingSlots: 12,
     endDate: null,
   });
 
@@ -31,8 +33,6 @@ export default function WhyStartNow({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
-
   const points = [
     {
       icon: '🟢',
@@ -42,7 +42,7 @@ export default function WhyStartNow({ onOpenModal }) {
     {
       icon: '🔥',
       title: 'LIMITED FREE INTRODUCTORY SESSIONS',
-      desc: `${remaining} free introductory sessions remain available today.`,
+      desc: `${demoSessionsRemaining} free introductory sessions remain available today.`,
     },
     {
       icon: '⏳',

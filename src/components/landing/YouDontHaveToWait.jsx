@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import useOfferTimer from '../../utils/useOfferTimer';
+import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 
 /**
  * YouDontHaveToWait — Requirement 12
  */
 export default function YouDontHaveToWait({ onOpenModal }) {
+  const { demoSessionsRemaining } = useDemoAvailability();
+
   const [offer, setOffer] = useState({
-    remainingSlots: 12,
     expertsAvailableCount: 3,
     endDate: null,
     active: true,
@@ -33,9 +35,8 @@ export default function YouDontHaveToWait({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  const remaining = Math.max(0, Number(offer.remainingSlots));
   const expertsCount = offer.expertsAvailableCount || 3;
-  const isDisabled = remaining <= 0 || isExpired || !offer.active;
+  const isDisabled = demoSessionsRemaining <= 0 || isExpired || !offer.active;
 
   return (
     <section className="section-you-dont-wait content-container" id="available-now-section">
@@ -53,7 +54,7 @@ export default function YouDontHaveToWait({ onOpenModal }) {
 
           <div className="wait-status-item">
             <span>🔥</span>
-            <span><strong>{remaining} free introductory sessions</strong> remaining today</span>
+            <span><strong>{demoSessionsRemaining} free introductory sessions</strong> remaining today</span>
           </div>
 
           <div className="wait-status-item">
