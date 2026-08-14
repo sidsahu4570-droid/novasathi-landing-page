@@ -1,25 +1,64 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * ConsultationModal — Action-Oriented Low-Friction Consultation Trigger
- * Section 12 specification: "Your free 5 minutes are ready."
+ * ConsultationModal — Requirements 12, 13, 14
+ * High-converting urgency modal with name, phone, optional whatsapp, and confirmation flow.
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
   const [medium, setMedium] = useState('Chat');
+  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
+  const [remaining, setRemaining] = useState(12);
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 27, seconds: 18 });
 
   useEffect(() => {
     if (defaultTopic) setSelectedTopic(defaultTopic);
   }, [defaultTopic]);
 
+  // Load offer settings & remaining slots
+  useEffect(() => {
+    if (!isOpen) return;
+    let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+
+    async function loadOffer() {
+      try {
+        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (isMounted) {
+              if (data.remainingSlots !== undefined) setRemaining(data.remainingSlots);
+              if (data.endDate) {
+                const diff = new Date(data.endDate) - new Date();
+                if (diff > 0) {
+                  const hours = Math.floor(diff / (1000 * 60 * 60));
+                  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                  setTimeLeft({ hours, minutes, seconds });
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
+    loadOffer();
+    return () => { isMounted = false; };
+  }, [isOpen]);
+
   // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
+      setName('');
       setPhone('');
+      setWhatsapp('');
       setPhoneError('');
       setStatus('idle');
       setErrorMsg('');
@@ -68,7 +107,13 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
       const res = await fetch('/api/consultations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: selectedTopic, mode: medium, phone }),
+        body: JSON.stringify({
+          topic: selectedTopic,
+          mode: medium,
+          phone,
+          name,
+          whatsapp,
+        }),
       });
 
       const data = await res.json();
@@ -84,12 +129,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
     }
   };
 
-  const modeMessages = {
-    Chat: 'Our advisor will send you a message shortly.',
-    Call: `We'll call you on +91 ${phone} within minutes.`,
-    Video: `We'll send a video link to your number +91 ${phone}.`,
-  };
-
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -97,47 +136,60 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           ✕
         </button>
 
+        {/* ── Top Modal Urgency Banner (Requirement 12) ── */}
+        <div className="modal-urgency-banner">
+          <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
+          <div className="modal-urgency-sub">
+            <span>🔥 {remaining} free sessions remaining today</span> •{' '}
+            <span>
+              ⏳ Offer closes in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            </span>
+          </div>
+        </div>
+
         {status === 'success' ? (
-          /* ── SUCCESS STATE ── */
-          <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '10px' }}>✅</div>
-            <h3 className="modal-title" style={{ color: 'var(--color-warm-gold)', marginBottom: '10px' }}>
-              Your 5 Free Minutes Are Ready!
+          /* ── REQUIREMENT 13: CONFIRMATION SCREEN ── */
+          <div style={{ textAlign: 'left', padding: '16px 4px' }}>
+            <h3 className="modal-title" style={{ color: '#6bcf7f', marginBottom: '4px', fontSize: '1.4rem' }}>
+              Your free session request has been sent.
             </h3>
-            <p className="modal-sub" style={{ marginBottom: '8px' }}>
-              {modeMessages[medium]}
+            <p style={{ fontSize: '0.9rem', color: 'rgba(248,244,234,0.85)', marginBottom: '18px' }}>
+              Looking for an available expert for you...
             </p>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(248,244,234,0.55)', marginBottom: '24px' }}>
-              Topic: <strong style={{ color: 'rgba(248,244,234,0.85)' }}>{selectedTopic}</strong>
-            </p>
+
+            <div className="modal-confirm-checklist">
+              <div className="confirm-check-item">
+                <span className="pulse-dot">🟢</span>
+                <span>Request received</span>
+              </div>
+              <div className="confirm-check-item">
+                <span className="check-icon">✓</span>
+                <span>Topic selected: <strong>{selectedTopic}</strong></span>
+              </div>
+              <div className="confirm-check-item">
+                <span className="check-icon">✓</span>
+                <span>Preferred connection method selected: <strong>{medium}</strong></span>
+              </div>
+              <div className="confirm-check-item">
+                <span className="check-icon">✓</span>
+                <span>Free introductory session reserved for <strong>+91 {phone}</strong></span>
+              </div>
+            </div>
+
             <button
               onClick={onClose}
               className="btn-primary btn-gold"
-              style={{ width: '100%', fontSize: '1rem', padding: '12px' }}
+              style={{ width: '100%', fontSize: '1rem', padding: '12px', marginTop: '16px' }}
             >
-              Close
+              DONE
             </button>
           </div>
         ) : (
           /* ── FORM STATE ── */
           <>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <img src="/logo.jpg" alt="NovaSathi Logo" className="logo-img-circle" style={{ width: '38px', height: '38px' }} />
-                <div>
-                  <h3 className="modal-title" style={{ fontSize: '1.35rem', marginBottom: '1px' }}>
-                    Your free 5 minutes are ready.
-                  </h3>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--color-warm-gold)' }}>
-                    NovaSathi — Safe & Private Guidance
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', color: '#6bcf7f', background: 'rgba(107, 207, 127, 0.12)', padding: '3px 10px', borderRadius: '12px', marginBottom: '16px' }}>
-              🟢 Experts available now
-            </div>
+            <p className="modal-sub" style={{ marginTop: '12px' }}>
+              What would you like help with?
+            </p>
 
             {status === 'error' && (
               <div style={{
@@ -154,9 +206,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
             )}
 
             <form onSubmit={handleSubmit}>
-              {/* Topic Selector */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                What would you like clarity about?
+              {/* 1. Topic Selector */}
+              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                1. Select Topic:
               </label>
               <div className="modal-topic-select">
                 {topics.map((t) => (
@@ -172,9 +224,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* Mode Selector */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                Choose how you'd like to connect:
+              {/* 2. Mode Selector */}
+              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                2. How would you like to connect?
               </label>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
                 {['Chat', 'Call', 'Video'].map((m) => (
@@ -191,10 +243,23 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* Phone Number Input */}
-              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
-                Your Mobile Number:
+              {/* 3. Customer Information (Requirement 14) */}
+              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
+                3. Where can our expert reach you?
               </label>
+
+              {/* Optional Name */}
+              <input
+                type="text"
+                placeholder="Your Name (Optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={status === 'loading'}
+                className="modal-text-input"
+                style={{ marginBottom: '10px' }}
+              />
+
+              {/* Required Phone Number */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -202,12 +267,11 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 border: `1px solid ${phoneError ? 'rgba(255,80,80,0.6)' : 'rgba(196,166,255,0.25)'}`,
                 borderRadius: '10px',
                 overflow: 'hidden',
-                marginBottom: phoneError ? '6px' : '18px',
-                transition: 'border-color 0.2s',
+                marginBottom: phoneError ? '6px' : '10px',
               }}>
                 <span style={{
-                  padding: '12px 12px 12px 14px',
-                  fontSize: '0.95rem',
+                  padding: '12px 14px',
+                  fontSize: '0.92rem',
                   color: 'rgba(248,244,234,0.6)',
                   borderRight: '1px solid rgba(196,166,255,0.2)',
                   fontWeight: '500',
@@ -220,7 +284,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                   type="tel"
                   inputMode="numeric"
                   autoComplete="tel"
-                  placeholder="Enter 10-digit number"
+                  placeholder="Enter 10-digit mobile number *"
                   value={phone}
                   onChange={handlePhoneChange}
                   disabled={status === 'loading'}
@@ -230,18 +294,28 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                     border: 'none',
                     outline: 'none',
                     padding: '12px 14px',
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     color: '#fff',
                     fontFamily: 'inherit',
-                    letterSpacing: '0.5px',
                   }}
                 />
               </div>
               {phoneError && (
-                <p style={{ fontSize: '0.78rem', color: '#ff7070', marginBottom: '16px', marginTop: '-2px' }}>
+                <p style={{ fontSize: '0.78rem', color: '#ff7070', marginBottom: '12px' }}>
                   ⚠ {phoneError}
                 </p>
               )}
+
+              {/* Optional WhatsApp Number */}
+              <input
+                type="tel"
+                placeholder="WhatsApp Number (Optional)"
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(e.target.value)}
+                disabled={status === 'loading'}
+                className="modal-text-input"
+                style={{ marginBottom: '18px' }}
+              />
 
               {/* Submit Button */}
               <button
@@ -251,17 +325,15 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 disabled={status === 'loading'}
                 style={{
                   width: '100%',
-                  fontSize: '1.08rem',
+                  fontSize: '1.05rem',
                   padding: '14px',
                   opacity: status === 'loading' ? 0.7 : 1,
-                  cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                  fontWeight: '700',
                 }}
               >
-                {status === 'loading' ? 'Connecting...' : 'CONNECT NOW — 5 MIN FREE →'}
+                {status === 'loading' ? 'Sending Request...' : 'REQUEST MY FREE SESSION →'}
               </button>
 
-              <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'rgba(248, 244, 234, 0.65)', marginTop: '12px' }}>
+              <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(248, 244, 234, 0.7)', marginTop: '12px' }}>
                 ₹0 to start • Private • No commitment
               </p>
             </form>

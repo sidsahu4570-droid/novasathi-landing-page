@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * Hero — Action-Oriented Hero Section
- * Immediately communicates: Problem → 5 Free Mins → Available Experts → Immediate CTA.
+ * Hero — Upgraded Immediate-Action Urgency & Availability Section
  */
 export default function Hero({ onOpenModal }) {
   const [offer, setOffer] = useState({
     active: true,
     title: 'YOUR FIRST 5 MINUTES ARE FREE',
     remainingSlots: 12,
+    expertsAvailableCount: 3,
     showRemainingSlots: true,
-    showCountdown: false,
+    showCountdown: true,
     endDate: null,
-    urgencyMessage: 'Limited introductory sessions available today',
   });
 
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 27, seconds: 18 });
 
   useEffect(() => {
     let isMounted = true;
@@ -32,7 +31,6 @@ export default function Hero({ onOpenModal }) {
             return;
           }
         }
-        // Fallback to local storage on static Vercel
         const saved = localStorage.getItem('ns_offer_settings');
         if (saved) {
           const parsed = JSON.parse(saved);
@@ -45,9 +43,9 @@ export default function Hero({ onOpenModal }) {
     return () => { isMounted = false; };
   }, []);
 
-  // Countdown timer calculation if configured by Admin
+  // Ticking countdown timer
   useEffect(() => {
-    if (!offer.showCountdown || !offer.endDate) return;
+    if (!offer.endDate) return;
 
     const timer = setInterval(() => {
       const diff = new Date(offer.endDate) - new Date();
@@ -63,94 +61,92 @@ export default function Hero({ onOpenModal }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [offer.showCountdown, offer.endDate]);
+  }, [offer.endDate]);
+
+  const remaining = offer.remainingSlots;
+  const expertsCount = offer.expertsAvailableCount || 3;
+  const isLowSlots = remaining <= 5 && remaining > 0;
+  const isFull = remaining <= 0;
+
+  const scrollToExperts = (e) => {
+    e.preventDefault();
+    const el = document.getElementById('experts');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section className="hero-section content-container" aria-label="Hero Introduction">
-      {/* 1. Top-of-Hero High-Visibility Urgency Strip */}
-      <div className="hero-urgency-strip">
-        <span className="urgency-strip-item live">
-          <span className="pulse-dot">🟢</span> EXPERTS AVAILABLE NOW
-        </span>
-        <span className="urgency-strip-divider">•</span>
-        <span className="urgency-strip-item free">
-          ✨ YOUR FIRST 5 MINUTES ARE FREE
-        </span>
-        {offer.showCountdown && offer.endDate && (
-          <>
-            <span className="urgency-strip-divider">•</span>
-            <span className="urgency-strip-item timer">
-              ⏳ ENDS IN {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </span>
-          </>
+      {/* ── Top Urgency & Live Availability Stack ── */}
+      <div className="hero-urgency-stack">
+        {/* 1. Live Availability Badge (Scrolls to Experts) */}
+        <a href="#experts" onClick={scrollToExperts} className="hero-live-badge">
+          <span className="pulse-dot">🟢</span>
+          <span>
+            <strong>EXPERTS AVAILABLE NOW</strong> — {expertsCount} verified experts are currently available
+          </span>
+        </a>
+
+        {/* 2. Real Session Remaining Urgency Badge */}
+        {offer.active && offer.showRemainingSlots && (
+          <div className={`hero-sessions-badge ${isLowSlots ? 'low-slots' : ''}`}>
+            <span>🔥</span>
+            {isFull ? (
+              <strong>FREE INTRODUCTORY SESSIONS ARE FULL TODAY</strong>
+            ) : (
+              <span>
+                {isLowSlots ? 'ONLY' : ''} <span className="hero-slots-num">{remaining}</span> FREE INTRODUCTORY SESSIONS LEFT TODAY
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* 3. Real Closing Countdown Timer */}
+        {offer.active && offer.showCountdown && (
+          <div className="hero-countdown-badge">
+            <span>⏳</span> FREE SESSIONS CLOSE IN{' '}
+            <strong className="hero-timer-digits">
+              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            </strong>
+          </div>
         )}
       </div>
 
-      {/* 2. Main Hero Headline */}
+      {/* ── Main Action-Oriented Headline ── */}
       <h1 className="hero-headline">
-        What's the one thing <br className="hero-br-desktop" />
-        you can't stop thinking about?
-        <span className="hero-headline-sub">Get clarity now.</span>
+        Still thinking about the same question? <br className="hero-br-desktop" />
+        <span className="hero-headline-accent">Talk to someone who understands — today.</span>
       </h1>
 
-      {/* Supporting Line */}
+      {/* Supporting Copy */}
       <p className="hero-subheading">
-        Don't spend another night overthinking it alone.
+        Get private guidance from a verified expert about love, career, relationships, astrology or life's difficult decisions.
       </p>
 
-      {/* 3. Dominant Offer Card Box */}
-      <div className="hero-dominant-offer">
-        <div className="hero-offer-badge">
-          <span>✨</span> YOUR FIRST 5 MINUTES ARE FREE
-        </div>
-        <p className="hero-offer-text">
-          Talk privately with a verified expert about what's on your mind.
-        </p>
-      </div>
-
-      {/* 4. Primary CTA Button Group */}
+      {/* ── Dominant Primary CTA ── */}
       <div className="hero-cta-group">
         <button
           onClick={() => onOpenModal('Hero')}
-          className="btn-primary btn-gold hero-action-btn"
+          className="btn-primary btn-gold hero-primary-btn"
+          disabled={isFull}
         >
-          START MY FREE 5 MINUTES →
+          {isFull ? 'DAILY FREE SESSIONS FULL — BOOK CONSULTATION →' : 'START MY FREE 5 MINUTES →'}
         </button>
       </div>
 
-      {/* Microcopy below CTA */}
-      <p className="hero-microcopy">
-        ₹0 to start • No commitment • Private conversation
-      </p>
-
-      {/* 5. Immediate Availability & Mental Path */}
-      <div className="hero-availability-box">
-        <div className="availability-tag">
-          <span className="pulse-dot">🟢</span> Experts available now
-        </div>
-        <div className="mental-path-text">
-          Choose your topic → choose your expert → start talking.
-        </div>
-      </div>
-
-      {/* 6. Loss Aversion Micro-Message */}
-      <p className="hero-loss-aversion">
-        Whatever is on your mind, you can start with it now. <br />
-        <span>Don't keep guessing when you can get another perspective.</span>
-      </p>
-
-      {/* 7. Active Campaign Banner (If active in Admin) */}
-      {offer.active && (
-        <div className="hero-campaign-banner">
-          <span className="campaign-chip">🔥 INTRODUCTORY OFFER ACTIVE</span>
-          <span className="campaign-note">Your first 5 minutes are currently FREE.</span>
-        </div>
-      )}
-
-      {/* 9. Micro Social Proof */}
-      <div className="hero-social-proof">
-        <span className="proof-stars">★★★★★</span>
-        <span className="proof-text">"People are already finding clarity through NovaSathi."</span>
+      {/* Sub-CTA Urgency Microcopy */}
+      <div className="hero-cta-micro-stack">
+        {offer.active && !isFull && (
+          <div className="micro-urgency-row">
+            <span>🔥 {remaining} free sessions remaining today</span>
+            <span>•</span>
+            <span>
+              ⏳ Offer closes in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            </span>
+          </div>
+        )}
+        <p className="hero-microcopy">
+          ₹0 to start • Private • No commitment
+        </p>
       </div>
     </section>
   );

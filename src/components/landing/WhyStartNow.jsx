@@ -1,51 +1,49 @@
 import React from 'react';
 
 /**
- * WhyStartNow — Section 9 ("Why start now?")
- * Conversion block specifically designed to eliminate procrastination and delay.
+ * WhyStartNow — Premium Urgency Card (Requirement 6)
  */
-const reasons = [
-  {
-    icon: '✨',
-    title: 'FIRST 5 MINUTES ARE FREE',
-    desc: 'Experience NovaSathi before deciding whether you want more.',
-  },
+const points = [
   {
     icon: '🟢',
-    title: 'EXPERTS AVAILABLE',
-    desc: 'Connect with verified experts ready to help.',
+    title: 'EXPERTS ARE AVAILABLE',
+    desc: 'Connect while verified experts are available.',
   },
   {
-    icon: '🔒',
-    title: 'PRIVATE',
-    desc: 'Your conversation is completely confidential.',
+    icon: '🔥',
+    title: 'LIMITED FREE INTRODUCTORY SESSIONS',
+    desc: 'Only a limited number of free first sessions are available today.',
   },
   {
-    icon: '↩',
-    title: 'NO COMMITMENT',
-    desc: 'Continue only if you find it useful.',
+    icon: '⏳',
+    title: "TODAY'S OFFER",
+    desc: 'Your free introductory session is available until the configured closing time.',
   },
 ];
 
 export default function WhyStartNow({ onOpenModal }) {
   return (
     <section className="section-why-start-now content-container" id="why-start-now">
-      <h2 className="section-title">Why start now?</h2>
+      <div className="glass-card glass-card-gold why-now-card-box">
+        <h2 className="why-now-box-title">WHY START NOW?</h2>
 
-      <div className="why-now-grid">
-        {reasons.map((r, i) => (
-          <div key={i} className="glass-card why-now-card">
-            <span className="why-now-icon">{r.icon}</span>
-            <h3 className="why-now-title">{r.title}</h3>
-            <p className="why-now-desc">{r.desc}</p>
-          </div>
-        ))}
-      </div>
+        <div className="why-now-points-grid">
+          {points.map((p, i) => (
+            <div key={i} className="why-now-point-item">
+              <span className="why-now-point-icon">{p.icon}</span>
+              <div>
+                <h3 className="why-now-point-title">{p.title}</h3>
+                <p className="why-now-point-desc">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        <button className="btn-primary btn-gold" onClick={() => onOpenModal('Why Start Now')}>
-          START MY FREE 5 MINUTES →
-        </button>
+        <div className="why-now-box-cta">
+          <button className="btn-primary btn-gold" onClick={() => onOpenModal('Why Start Now')}>
+            START MY FREE 5 MINUTES →
+          </button>
+        </div>
       </div>
     </section>
   );

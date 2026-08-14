@@ -4,7 +4,6 @@ import requireAdmin from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Helper to get or create default offer settings
 async function getOrCreateOffer() {
   let offer = await OfferSettings.findOne();
   if (!offer) {
@@ -13,9 +12,11 @@ async function getOrCreateOffer() {
       title: 'Your First 5 Minutes Are Free',
       dailyLimit: 50,
       sessionsUsed: 38,
-      showCountdown: false,
+      expertsAvailableCount: 3,
+      showCountdown: true,
       showRemainingSlots: true,
       urgencyMessage: 'Limited introductory sessions available today',
+      endDate: new Date(Date.now() + 4 * 3600 * 1000 + 27 * 60 * 1000),
     });
     await offer.save();
   }
@@ -24,7 +25,7 @@ async function getOrCreateOffer() {
 
 /**
  * GET /api/offer
- * Public endpoint returning current offer status & remaining sessions.
+ * Returns live active offer, remaining slots, experts available, and countdown end time.
  */
 router.get('/', async (req, res) => {
   try {
@@ -38,6 +39,7 @@ router.get('/', async (req, res) => {
       dailyLimit: offer.dailyLimit,
       sessionsUsed: offer.sessionsUsed,
       remainingSlots: remaining,
+      expertsAvailableCount: offer.expertsAvailableCount || 3,
       showCountdown: offer.showCountdown,
       showRemainingSlots: offer.showRemainingSlots,
       urgencyMessage: offer.urgencyMessage,
@@ -49,8 +51,8 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * PATCH /api/admin/offer
- * Protected admin endpoint to update offer & urgency configuration.
+ * PATCH /api/admin/update
+ * Admin route to update offer settings.
  */
 router.patch('/admin/update', requireAdmin, async (req, res) => {
   try {
@@ -62,6 +64,7 @@ router.patch('/admin/update', requireAdmin, async (req, res) => {
       endDate,
       dailyLimit,
       sessionsUsed,
+      expertsAvailableCount,
       showCountdown,
       showRemainingSlots,
       urgencyMessage,
@@ -69,9 +72,10 @@ router.patch('/admin/update', requireAdmin, async (req, res) => {
 
     if (active !== undefined) offer.active = Boolean(active);
     if (title !== undefined) offer.title = String(title).trim();
-    if (endDate !== undefined) offer.endDate = endDate ? new Date(endDate) : null;
+    if (endDate !== undefined) offer.endDate = endDate ? new Date(endDate) : offer.endDate;
     if (dailyLimit !== undefined) offer.dailyLimit = Number(dailyLimit) || 0;
     if (sessionsUsed !== undefined) offer.sessionsUsed = Number(sessionsUsed) || 0;
+    if (expertsAvailableCount !== undefined) offer.expertsAvailableCount = Number(expertsAvailableCount) || 0;
     if (showCountdown !== undefined) offer.showCountdown = Boolean(showCountdown);
     if (showRemainingSlots !== undefined) offer.showRemainingSlots = Boolean(showRemainingSlots);
     if (urgencyMessage !== undefined) offer.urgencyMessage = String(urgencyMessage).trim();

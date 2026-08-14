@@ -12,7 +12,7 @@ const offerSettingsSchema = new mongoose.Schema(
     },
     endDate: {
       type: Date,
-      default: null,
+      default: () => new Date(Date.now() + 4 * 3600 * 1000 + 27 * 60 * 1000), // Default ~4 hours 27 min
     },
     dailyLimit: {
       type: Number,
@@ -22,9 +22,13 @@ const offerSettingsSchema = new mongoose.Schema(
       type: Number,
       default: 38,
     },
+    expertsAvailableCount: {
+      type: Number,
+      default: 3,
+    },
     showCountdown: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     showRemainingSlots: {
       type: Boolean,

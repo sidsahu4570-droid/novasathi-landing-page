@@ -13,7 +13,7 @@ const ALLOWED_STATUSES = ['pending', 'called', 'connected', 'no_answer', 'comple
  */
 router.post('/', async (req, res) => {
   try {
-    const { topic, mode, phone } = req.body;
+    const { topic, mode, phone, name, whatsapp } = req.body;
 
     if (!topic || !mode || !phone) {
       return res.status(400).json({ error: 'Topic, mode, and phone number are required.' });
@@ -26,14 +26,26 @@ router.post('/', async (req, res) => {
       topic,
       mode,
       phone: cleanPhone,
+      name: name ? String(name).trim() : '',
+      adminNotes: whatsapp ? `WhatsApp: ${whatsapp}` : '',
       status: 'pending', // always set server-side
     });
 
     await consultation.save();
 
+    // Dynamically increment sessionsUsed in OfferSettings so remaining slots decrease (12 -> 11 -> 10)
+    try {
+      const OfferSettings = (await import('../models/OfferSettings.js')).default;
+      const offer = await OfferSettings.findOne();
+      if (offer) {
+        offer.sessionsUsed = (offer.sessionsUsed || 0) + 1;
+        await offer.save();
+      }
+    } catch (e) {}
+
     res.status(201).json({
       success: true,
-      message: 'Consultation request received successfully.',
+      message: 'Your free session request has been sent.',
       id: consultation._id,
     });
   } catch (err) {

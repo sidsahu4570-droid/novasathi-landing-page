@@ -7,7 +7,8 @@ export default function AdminOfferManager({ token }) {
     endDate: '',
     dailyLimit: 50,
     sessionsUsed: 38,
-    showCountdown: false,
+    expertsAvailableCount: 3,
+    showCountdown: true,
     showRemainingSlots: true,
     urgencyMessage: 'Limited introductory sessions available today',
   });
@@ -36,7 +37,6 @@ export default function AdminOfferManager({ token }) {
           endDate: data.endDate ? new Date(data.endDate).toISOString().slice(0, 16) : '',
         });
       } else {
-        // Fallback to local storage on static Vercel
         const saved = localStorage.getItem('ns_offer_settings');
         if (saved) setOffer(JSON.parse(saved));
       }
@@ -73,10 +73,9 @@ export default function AdminOfferManager({ token }) {
       }
     } catch (e) {
     } finally {
-      // Sync to local storage for live static Vercel preview
       localStorage.setItem('ns_offer_settings', JSON.stringify(offer));
       setSaving(false);
-      setMsg('✨ Offer and urgency settings saved successfully!');
+      setMsg('✨ Free Session Offer and Real Urgency settings saved!');
       setTimeout(() => setMsg(''), 4000);
     }
   };
@@ -87,9 +86,9 @@ export default function AdminOfferManager({ token }) {
     <div className="arm-container">
       <div className="arm-top-bar">
         <div>
-          <h2 className="arm-title">Offer & Real Urgency Settings</h2>
+          <h2 className="arm-title">FREE SESSION OFFER & REAL URGENCY CONTROL</h2>
           <p className="arm-sub">
-            Control the live free 5-minute campaign, daily capacity limits, and countdown timers.
+            Manage live free session capacity, real-time remaining slots, expert availability numbers, and countdown closing time.
           </p>
         </div>
       </div>
@@ -112,36 +111,14 @@ export default function AdminOfferManager({ token }) {
               />
               <span className="arm-slider" />
               <span style={{ marginLeft: '12px', fontSize: '1rem', fontWeight: 600 }}>
-                Free 5-Minute Campaign Active (ON / OFF)
+                Free 5-Minute Session Offer Active (ON / OFF)
               </span>
             </label>
           </div>
 
-          <div className="arm-form-group">
-            <label>Offer Headline Title</label>
-            <input
-              type="text"
-              className="admin-input"
-              value={offer.title}
-              onChange={(e) => setOffer({ ...offer, title: e.target.value })}
-              required
-            />
-          </div>
-
-          <div className="arm-form-group">
-            <label>Urgency Message</label>
-            <input
-              type="text"
-              className="admin-input"
-              value={offer.urgencyMessage}
-              onChange={(e) => setOffer({ ...offer, urgencyMessage: e.target.value })}
-              placeholder="e.g. Limited introductory sessions available today"
-            />
-          </div>
-
           <div className="arm-form-row">
             <div className="arm-form-group flex-1">
-              <label>Daily Free Sessions Limit</label>
+              <label>Daily Free Sessions Capacity</label>
               <input
                 type="number"
                 className="admin-input"
@@ -163,13 +140,40 @@ export default function AdminOfferManager({ token }) {
             </div>
 
             <div className="arm-form-group flex-1">
-              <label>Remaining Sessions Today</label>
+              <label>Free Sessions Remaining Today</label>
               <input
                 type="text"
                 className="admin-input"
                 value={`${remaining} remaining`}
                 disabled
-                style={{ opacity: 0.75, color: '#6bcf7f', fontWeight: 'bold' }}
+                style={{
+                  opacity: 0.9,
+                  color: remaining <= 5 ? '#ff6b6b' : '#6bcf7f',
+                  fontWeight: 'bold',
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="arm-form-row">
+            <div className="arm-form-group flex-1">
+              <label>Experts Available Now Count</label>
+              <input
+                type="number"
+                className="admin-input"
+                min="0"
+                value={offer.expertsAvailableCount}
+                onChange={(e) => setOffer({ ...offer, expertsAvailableCount: e.target.value })}
+              />
+            </div>
+
+            <div className="arm-form-group flex-2">
+              <label>Offer Closing Date & Time (for Countdown)</label>
+              <input
+                type="datetime-local"
+                className="admin-input"
+                value={offer.endDate}
+                onChange={(e) => setOffer({ ...offer, endDate: e.target.value })}
               />
             </div>
           </div>
@@ -183,7 +187,7 @@ export default function AdminOfferManager({ token }) {
                   onChange={(e) => setOffer({ ...offer, showRemainingSlots: e.target.checked })}
                 />
                 <span className="arm-slider" />
-                <span style={{ marginLeft: '10px', fontSize: '0.85rem' }}>
+                <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
                   Show Remaining Sessions Badge
                 </span>
               </label>
@@ -197,24 +201,12 @@ export default function AdminOfferManager({ token }) {
                   onChange={(e) => setOffer({ ...offer, showCountdown: e.target.checked })}
                 />
                 <span className="arm-slider" />
-                <span style={{ marginLeft: '10px', fontSize: '0.85rem' }}>
-                  Show Offer Expiry Countdown
+                <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
+                  Show Live Offer Closing Countdown
                 </span>
               </label>
             </div>
           </div>
-
-          {offer.showCountdown && (
-            <div className="arm-form-group">
-              <label>Campaign End Date & Time (for Countdown Timer)</label>
-              <input
-                type="datetime-local"
-                className="admin-input"
-                value={offer.endDate}
-                onChange={(e) => setOffer({ ...offer, endDate: e.target.value })}
-              />
-            </div>
-          )}
 
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
             <button
@@ -223,7 +215,7 @@ export default function AdminOfferManager({ token }) {
               style={{ width: 'auto', padding: '12px 32px' }}
               disabled={saving}
             >
-              {saving ? 'Saving...' : 'Save Offer Settings'}
+              {saving ? 'Saving...' : 'SAVE OFFER SETTINGS'}
             </button>
           </div>
         </form>

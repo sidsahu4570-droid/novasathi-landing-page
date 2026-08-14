@@ -88,10 +88,15 @@ function RequestCard({ item, token, onStatusUpdate }) {
       {/* Top Row */}
       <div className="admin-request-top">
         <div>
+          {item.name && (
+            <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#fff', marginBottom: '4px' }}>
+              👤 {item.name}
+            </div>
+          )}
           <a
             href={`tel:+91${item.phone}`}
             className="admin-request-phone"
-            title="Click to call"
+            title="Click to call customer"
           >
             📞 +91 {item.phone}
           </a>
@@ -106,6 +111,38 @@ function RequestCard({ item, token, onStatusUpdate }) {
           </div>
         </div>
         <span className="admin-request-time">{formatTime(item.createdAt)}</span>
+      </div>
+
+      {/* Quick Call Button */}
+      <div style={{ margin: '10px 0 6px 0', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <a
+          href={`tel:+91${item.phone}`}
+          className="admin-action-btn status-btn-called"
+          style={{ textDecoration: 'none', padding: '6px 14px', fontSize: '0.82rem' }}
+        >
+          📞 CALL CUSTOMER
+        </a>
+        <button
+          className="admin-action-btn status-btn-connected"
+          onClick={() => handleStatusChange('connected')}
+          disabled={updatingStatus || item.status === 'connected'}
+        >
+          ✓ ACCEPT REQUEST
+        </button>
+        <button
+          className="admin-action-btn status-btn-called"
+          onClick={() => handleStatusChange('called')}
+          disabled={updatingStatus || item.status === 'called'}
+        >
+          📱 MARK CONTACTED
+        </button>
+        <button
+          className="admin-action-btn status-btn-cancelled"
+          onClick={() => handleStatusChange('cancelled')}
+          disabled={updatingStatus || item.status === 'cancelled'}
+        >
+          ✕ REJECT
+        </button>
       </div>
 
       {/* Status Action Buttons */}

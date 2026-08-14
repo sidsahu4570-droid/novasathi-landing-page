@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
- * Navbar — Transparent Glassmorphic Header with Circular Logo
- * Displays the official NovaSathi circular logo image, navigation links,
- * and the primary "Talk to an Expert — FREE" CTA button.
+ * Navbar — Transparent Glassmorphic Header with Urgent CTA
  */
 export default function Navbar({ onOpenModal }) {
+  const [remaining, setRemaining] = useState(12);
+
+  useEffect(() => {
+    let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    async function loadOffer() {
+      try {
+        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (isMounted && data.remainingSlots !== undefined) {
+              setRemaining(data.remainingSlots);
+            }
+          }
+        }
+      } catch (e) {}
+    }
+    loadOffer();
+    return () => { isMounted = false; };
+  }, []);
+
   return (
     <header className="navbar" role="banner">
       <div className="content-container navbar-inner">
@@ -15,13 +36,12 @@ export default function Navbar({ onOpenModal }) {
           <span>NovaSathi</span>
         </a>
 
-
-        {/* Primary CTA */}
+        {/* Urgent Primary CTA */}
         <button
-          onClick={() => onOpenModal('General')}
+          onClick={() => onOpenModal('Navbar')}
           className="btn-primary nav-cta"
         >
-          Talk to an Expert — FREE
+          {remaining > 0 ? `🔥 ${remaining} FREE SESSIONS LEFT` : '🔥 5 MIN FREE — TALK NOW →'}
         </button>
       </div>
     </header>
