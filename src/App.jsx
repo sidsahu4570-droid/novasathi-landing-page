@@ -4,6 +4,7 @@ import Navbar from './components/landing/Navbar';
 import Hero from './components/landing/Hero';
 import WhyPeopleStart from './components/landing/WhyPeopleStart';
 import ProblemSelector from './components/landing/ProblemSelector';
+import YouDontHaveToWait from './components/landing/YouDontHaveToWait';
 import HowItWorks from './components/landing/HowItWorks';
 import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
@@ -27,7 +28,7 @@ function checkIsAdminRoute() {
 
 /**
  * NovaSathi Root Application
- * Upgraded Conversion Psychology Sequence (Section 18).
+ * High-Converting Action-Oriented Urgency Consultation Funnel.
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -52,7 +53,7 @@ export default function App() {
   }
 
   const handleOpenModal = (topic) => {
-    if (topic && topic !== 'Hero' && topic !== 'General' && topic !== 'Final CTA' && topic !== 'Value Block' && topic !== 'Why Start Now' && topic !== 'Intro Offer Box' && topic !== 'Sticky Mobile Bar') {
+    if (topic && topic !== 'Hero' && topic !== 'General' && topic !== 'Final CTA' && topic !== 'Value Block' && topic !== 'Why Start Now' && topic !== 'Intro Offer Box' && topic !== 'Sticky Mobile Bar' && topic !== 'Act Now Strip' && topic !== 'Hero Urgency Box' && topic !== 'You Dont Have To Wait') {
       setModalTopic(topic);
     } else {
       setModalTopic('Love & Relationships');
@@ -71,6 +72,7 @@ export default function App() {
         <Hero onOpenModal={handleOpenModal} />
         <WhyPeopleStart />
         <ProblemSelector onOpenModal={handleOpenModal} />
+        <YouDontHaveToWait onOpenModal={handleOpenModal} />
         <HowItWorks />
         <ExpertProfiles onOpenModal={handleOpenModal} />
         <VideoTestimonials onOpenModal={handleOpenModal} />
@@ -83,7 +85,7 @@ export default function App() {
         <Footer />
       </div>
 
-      {/* Sticky Mobile CTA Bar */}
+      {/* Desktop & Mobile Sticky Bottom Action Bar */}
       <StickyMobileCTA onOpenModal={handleOpenModal} />
 
       {/* Interactive Free 5-Minute Session Modal */}

@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
- * StickyMobileCTA — Requirement 11
- * Mobile sticky bottom bar displaying remaining sessions, 10-minute decreasing countdown timer, and immediate CTA.
+ * StickyBottomBar — Desktop & Mobile Sticky Bottom Action Bar (Requirement 10)
  */
 export default function StickyMobileCTA({ onOpenModal }) {
-  const { formatted: timerFormatted } = useTenMinTimer();
+  const { formattedHms, formatted } = useTenMinTimer();
   const [visible, setVisible] = useState(false);
   const [remaining, setRemaining] = useState(12);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 350) {
         setVisible(true);
       } else {
         setVisible(false);
@@ -46,20 +45,42 @@ export default function StickyMobileCTA({ onOpenModal }) {
   if (!visible) return null;
 
   return (
-    <div className="sticky-mobile-bar">
-      <div className="sticky-mobile-inner">
-        <div className="sticky-mobile-info">
-          <span className="sticky-badge">🔥 5 MIN FREE • ⏳ {timerFormatted}</span>
-          <span className="sticky-sub">
-            {remaining > 0 ? `${remaining} sessions left today` : 'Free session ending soon'}
-          </span>
+    <div className="sticky-bottom-action-bar">
+      <div className="sticky-bottom-inner content-container">
+        {/* Desktop View */}
+        <div className="sticky-desktop-content">
+          <div className="sticky-desktop-info">
+            <span className="sticky-fire-badge">
+              🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT TODAY` : 'SESSIONS FULL TODAY'}
+            </span>
+            <span className="sticky-divider">•</span>
+            <span className="sticky-timer-text">
+              ⏳ <strong>{formattedHms}</strong>
+            </span>
+          </div>
+          <button
+            className="btn-primary btn-gold sticky-action-btn"
+            onClick={() => onOpenModal('Sticky Bottom Bar')}
+          >
+            START MY FREE 5 MINUTES →
+          </button>
         </div>
-        <button
-          className="btn-primary btn-gold sticky-mobile-btn"
-          onClick={() => onOpenModal('Sticky Mobile Bar')}
-        >
-          START NOW →
-        </button>
+
+        {/* Mobile View */}
+        <div className="sticky-mobile-content">
+          <div className="sticky-mobile-info">
+            <span className="sticky-badge">
+              🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
+            </span>
+            <span className="sticky-sub">⏳ Closes in {formatted}</span>
+          </div>
+          <button
+            className="btn-primary btn-gold sticky-mobile-btn"
+            onClick={() => onOpenModal('Sticky Mobile Bar')}
+          >
+            START NOW →
+          </button>
+        </div>
       </div>
     </div>
   );

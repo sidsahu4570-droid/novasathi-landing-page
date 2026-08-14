@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 /**
  * Custom Hook: useTenMinTimer
- * Maintains a continuous 10-minute decreasing countdown timer (MM:SS, e.g. "09:58", "09:57").
+ * Maintains a continuous 10-minute decreasing countdown timer.
  * Synchronized via sessionStorage so reloading or navigating keeps the exact decreasing time.
  */
 export default function useTenMinTimer() {
@@ -38,13 +38,24 @@ export default function useTenMinTimer() {
     return () => clearInterval(interval);
   }, []);
 
+  const hrs = 0;
   const mins = Math.floor(secondsLeft / 60);
   const secs = secondsLeft % 60;
-  const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+  const hrsStr = '00';
+  const minsStr = String(mins).padStart(2, '0');
+  const secsStr = String(secs).padStart(2, '0');
+
+  const formatted = `${minsStr}:${secsStr}`;
+  const formattedHms = `${hrsStr}:${minsStr}:${secsStr}`;
 
   return {
+    hoursStr: hrsStr,
+    minutesStr: minsStr,
+    secondsStr: secsStr,
     minutes: mins,
     seconds: secs,
     formatted,
+    formattedHms,
   };
 }

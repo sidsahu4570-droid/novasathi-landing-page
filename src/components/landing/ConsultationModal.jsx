@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import useTenMinTimer from '../../utils/useTenMinTimer';
 
 /**
- * ConsultationModal — Requirements 12, 13, 14
- * High-converting urgency modal with 10-minute decreasing timer, contact fields, and confirmation flow.
+ * ConsultationModal — Requirements 14 & 15
+ * High-converting urgency modal with remaining session count, countdown timer, contact fields, and instant confirmation checklist screen.
  */
 export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
-  const { formatted: timerFormatted } = useTenMinTimer();
+  const { formattedHms } = useTenMinTimer();
   const [selectedTopic, setSelectedTopic] = useState(defaultTopic || 'Love & Relationships');
   const [medium, setMedium] = useState('Chat');
   const [name, setName] = useState('');
@@ -128,42 +128,56 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           ✕
         </button>
 
-        {/* ── Top Modal Urgency Banner (10-Min Decreasing Timer) ── */}
+        {/* ── Top Modal Urgency Banner (Requirement 14) ── */}
         <div className="modal-urgency-banner">
           <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
           <div className="modal-urgency-sub">
-            <span>🔥 {remaining} free sessions remaining today</span> •{' '}
-            <span>⏳ Offer closes in {timerFormatted}</span>
+            <span>🔥 {remaining} sessions remaining today</span> •{' '}
+            <span>⏳ {formattedHms} remaining</span>
           </div>
         </div>
 
         {status === 'success' ? (
-          /* ── REQUIREMENT 13: CONFIRMATION SCREEN ── */
+          /* ── REQUIREMENT 15: AFTER SUBMISSION CONFIRMATION SCREEN ── */
           <div style={{ textAlign: 'left', padding: '16px 4px' }}>
-            <h3 className="modal-title" style={{ color: '#6bcf7f', marginBottom: '4px', fontSize: '1.4rem' }}>
-              Your free session request has been sent.
+            <h3 className="modal-title" style={{ color: '#6bcf7f', marginBottom: '6px', fontSize: '1.35rem' }}>
+              🔥 YOUR SESSION REQUEST IS IN
             </h3>
-            <p style={{ fontSize: '0.9rem', color: 'rgba(248,244,234,0.85)', marginBottom: '18px' }}>
-              Looking for an available expert for you...
-            </p>
 
             <div className="modal-confirm-checklist">
               <div className="confirm-check-item">
-                <span className="pulse-dot">🟢</span>
-                <span>Request received</span>
+                <span className="check-icon">✓</span>
+                <span>Your request has been received</span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Topic selected: <strong>{selectedTopic}</strong></span>
+                <span>We're matching you with an available expert</span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Preferred connection method selected: <strong>{medium}</strong></span>
+                <span>Your selected topic has been recorded: <strong>{selectedTopic}</strong></span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Free introductory session reserved for <strong>+91 {phone}</strong></span>
+                <span>Your preferred contact method has been recorded: <strong>{medium}</strong></span>
               </div>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'rgba(107, 207, 127, 0.12)',
+              border: '1px solid rgba(107, 207, 127, 0.35)',
+              padding: '12px 16px',
+              borderRadius: '10px',
+              marginTop: '16px',
+              fontSize: '0.9rem',
+              color: '#6bcf7f',
+              fontWeight: '600',
+            }}>
+              <span className="pulse-dot">🟢</span>
+              <span>MATCHING WITH AN AVAILABLE EXPERT...</span>
             </div>
 
             <button
@@ -175,19 +189,15 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
             </button>
           </div>
         ) : (
-          /* ── FORM STATE ── */
+          /* ── FORM STATE (REQUIREMENT 14) ── */
           <>
-            <p className="modal-sub" style={{ marginTop: '12px' }}>
-              What would you like help with?
-            </p>
-
             {status === 'error' && (
               <div style={{
                 background: 'rgba(255,80,80,0.12)',
                 border: '1px solid rgba(255,80,80,0.35)',
                 borderRadius: '8px',
                 padding: '10px 14px',
-                marginBottom: '16px',
+                margin: '12px 0',
                 fontSize: '0.85rem',
                 color: '#ff7070',
               }}>
@@ -195,10 +205,10 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
               </div>
             )}
 
-            <form onSubmit={handleSubmit}>
-              {/* 1. Topic Selector */}
-              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                1. Select Topic:
+            <form onSubmit={handleSubmit} style={{ marginTop: '12px' }}>
+              {/* Question 1: Topic */}
+              <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                What would you like help with?
               </label>
               <div className="modal-topic-select">
                 {topics.map((t) => (
@@ -214,9 +224,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* 2. Mode Selector */}
-              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                2. How would you like to connect?
+              {/* Question 2: Mode */}
+              <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
+                Choose how you'd like to connect
               </label>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
                 {['Chat', 'Call', 'Video'].map((m) => (
@@ -233,9 +243,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* 3. Customer Information */}
-              <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
-                3. Where can our expert reach you?
+              {/* Contact Information */}
+              <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
+                Where can our expert reach you?
               </label>
 
               {/* Optional Name */}
@@ -320,10 +330,10 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                   opacity: status === 'loading' ? 0.7 : 1,
                 }}
               >
-                {status === 'loading' ? 'Sending Request...' : 'REQUEST MY FREE SESSION →'}
+                {status === 'loading' ? 'Sending Request...' : 'CLAIM MY FREE SESSION →'}
               </button>
 
-              <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'rgba(248, 244, 234, 0.7)', marginTop: '12px' }}>
+              <p style={{ textAlign: 'center', fontSize: '0.82rem', color: 'rgba(248, 244, 234, 0.8)', marginTop: '12px' }}>
                 ₹0 to start • Private • No commitment
               </p>
             </form>

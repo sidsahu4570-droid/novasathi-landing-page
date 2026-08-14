@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * Navbar — Transparent Glassmorphic Header with Urgent CTA
+ * Navbar — Glassmorphic Header with Header Urgency Badge and "TALK TO AN EXPERT" Action Button
  */
 export default function Navbar({ onOpenModal }) {
   const [remaining, setRemaining] = useState(12);
@@ -36,13 +36,18 @@ export default function Navbar({ onOpenModal }) {
           <span>NovaSathi</span>
         </a>
 
-        {/* Urgent Primary CTA */}
-        <button
-          onClick={() => onOpenModal('Navbar')}
-          className="btn-primary nav-cta"
-        >
-          {remaining > 0 ? `🔥 ${remaining} FREE SESSIONS LEFT` : '🔥 5 MIN FREE — TALK NOW →'}
-        </button>
+        {/* Header Urgency & Action Button */}
+        <div className="nav-urgency-action-wrap">
+          <span className="nav-urgency-badge">
+            🔥 {remaining > 0 ? `${remaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
+          </span>
+          <button
+            onClick={() => onOpenModal('Navbar')}
+            className="btn-primary nav-cta"
+          >
+            TALK TO AN EXPERT →
+          </button>
+        </div>
       </div>
     </header>
   );

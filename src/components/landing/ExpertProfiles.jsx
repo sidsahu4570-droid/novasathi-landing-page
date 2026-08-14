@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * ExpertProfiles — Section 4 ("Find someone who understands.")
- * Expert trust cards displaying verified profile credentials, specialties, availability, and direct CTA.
+ * ExpertProfiles — Section 4 ("Find someone who understands.") Requirement 13
+ * Expert trust cards displaying verified profile credentials, actionable status, and direct CTA.
  */
 const experts = [
   {
@@ -12,7 +12,8 @@ const experts = [
     rating: 4.9,
     experience: '12+ years exp',
     specialties: 'Love • Career • Marriage',
-    status: 'Available',
+    status: 'AVAILABLE NOW',
+    subStatus: 'Ready to talk',
     avatar: '🧙‍♂️',
     topic: 'Future & Astrology',
   },
@@ -23,7 +24,8 @@ const experts = [
     rating: 4.95,
     experience: '8+ years exp',
     specialties: 'Emotions • Breakups • Compatibility',
-    status: 'Available',
+    status: 'AVAILABLE NOW',
+    subStatus: 'Ready to talk',
     avatar: '🔮',
     topic: 'Love & Relationships',
   },
@@ -34,7 +36,8 @@ const experts = [
     rating: 4.88,
     experience: '10+ years exp',
     specialties: 'Job • Business • Life Decisions',
-    status: 'Available',
+    status: 'AVAILABLE NOW',
+    subStatus: 'Ready to talk',
     avatar: '⭐',
     topic: 'Career & Money',
   },
@@ -56,7 +59,9 @@ export default function ExpertProfiles({ onOpenModal }) {
                 <span className="expert-avatar-icon">{exp.avatar}</span>
               </div>
               <div className="expert-badge-wrap">
-                <span className="expert-status-badge">🟢 {exp.status}</span>
+                <span className="expert-status-badge">
+                  🟢 {exp.status} • "{exp.subStatus}"
+                </span>
               </div>
             </div>
 
