@@ -1081,20 +1081,40 @@ body, html {
   }
 
   .hero-urgency-card-container {
-    margin: 12px 0 24px 0 !important;
+    margin: 8px 0 16px 0 !important;
+  }
+
+  .hero-urgency-card {
+    padding: 20px 16px 18px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .hero-giant-number-box {
+    margin: 2px 0 10px 0 !important;
+  }
+
+  .hero-progress-wrap {
+    padding: 10px 14px !important;
+    margin-bottom: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-countdown-container {
+    margin-top: 12px !important;
+    margin-bottom: 14px !important;
   }
 
   .hero-main-glass-panel {
-    margin: 8px 10px 20px 10px !important;
-    padding: 24px 16px 20px 16px !important;
-    border-radius: 22px !important;
+    margin: 6px 10px 16px 10px !important;
+    padding: 20px 16px 16px 16px !important;
+    border-radius: 20px !important;
     max-width: calc(100vw - 20px) !important;
     box-sizing: border-box !important;
   }
 
   .hero-status-badges-wrap {
     gap: 8px !important;
-    margin: 14px auto 16px auto !important;
+    margin: 12px auto 14px auto !important;
   }
 
   .hero-status-badge {
