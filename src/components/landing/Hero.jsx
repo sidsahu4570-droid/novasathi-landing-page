@@ -66,15 +66,15 @@ export default function Hero({ onOpenModal }) {
             className="hero-green-availability-pill"
           >
             {hasAvailableExperts ? (
-              <>
-                <span className="pulse-dot">🟢</span>
-                <span>ASTROLOGERS AVAILABLE NOW · {expertsAvailableCount} VERIFIED EXPERTS ONLINE</span>
-              </>
+              <span>
+                <span className="pulse-dot" style={{ display: 'inline-block', marginRight: '6px' }}>🟢</span>
+                ASTROLOGERS AVAILABLE NOW · {expertsAvailableCount} VERIFIED EXPERTS ONLINE
+              </span>
             ) : (
-              <>
-                <span>⚪</span>
-                <span>NO EXPERTS AVAILABLE RIGHT NOW · CHECK BACK SOON</span>
-              </>
+              <span>
+                <span style={{ display: 'inline-block', marginRight: '6px' }}>⚪</span>
+                NO EXPERTS AVAILABLE RIGHT NOW · CHECK BACK SOON
+              </span>
             )}
           </a>
         </div>

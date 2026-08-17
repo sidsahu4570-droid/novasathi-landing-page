@@ -1042,14 +1042,11 @@ body, html {
 
   .hero-green-availability-pill {
     font-size: 0.84rem !important;
-    padding: 8px 14px !important;
+    padding: 8px 16px !important;
     border-radius: 99px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: inline-block !important;
     text-align: center !important;
-    flex-wrap: wrap !important;
-    line-height: 1.35 !important;
+    line-height: 1.4 !important;
     white-space: normal !important;
     max-width: calc(100vw - 24px) !important;
     box-sizing: border-box !important;
@@ -3110,10 +3107,7 @@ body, html {
 }
 
 .hero-green-availability-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: inline-block;
   background: rgba(107, 207, 127, 0.14);
   border: 1px solid rgba(107, 207, 127, 0.45);
   color: #6bcf7f;
@@ -3127,6 +3121,7 @@ body, html {
   text-align: center;
   box-sizing: border-box;
   max-width: 100%;
+  line-height: 1.4;
 }
 
 .hero-green-availability-pill:hover {
