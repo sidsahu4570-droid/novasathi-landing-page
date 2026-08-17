@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CosmicBackground from './components/cosmic/CosmicBackground';
 import Navbar from './components/landing/Navbar';
 import Hero from './components/landing/Hero';
-import ProblemSelector from './components/landing/ProblemSelector';
 import HowItWorks from './components/landing/HowItWorks';
 import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
@@ -66,7 +65,6 @@ export default function App() {
         <div className="landing-overlay">
           <Navbar onOpenModal={handleOpenModal} />
           <Hero onOpenModal={handleOpenModal} />
-          <ProblemSelector onOpenModal={handleOpenModal} />
           <HowItWorks />
           <ExpertProfiles onOpenModal={handleOpenModal} />
           <VideoTestimonials onOpenModal={handleOpenModal} />
