@@ -42,11 +42,11 @@ export default function HowItWorks() {
       <div className="steps-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
         {steps.map((step) => (
           <div key={step.num} className="glass-card step-card">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-              <div className="step-number" style={{ color: 'var(--color-warm-gold)', fontWeight: 800, fontSize: '1.4rem' }}>{step.num}</div>
-              <span style={{ fontSize: '1.5rem' }}>{step.icon}</span>
+            <div className="step-card-header">
+              <div className="step-number">{step.num}</div>
+              <span className="step-icon">{step.icon}</span>
             </div>
-            <h3 className="step-title" style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '10px' }}>{step.title}</h3>
+            <h3 className="step-title">{step.title}</h3>
             <p className="step-desc">{step.desc}</p>
           </div>
         ))}
