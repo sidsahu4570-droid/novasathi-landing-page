@@ -194,7 +194,7 @@ export default function AdminOfferManager({ token }) {
             </div>
 
             <div className="arm-form-group flex-2">
-              <label>Offer Closing Time (Authoritative Countdown End Time)</label>
+              <label>Introductory Window Duration (Target End Time)</label>
               <input
                 type="datetime-local"
                 className="admin-input"
@@ -215,7 +215,7 @@ export default function AdminOfferManager({ token }) {
                 />
                 <span className="arm-slider" />
                 <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
-                  Show Remaining Sessions Counter
+                  Show Remaining Sessions Counter (ON / OFF)
                 </span>
               </label>
             </div>
@@ -228,8 +228,8 @@ export default function AdminOfferManager({ token }) {
                   onChange={(e) => setOffer({ ...offer, showCountdown: e.target.checked })}
                 />
                 <span className="arm-slider" />
-                <span style={{ marginLeft: '10px', fontSize: '0.88rem' }}>
-                  Show Closing Countdown
+                <span style={{ marginLeft: '10px', fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-warm-gold)' }}>
+                  Show Introductory Countdown (ON / OFF)
                 </span>
               </label>
             </div>

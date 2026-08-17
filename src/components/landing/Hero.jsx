@@ -14,6 +14,35 @@ export default function Hero({ onOpenModal }) {
     showIntroductorySessionCount,
   } = useDemoAvailability();
 
+  const [offer, setOffer] = useState({
+    active: true,
+    showCountdown: true,
+    endDate: null,
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+
+    async function loadOffer() {
+      try {
+        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+        if (res && res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (isMounted) setOffer(data);
+            return;
+          }
+        }
+      } catch (e) {}
+    }
+    loadOffer();
+    return () => { isMounted = false; };
+  }, []);
+
+  const { minutesStr, secondsStr, isExpired } = useOfferTimer(offer.endDate);
+
   const scrollToExperts = (e) => {
     e.preventDefault();
     const el = document.getElementById('experts');
@@ -21,12 +50,16 @@ export default function Hero({ onOpenModal }) {
   };
 
   const hasAvailableExperts = expertsAvailableCount > 0;
+  const demoCapacity = 50;
+  const demoPercent = Math.round((introductorySessionsRemaining / demoCapacity) * 100);
+  const isFull = introductorySessionsRemaining <= 0;
+  const isDisabled = isFull || isExpired || !offer.active;
 
   return (
     <section className="hero-section content-container" aria-label="Hero Introduction">
       {/* ── 1. GREEN IMMEDIATE AVAILABILITY PILL (Topmost signal) ── */}
       {showAvailabilityUrgency && (
-        <div className="hero-top-banner-wrap" style={{ marginBottom: '8px' }}>
+        <div className="hero-top-banner-wrap" style={{ marginBottom: '12px' }}>
           <a
             href="#experts"
             onClick={scrollToExperts}
@@ -66,32 +99,79 @@ export default function Hero({ onOpenModal }) {
         </div>
       )}
 
-      {/* ── 2. REAL INTRODUCTORY SESSION AVAILABILITY BADGE ── */}
+      {/* ── 2. INTRODUCTORY ASTROLOGY CONSULTATION URGENCY CARD WITH REAL TIMER ── */}
       {showIntroductorySessionCount && (
-        <div className="hero-top-banner-wrap" style={{ marginBottom: '12px' }}>
-          <span
-            className="hero-coral-sessions-pill"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'rgba(255, 107, 107, 0.14)',
-              border: '1px solid rgba(255, 107, 107, 0.45)',
-              color: '#ff7b7b',
-              padding: '6px 16px',
-              borderRadius: '99px',
-              fontSize: '0.84rem',
-              fontWeight: 800,
-              letterSpacing: '0.04em',
-              boxShadow: '0 0 12px rgba(255, 107, 107, 0.2)',
-              whiteSpace: 'nowrap',
-              maxWidth: 'calc(100vw - 32px)',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
-          >
-            🔥 {introductorySessionsRemaining} INTRODUCTORY SESSIONS REMAINING TODAY
-          </span>
+        <div className="hero-urgency-card-container" style={{ margin: '12px 0 24px 0' }}>
+          <div className="hero-urgency-card glass-card glass-card-gold">
+            <div className="hero-urgency-card-header">
+              <span>🔥 INTRODUCTORY ASTROLOGY CONSULTATION</span>
+            </div>
+
+            {/* DYNAMIC SESSIONS REMAINING NUMBER */}
+            <div className="hero-giant-number-box">
+              <span className="hero-giant-number">{introductorySessionsRemaining}</span>
+              <div className="hero-giant-label">
+                {isFull ? (
+                  <span className="label-bold-800">CONSULTATIONS REMAINING TODAY</span>
+                ) : (
+                  <>
+                    <span className="label-bold-800">INTRODUCTORY CONSULTATIONS</span>{' '}
+                    <span className="label-bold-700">LEFT TODAY</span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* AVAILABILITY / PROGRESS BAR */}
+            <div className="hero-progress-wrap">
+              <div className="hero-progress-header">
+                <span>TODAY'S CONSULTATION AVAILABILITY</span>
+                <span className="hero-progress-pct">{demoPercent}% remaining</span>
+              </div>
+              <div className="hero-progress-bar-track">
+                <div
+                  className="hero-progress-bar-fill"
+                  style={{ width: `${demoPercent}%` }}
+                ></div>
+              </div>
+              <div className="hero-progress-sub">
+                {introductorySessionsRemaining} of {demoCapacity} sessions remaining today
+              </div>
+            </div>
+
+            {/* REAL-TIME 2-BOX COUNTDOWN TIMER */}
+            {(offer.showCountdown ?? true) && (
+              <div className="hero-countdown-container" style={{ marginTop: '16px', marginBottom: '20px' }}>
+                <div className="hero-countdown-title">
+                  {isExpired ? "INTRODUCTORY WINDOW CLOSED" : "⌛ TODAY'S INTRODUCTORY WINDOW CLOSES IN"}
+                </div>
+                <div className="hero-timer-boxes-row">
+                  <div className="timer-box">
+                    <span className="timer-box-num">{minutesStr}</span>
+                    <span className="timer-box-label">MINUTES</span>
+                  </div>
+                  <span className="timer-sep">:</span>
+                  <div className="timer-box">
+                    <span className="timer-box-num">{secondsStr}</span>
+                    <span className="timer-box-label">SECONDS</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* CARD CTA BUTTON */}
+            <button
+              onClick={() => onOpenModal('Hero Urgency Box')}
+              className="btn-primary btn-gold hero-urgency-card-btn"
+              disabled={isDisabled}
+            >
+              {isExpired
+                ? "INTRODUCTORY WINDOW CLOSED"
+                : isFull
+                ? "TODAY'S CONSULTATIONS ARE FULL"
+                : 'GET MY ASTROLOGY CONSULTATION →'}
+            </button>
+          </div>
         </div>
       )}
 
@@ -138,14 +218,16 @@ export default function Hero({ onOpenModal }) {
         <button
           onClick={() => onOpenModal('Hero Astrology Consultation')}
           className="btn-primary btn-gold"
+          disabled={isDisabled}
           style={{
             padding: '16px 32px',
             fontSize: 'clamp(0.98rem, 4.2vw, 1.15rem)',
             fontWeight: 900,
             whiteSpace: 'nowrap',
+            opacity: isDisabled ? 0.7 : 1,
           }}
         >
-          🔥 START MY CONSULTATION NOW →
+          {isExpired ? 'INTRODUCTORY WINDOW CLOSED' : '🔥 START MY CONSULTATION NOW →'}
         </button>
 
         {/* CTA Microcopy line */}
