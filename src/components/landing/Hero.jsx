@@ -165,7 +165,7 @@ export default function Hero({ onOpenModal }) {
 
         {/* Headline */}
         <h1 className="hero-headline">
-          HAVE QUESTIONS ABOUT YOUR CAREER, LOVE, BUSINESS OR FUTURE?
+          Worried About Your Career, Love Life, Business or Future?
         </h1>
 
         {/* Immediate sub-headline urgency line */}
@@ -181,11 +181,11 @@ export default function Hero({ onOpenModal }) {
             lineHeight: 1.4,
           }}
         >
-          Don't keep putting the question off. Speak with an astrologer while introductory sessions are available today.
+          Don't keep wondering what comes next. Get personalized guidance while today's introductory consultations are still available.
         </p>
 
         <p className="hero-subheading">
-          Get personalized astrology guidance based on your birth date, exact birth time and birthplace — and explore the questions that matter most to you.
+          Your birth date, exact birth time and birthplace can help an astrologer understand your chart and provide personalized guidance for the questions that matter most to you.
         </p>
 
         {/* Primary & Secondary Hero CTAs */}
@@ -224,7 +224,7 @@ export default function Hero({ onOpenModal }) {
               letterSpacing: '0.02em',
             }}
           >
-            Introductory sessions available today · Subject to availability
+            Introductory consultations available today • Subject to availability
           </span>
 
           <a

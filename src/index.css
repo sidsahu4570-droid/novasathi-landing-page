@@ -273,16 +273,16 @@ body, html {
 
 .hero-headline {
   font-family: 'Roboto Condensed', sans-serif !important;
-  font-size: clamp(2.8rem, 6vw, 3.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 3.5rem);
   font-weight: 900 !important;
-  line-height: 1.1;
-  letter-spacing: -0.02em !important;
+  line-height: 1.15;
+  letter-spacing: -0.01em !important;
   background: linear-gradient(180deg, #FFFFFF 0%, #E2D9F8 60%, #C8B8F4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 16px;
   max-width: 840px;
-  text-transform: uppercase;
+  text-transform: none !important;
 }
 
 .btn-gold:hover {
@@ -1165,11 +1165,12 @@ body, html {
   }
 
   .hero-headline {
-    font-size: clamp(2.1rem, 7vw, 2.7rem) !important;
-    line-height: 1.15 !important;
-    margin-bottom: 14px !important;
-    padding: 0 8px !important;
+    font-size: clamp(1.85rem, 6.8vw, 2.5rem) !important;
+    line-height: 1.18 !important;
+    margin-bottom: 12px !important;
+    padding: 0 6px !important;
     word-break: normal !important;
+    text-transform: none !important;
     background: linear-gradient(180deg, #FFFFFF 0%, #E2D9F8 60%, #C8B8F4 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
