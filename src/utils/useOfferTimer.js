@@ -6,41 +6,39 @@ import { useState, useEffect } from 'react';
  * Ensures hours is ALWAYS "00" and duration is 10 minutes maximum.
  * Synchronized per visitor session via sessionStorage target.
  */
-export default function useOfferTimer(endDate) {
-  const getInitialTarget = () => {
-    let target = sessionStorage.getItem('ns_offer_10m_target');
-    if (!target) {
-      target = Date.now() + 10 * 60 * 1000; // 10 minutes from now
-      sessionStorage.setItem('ns_offer_10m_target', target);
+export default function useOfferTimer(endDateParam) {
+  const getTargetTime = () => {
+    if (endDateParam) {
+      const parsed = new Date(endDateParam).getTime();
+      if (!isNaN(parsed)) return parsed;
     }
-    const diff = Math.max(0, Math.floor((Number(target) - Date.now()) / 1000));
-    return diff > 0 ? diff : 600;
+
+    let saved = localStorage.getItem('novaSathiIntroStartTime');
+    if (!saved) {
+      saved = String(Date.now());
+      localStorage.setItem('novaSathiIntroStartTime', saved);
+    }
+    // 10 minutes (600 seconds) target from initial visit
+    return Number(saved) + 10 * 60 * 1000;
   };
 
-  const [secondsLeft, setSecondsLeft] = useState(getInitialTarget);
+  const calculateDiff = () => {
+    const target = getTargetTime();
+    const diffSec = Math.max(0, Math.floor((target - Date.now()) / 1000));
+    return diffSec;
+  };
+
+  const [secondsLeft, setSecondsLeft] = useState(calculateDiff);
 
   useEffect(() => {
+    setSecondsLeft(calculateDiff());
     const interval = setInterval(() => {
-      let target = sessionStorage.getItem('ns_offer_10m_target');
-      if (!target) {
-        target = Date.now() + 10 * 60 * 1000;
-        sessionStorage.setItem('ns_offer_10m_target', target);
-      }
-
-      let diff = Math.floor((Number(target) - Date.now()) / 1000);
-
-      if (diff <= 0) {
-        // Reset 10 minutes when expired
-        const newTarget = Date.now() + 10 * 60 * 1000;
-        sessionStorage.setItem('ns_offer_10m_target', newTarget);
-        diff = 600;
-      }
-
+      const diff = calculateDiff();
       setSecondsLeft(diff);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [endDateParam]);
 
   const hrs = 0;
   const mins = Math.floor(secondsLeft / 60);
