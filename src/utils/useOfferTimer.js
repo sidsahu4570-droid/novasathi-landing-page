@@ -2,24 +2,28 @@ import { useState, useEffect } from 'react';
 
 /**
  * Custom Hook: useOfferTimer
- * Maintains a strict 10-minute decreasing countdown timer (00 Hours : MM Minutes : SS Seconds, e.g. "00 : 09 : 58").
- * Ensures hours is ALWAYS "00" and duration is 10 minutes maximum.
- * Synchronized per visitor session via sessionStorage target.
+ * Maintains an active 10-minute decreasing countdown timer (MM Minutes : SS Seconds, e.g. "09 : 58").
+ * Ensures duration starts at 10 minutes (600s) and decrements live every second.
+ * Persisted per visitor session in sessionStorage.
  */
 export default function useOfferTimer(endDateParam) {
   const getTargetTime = () => {
+    // 1. If authoritative future endDate is provided by admin
     if (endDateParam) {
       const parsed = new Date(endDateParam).getTime();
-      if (!isNaN(parsed)) return parsed;
+      if (!isNaN(parsed) && parsed > Date.now()) {
+        return parsed;
+      }
     }
 
-    let saved = localStorage.getItem('novaSathiIntroStartTime');
-    if (!saved) {
-      saved = String(Date.now());
-      localStorage.setItem('novaSathiIntroStartTime', saved);
+    // 2. Per-session 10-minute countdown target
+    let target = sessionStorage.getItem('ns_intro_10m_target');
+    if (!target || Number(target) <= Date.now()) {
+      target = String(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+      sessionStorage.setItem('ns_intro_10m_target', target);
     }
-    // 10 minutes (600 seconds) target from initial visit
-    return Number(saved) + 10 * 60 * 1000;
+
+    return Number(target);
   };
 
   const calculateDiff = () => {
