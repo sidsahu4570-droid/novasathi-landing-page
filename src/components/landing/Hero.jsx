@@ -246,30 +246,20 @@ export default function Hero({ onOpenModal }) {
           </a>
         </div>
 
-        {/* Compact Real-time Status Row */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '14px',
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            borderRadius: '99px',
-            padding: '8px 20px',
-            margin: '0 auto 20px auto',
-            maxWidth: 'fit-content',
-            fontSize: '0.86rem',
-            color: '#E2D9F8',
-            boxSizing: 'border-box',
-          }}
-        >
-          <span>🟢 <strong>{expertsAvailableCount}</strong> Experts Online</span>
-          <span>•</span>
-          <span>🔥 <strong>{introductorySessionsRemaining}</strong> Introductory Sessions</span>
-          <span>•</span>
-          <span>🔒 Private Consultation</span>
+        {/* Compact Real-time Status Badges */}
+        <div className="hero-status-badges-wrap">
+          <div className="hero-status-badge">
+            <span className="pulse-dot">🟢</span>
+            <span><strong>{expertsAvailableCount}</strong> Experts Online</span>
+          </div>
+          <div className="hero-status-badge">
+            <span>🔥</span>
+            <span><strong>{introductorySessionsRemaining}</strong> Introductory Sessions</span>
+          </div>
+          <div className="hero-status-badge">
+            <span>🔒</span>
+            <span>Private Consultation</span>
+          </div>
         </div>
 
         {/* Trust Line */}

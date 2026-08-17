@@ -1074,6 +1074,16 @@ body, html {
     box-sizing: border-box !important;
   }
 
+  .hero-status-badges-wrap {
+    gap: 8px !important;
+    margin: 14px auto 16px auto !important;
+  }
+
+  .hero-status-badge {
+    font-size: 0.76rem !important;
+    padding: 5px 12px !important;
+  }
+
   .hero-giant-number {
     font-size: clamp(3.8rem, 10vw, 5.2rem) !important;
     line-height: 0.95 !important;
@@ -3179,6 +3189,37 @@ body, html {
   box-sizing: border-box;
   position: relative;
   z-index: 2;
+}
+
+.hero-status-badges-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px auto 18px auto;
+  max-width: 100%;
+}
+
+.hero-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  color: #E2D9F8;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.hero-status-badge strong {
+  color: #fff;
+  font-weight: 800;
 }
 
 .hero-headline-sub {
