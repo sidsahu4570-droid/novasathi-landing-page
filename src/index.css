@@ -1063,12 +1063,16 @@ body, html {
   .btn-gold,
   .final-cta-btn,
   .btn-primary {
-    white-space: nowrap !important;
-    font-size: clamp(0.85rem, 4.1vw, 1.1rem) !important;
-    padding: 14px 10px !important;
+    font-size: clamp(0.82rem, 3.8vw, 1.05rem) !important;
+    padding: 14px 14px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.25 !important;
   }
 
   .hero-offer-badge {
@@ -3309,15 +3313,20 @@ body, html {
 
 .hero-urgency-card-btn {
   width: 100% !important;
-  font-size: 1.25rem !important;
-  padding: 18px 24px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.03em !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: clamp(0.92rem, 3.8vw, 1.15rem) !important;
+  padding: 14px 18px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.25 !important;
   box-shadow: 0 10px 32px rgba(212, 168, 79, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
-  white-space: nowrap !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  text-align: center !important;
+  word-break: normal !important;
+  border-radius: 99px !important;
 }
 
 .hero-card-micro-info {
