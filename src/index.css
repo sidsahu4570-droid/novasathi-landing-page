@@ -1024,13 +1024,16 @@ body, html {
   }
 
   .hero-top-urgency-banner {
-    font-size: 0.92rem !important;
+    font-size: 0.82rem !important;
     font-weight: 800 !important;
-    color: #FF7B7B !important;
-    padding: 8px 18px !important;
+    color: #ff6b6b !important;
+    padding: 6px 14px !important;
     letter-spacing: 0.04em !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
     white-space: nowrap !important;
+    max-width: calc(100vw - 32px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box !important;
   }
 
   .hero-available-signal-wrap {
@@ -1039,12 +1042,12 @@ body, html {
 
   .hero-live-badge {
     white-space: nowrap !important;
-    font-size: clamp(0.78rem, 3.8vw, 0.92rem) !important;
-    padding: 7px 14px !important;
-    max-width: 100% !important;
+    font-size: clamp(0.76rem, 3.6vw, 0.88rem) !important;
+    padding: 6px 14px !important;
+    max-width: calc(100vw - 32px) !important;
     box-sizing: border-box !important;
-    color: #72E887 !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+    color: #6bcf7f !important;
+    background: rgba(107, 207, 127, 0.14) !important;
   }
 
   .hero-urgency-card-container {
@@ -1077,42 +1080,50 @@ body, html {
   }
 
   .hero-headline {
-    font-size: clamp(2.35rem, 8vw, 3.0rem) !important;
+    font-size: clamp(2.1rem, 7vw, 2.7rem) !important;
     line-height: 1.15 !important;
     margin-bottom: 14px !important;
     padding: 0 8px !important;
     word-break: normal !important;
-    color: #FFFFFF !important;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #E2D9F8 60%, #C8B8F4 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8)) !important;
     letter-spacing: -0.01em !important;
     box-sizing: border-box !important;
   }
 
   .hero-headline-sub {
-    font-size: 1.44rem !important;
+    font-size: 1.32rem !important;
     line-height: 1.35 !important;
     font-weight: 700 !important;
-    color: #FFE699 !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+    color: var(--color-warm-gold) !important;
+    -webkit-text-fill-color: var(--color-warm-gold) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
     padding: 0 6px !important;
+    display: block !important;
+    margin-top: 6px !important;
   }
 
   .hero-subheading {
-    font-size: 1.36rem !important;
+    font-size: 1.25rem !important;
     line-height: 1.45 !important;
     margin-bottom: 20px !important;
     padding: 0 10px !important;
-    font-weight: 600 !important;
-    color: #FFFFFF !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+    font-weight: 400 !important;
+    color: rgba(248, 244, 234, 0.95) !important;
+    -webkit-text-fill-color: rgba(248, 244, 234, 0.95) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
     box-sizing: border-box !important;
   }
 
   .hero-subheading span {
-    font-size: 1.12rem !important;
+    font-size: 1.05rem !important;
     line-height: 1.5 !important;
     margin-top: 6px !important;
-    color: rgba(235, 225, 255, 0.98) !important;
+    color: rgba(235, 225, 255, 0.95) !important;
+    -webkit-text-fill-color: rgba(235, 225, 255, 0.95) !important;
     font-weight: 400 !important;
   }
 
