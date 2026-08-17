@@ -1214,7 +1214,7 @@ body, html {
   }
 
   .section-subtitle {
-    font-size: 1.22rem !important;
+    font-size: 1.10rem !important;
     line-height: 1.45 !important;
     margin-bottom: 18px !important;
     font-weight: 500 !important;
@@ -1227,15 +1227,22 @@ body, html {
   .why-now-point-desc,
   .wait-sub,
   .testimonial-quote,
-  .faq-answer,
   .value-card-desc,
   .what-get-desc,
   .risk-card-desc {
-    font-size: 1.11rem !important;
+    font-size: 1.05rem !important;
     line-height: 1.45 !important;
     font-weight: 400 !important;
     color: rgba(255, 255, 255, 0.95) !important;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
+  }
+
+  .faq-answer {
+    font-size: 0.98rem !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    color: rgba(248, 244, 234, 0.9) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
   }
 
   /* Mobile Card Outer Margins & 2-Column Grid Fix */
@@ -1643,14 +1650,14 @@ body, html {
   }
 
   .faq-question {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
     gap: 8px !important;
     font-weight: 700 !important;
   }
 
   .faq-answer {
-    font-size: 1.25rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
   }
 
   .footer {
