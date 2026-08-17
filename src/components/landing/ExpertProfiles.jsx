@@ -8,47 +8,50 @@ const experts = [
   {
     id: 1,
     name: 'Pandit Sharma',
-    category: 'Vedic Astrology',
+    category: 'Vedic Astrology & Birth Chart',
     rating: 4.9,
     experience: '12+ years exp',
-    specialties: 'Love • Career • Marriage',
+    languages: 'English, Hindi',
+    specialties: 'Love • Career • Marriage Chart',
     status: 'AVAILABLE NOW',
-    subStatus: 'Ready to talk',
+    subStatus: 'Online',
     avatar: '🧙‍♂️',
     topic: 'Future & Astrology',
   },
   {
     id: 2,
-    name: 'Tanvi Varma',
-    category: 'Tarot & Relationships',
+    name: 'Acharya Tanvi Varma',
+    category: 'Kundu & Relationship Compatibility',
     rating: 4.95,
     experience: '8+ years exp',
-    specialties: 'Emotions • Breakups • Compatibility',
+    languages: 'English, Hindi',
+    specialties: 'Compatibility • Marriage • Periods',
     status: 'AVAILABLE NOW',
-    subStatus: 'Ready to talk',
+    subStatus: 'Online',
     avatar: '🔮',
     topic: 'Love & Relationships',
   },
   {
     id: 3,
-    name: 'Astro Rajesh',
-    category: 'Numerology & Career',
+    name: 'Astro Rajesh K.',
+    category: 'KP Astrology & Business Transit',
     rating: 4.88,
     experience: '10+ years exp',
-    specialties: 'Job • Business • Life Decisions',
+    languages: 'English, Hindi, Gujarati',
+    specialties: 'Job • Business Growth • Decisions',
     status: 'AVAILABLE NOW',
-    subStatus: 'Ready to talk',
+    subStatus: 'Online',
     avatar: '⭐',
-    topic: 'Career & Money',
+    topic: 'Career & Business',
   },
 ];
 
 export default function ExpertProfiles({ onOpenModal }) {
   return (
     <section className="section-experts content-container" id="experts">
-      <h2 className="section-title">Find someone who understands.</h2>
+      <h2 className="section-title">SPEAK DIRECTLY WITH AN ASTROLOGER</h2>
       <p className="section-subtitle">
-        Choose the kind of guidance that feels right for you.
+        Choose an astrologer and discuss the questions that matter most to you.
       </p>
 
       <div className="experts-grid">
@@ -73,6 +76,7 @@ export default function ExpertProfiles({ onOpenModal }) {
                 <span className="expert-score">{exp.rating}</span>
                 <span className="expert-exp">• {exp.experience}</span>
               </div>
+              <p style={{ fontSize: '0.82rem', color: '#E2D9F8', opacity: 0.8, margin: '4px 0' }}>🗣️ {exp.languages}</p>
               <p className="expert-specialties">{exp.specialties}</p>
             </div>
 
@@ -80,7 +84,7 @@ export default function ExpertProfiles({ onOpenModal }) {
               className="btn-primary btn-gold expert-cta"
               onClick={() => onOpenModal(exp.topic)}
             >
-              TALK TO THIS EXPERT →
+              TALK TO THIS ASTROLOGER →
             </button>
           </div>
         ))}

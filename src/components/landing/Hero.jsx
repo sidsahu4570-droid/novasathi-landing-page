@@ -64,59 +64,79 @@ export default function Hero({ onOpenModal }) {
 
   return (
     <section className="hero-section content-container" aria-label="Hero Introduction">
-      {/* ── 1. Top Urgency Banner ── */}
+      {/* ── 1. Top Urgency Badge / Category Badge ── */}
       <div className="hero-top-banner-wrap">
-        <span className="hero-top-urgency-banner">{bannerText}</span>
+        <span className="hero-top-urgency-banner">✨ PERSONAL ASTROLOGY CONSULTATION</span>
       </div>
 
-      {/* ── 5. Hero Headline & Copy ── */}
+      {/* ── 2. Hero Headline & Copy ── */}
       <h1 className="hero-headline">
-        STILL THINKING ABOUT THE SAME QUESTION? <br />
-        <span className="hero-headline-sub">
-          Talk to someone who understands — before today's free sessions fill up.
-        </span>
+        HAVE QUESTIONS ABOUT YOUR CAREER, LOVE, BUSINESS OR FUTURE?
       </h1>
 
       <p className="hero-subheading">
-        Get private guidance from a verified expert about love, career, relationships, astrology or life's difficult decisions.
+        Get personalized astrology guidance based on your birth date, exact birth time and birthplace — and explore the questions that matter most to you.
       </p>
 
-      {/* ── 7. Available Now Signal ── */}
+      {/* ── 3. Primary & Secondary Hero CTAs ── */}
+      <div className="hero-cta-group" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', margin: '20px 0 24px 0' }}>
+        <button
+          onClick={() => onOpenModal('Hero Astrology Consultation')}
+          className="btn-primary btn-gold"
+          style={{ padding: '16px 28px', fontSize: '1.1rem', fontWeight: 800 }}
+        >
+          GET MY ASTROLOGY CONSULTATION →
+        </button>
+        <a
+          href="#how-it-works"
+          className="btn-secondary"
+          style={{ padding: '16px 24px', fontSize: '1.05rem', textDecoration: 'none', color: '#E2D9F8', border: '1px solid rgba(226, 217, 248, 0.4)', borderRadius: '99px', display: 'inline-flex', alignItems: 'center' }}
+        >
+          SEE HOW IT WORKS →
+        </a>
+      </div>
+
+      {/* ── 4. Trust Line ── */}
+      <div className="hero-trust-line" style={{ textAlign: 'center', fontSize: '0.92rem', color: '#E2D9F8', opacity: 0.9, marginBottom: '28px', letterSpacing: '0.02em' }}>
+        🔒 Private & Confidential &nbsp;·&nbsp; ✨ Personalized Birth Chart &nbsp;·&nbsp; 👤 One-on-One Consultation
+      </div>
+
+      {/* ── 5. Available Astrologers Signal ── */}
       <div className="hero-available-signal-wrap">
         <a href="#experts" onClick={scrollToExperts} className="hero-live-badge">
           <span className="pulse-dot">🟢</span>
           <span>
-            <strong>EXPERTS AVAILABLE NOW</strong> — {expertsCount} verified experts available
+            <strong>ASTROLOGERS AVAILABLE NOW</strong> — {expertsCount} verified astrologers online
           </span>
         </a>
       </div>
 
-      {/* ── 2, 3, 4. MAIN URGENCY COMPONENT (MAIN VISUAL HOOK) ── */}
+      {/* ── 6. MAIN CONSULTATION & CAPACITY CARD ── */}
       <div className="hero-urgency-card-container">
         <div className="hero-urgency-card glass-card glass-card-gold">
           <div className="hero-urgency-card-header">
-            <span>🔥 LIMITED TODAY</span>
+            <span>✨ INTRODUCTORY ASTROLOGY CONSULTATION</span>
           </div>
 
-          {/* LARGE REMAINING NUMBER (900 Weight, 800 Label, 700 Sub) */}
+          {/* LARGE REMAINING NUMBER */}
           <div className="hero-giant-number-box">
             <span className="hero-giant-number">{demoSessionsRemaining}</span>
             <div className="hero-giant-label">
               {isFull ? (
-                <span className="label-bold-800">SESSIONS REMAINING TODAY</span>
+                <span className="label-bold-800">CONSULTATIONS REMAINING TODAY</span>
               ) : (
                 <>
-                  <span className="label-bold-800">FREE SESSIONS</span>{' '}
+                  <span className="label-bold-800">INTRODUCTORY CONSULTATIONS</span>{' '}
                   <span className="label-bold-700">LEFT TODAY</span>
                 </>
               )}
             </div>
           </div>
 
-          {/* 3. VISUAL AVAILABILITY BAR */}
+          {/* VISUAL AVAILABILITY BAR */}
           <div className="hero-progress-wrap">
             <div className="hero-progress-header">
-              <span>FREE SESSION AVAILABILITY</span>
+              <span>TODAY'S CONSULTATION AVAILABILITY</span>
               <span className="hero-progress-pct">{demoPercent}% remaining</span>
             </div>
             <div className="hero-progress-bar-track">
@@ -130,11 +150,11 @@ export default function Hero({ onOpenModal }) {
             </div>
           </div>
 
-          {/* 4. REAL COUNTDOWN BOXES */}
+          {/* TIMER */}
           {offer.showCountdown && (
             <div className="hero-countdown-container">
               <div className="hero-countdown-title">
-                {isExpired ? "TODAY'S INTRODUCTORY WINDOW CLOSED" : "⏳ TODAY'S FREE SESSION WINDOW CLOSES IN"}
+                {isExpired ? "TODAY'S INTRODUCTORY WINDOW CLOSED" : "⏳ TODAY'S INTRODUCTORY WINDOW CLOSES IN"}
               </div>
               <div className="hero-timer-boxes-row">
                 <div className="timer-box">
@@ -150,49 +170,28 @@ export default function Hero({ onOpenModal }) {
             </div>
           )}
 
-          {/* 6. CTA DIRECTLY CONNECTED TO URGENCY (800 Weight) */}
+          {/* CTA */}
           <button
             onClick={() => onOpenModal('Hero Urgency Box')}
             className="btn-primary btn-gold hero-urgency-card-btn"
             disabled={isDisabled}
           >
             {isExpired
-              ? "TODAY'S INTRODUCTORY SESSIONS ARE CLOSED"
+              ? "TODAY'S INTRODUCTORY CONSULTATIONS ARE CLOSED"
               : isFull
-              ? "TODAY'S FREE SESSIONS ARE FULL"
-              : 'START MY FREE 5 MINUTES →'}
+              ? "TODAY'S CONSULTATIONS ARE FULL"
+              : 'GET MY ASTROLOGY CONSULTATION →'}
           </button>
 
           {/* Microcopy below button */}
           <div className="hero-card-micro-info">
             <div className="micro-info-line">
-              <span>🔥 {demoSessionsRemaining} sessions remaining today</span>
+              <span>🔒 Private & Confidential</span>
               <span>•</span>
-              <span>⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedHms}`}</span>
-            </div>
-            <div className="micro-info-sub">
-              ₹0 to start • Private • No commitment
+              <span>✨ Birth Chart Analysis</span>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* ── 8. ACT NOW HIGH-CONTRAST STRIP ── */}
-      <div className="hero-act-now-strip">
-        <div className="act-now-strip-left">
-          <span className="act-now-badge">🔥 AVAILABLE RIGHT NOW</span>
-          <div className="act-now-text">
-            <strong>{demoSessionsRemaining} free introductory sessions remain today.</strong>
-            <span> ⏳ Today's introductory window closes in {formattedHms}</span>
-          </div>
-        </div>
-        <button
-          className="btn-primary btn-gold act-now-btn"
-          onClick={() => onOpenModal('Act Now Strip')}
-          disabled={isDisabled}
-        >
-          {isDisabled ? 'CLOSED →' : 'START NOW →'}
-        </button>
       </div>
     </section>
   );

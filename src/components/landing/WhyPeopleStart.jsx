@@ -7,18 +7,18 @@ import React from 'react';
 const situations = [
   {
     icon: '❓',
-    title: '"I DON\'T KNOW WHAT TO DO."',
-    desc: 'Standing at a crossroads in love, career, or life decisions without clarity on the next move.',
+    title: '"I NEED CLARITY ON MY CAREER OR LOVE LIFE."',
+    desc: 'Standing at a crossroads in love, career, or life decisions and seeking guidance based on your birth chart.',
   },
   {
-    icon: '🌀',
-    title: '"I KEEP OVERTHINKING THE SAME QUESTION."',
-    desc: 'Replaying the same scenario over and over late at night hoping for perspective.',
+    icon: '🔮',
+    title: '"I WANT TO UNDERSTAND MY PLANETARY PERIODS."',
+    desc: 'Exploring what your current planetary transit means for your finances, relationships and personal growth.',
   },
   {
-    icon: '💡',
-    title: '"I JUST WANT ANOTHER PERSPECTIVE."',
-    desc: 'A safe, unbiased conversation with someone who listens without judging.',
+    icon: '🧭',
+    title: '"I WANT AN ASTROLOGICAL PERSPECTIVE."',
+    desc: 'A private one-on-one conversation with a verified astrologer who analyzes your birth details.',
   },
 ];
 
@@ -26,10 +26,10 @@ export default function WhyPeopleStart() {
   return (
     <section className="section-why-start content-container" id="why-people-start">
       <h2 className="section-title">
-        People don't come here because they have everything figured out.
+        WHY PEOPLE GET AN ASTROLOGY CONSULTATION
       </h2>
       <p className="section-subtitle">
-        That's where NovaSathi starts.
+        Understand your path with personalized birth chart insights.
       </p>
 
       <div className="why-start-grid">

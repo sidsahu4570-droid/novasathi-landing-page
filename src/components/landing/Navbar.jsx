@@ -19,13 +19,13 @@ export default function Navbar({ onOpenModal }) {
         {/* Header Urgency & Action Button */}
         <div className="nav-urgency-action-wrap">
           <span className="nav-urgency-badge">
-            🔥 {demoSessionsRemaining > 0 ? `${demoSessionsRemaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
+            ✨ ASTROLOGY CONSULTATION
           </span>
           <button
             onClick={() => onOpenModal('Navbar')}
             className="btn-primary nav-cta"
           >
-            TALK TO AN EXPERT →
+            TALK TO AN ASTROLOGER →
           </button>
         </div>
       </div>

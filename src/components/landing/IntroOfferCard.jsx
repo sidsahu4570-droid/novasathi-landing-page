@@ -5,77 +5,31 @@ import useTenMinTimer from '../../utils/useTenMinTimer';
  * IntroOfferCard — Section 10 (Premium Offer Box with 10-minute decreasing countdown)
  */
 export default function IntroOfferCard({ onOpenModal }) {
-  const { formatted: timerFormatted } = useTenMinTimer();
-  const [offer, setOffer] = useState({
-    active: true,
-    showCountdown: true,
-  });
-
-  useEffect(() => {
-    let isMounted = true;
-    const apiUrl = import.meta.env.VITE_API_URL || '';
-
-    async function fetchOffer() {
-      try {
-        const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
-        if (res && res.ok) {
-          const contentType = res.headers.get('content-type') || '';
-          if (contentType.includes('application/json')) {
-            const data = await res.json();
-            if (isMounted) setOffer(data);
-            return;
-          }
-        }
-        const saved = localStorage.getItem('ns_offer_settings');
-        if (saved) {
-          if (isMounted) setOffer(JSON.parse(saved));
-        }
-      } catch (e) {}
-    }
-    fetchOffer();
-    return () => { isMounted = false; };
-  }, []);
-
-  if (!offer.active) return null;
-
   return (
     <section className="section-intro-offer content-container" id="intro-offer">
-      <div className="glass-card glass-card-gold intro-offer-card">
-        <span className="intro-offer-pill">✨ INTRODUCTORY OFFER</span>
+      <div className="glass-card glass-card-gold intro-offer-card" style={{ padding: '32px 24px', borderRadius: '24px', textAlign: 'center' }}>
+        <span className="intro-offer-pill" style={{ display: 'inline-block', marginBottom: '14px', background: 'rgba(212, 168, 79, 0.2)', border: '1px solid rgba(212, 168, 79, 0.5)', padding: '6px 16px', borderRadius: '99px', color: 'var(--color-warm-gold)', fontSize: '0.88rem', fontWeight: 700 }}>
+          ✨ INTRODUCTORY CONSULTATION
+        </span>
 
-        <div className="intro-offer-header">
-          <div className="intro-offer-title-wrap">
-            <h2 className="intro-offer-title">YOUR FIRST 5 MINUTES</h2>
-            <p className="intro-offer-sub">ONE-ON-ONE GUIDANCE</p>
-          </div>
-          <div className="intro-offer-price-badge">
-            <span className="price-zero">₹0</span>
-          </div>
-        </div>
+        <h2 className="section-title" style={{ fontSize: ' clamp(1.4rem, 4vw, 2.0rem)', marginBottom: '12px' }}>
+          START WITH AN INTRODUCTORY ASTROLOGY CONSULTATION
+        </h2>
 
-        <div className="intro-offer-features">
-          <div className="feature-item"><span>✓</span> Verified expert</div>
-          <div className="feature-item"><span>✓</span> Private conversation</div>
-          <div className="feature-item"><span>✓</span> Chat / Call / Video</div>
-          <div className="feature-item"><span>✓</span> No commitment</div>
-        </div>
-
-        {offer.showCountdown && (
-          <div className="intro-countdown-wrap">
-            <span className="countdown-label">Offer closes in:</span>
-            <span className="countdown-digits">{timerFormatted}</span>
-          </div>
-        )}
+        <p style={{ fontSize: '1.05rem', color: '#E2D9F8', opacity: 0.95, maxWidth: '640px', margin: '0 auto 24px auto', lineHeight: 1.5 }}>
+          Get a first introduction to your personal astrology consultation and understand how the process works.
+        </p>
 
         <button
           className="btn-primary btn-gold intro-offer-btn"
-          onClick={() => onOpenModal('Intro Offer Box')}
+          onClick={() => onOpenModal('Introductory Consultation')}
+          style={{ padding: '16px 36px', fontSize: '1.1rem', fontWeight: 800 }}
         >
-          START MY FREE 5 MINUTES →
+          START MY CONSULTATION →
         </button>
 
-        <p className="intro-offer-footer-note">
-          Available while introductory sessions remain today.
+        <p className="intro-offer-footer-note" style={{ marginTop: '16px', fontSize: '0.88rem', color: '#E2D9F8', opacity: 0.8 }}>
+          🔒 Private & Confidential · Personalized Birth Chart Observations
         </p>
       </div>
     </section>

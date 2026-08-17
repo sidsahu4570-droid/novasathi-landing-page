@@ -41,36 +41,33 @@ export default function YouDontHaveToWait({ onOpenModal }) {
   return (
     <section className="section-you-dont-wait content-container" id="available-now-section">
       <div className="glass-card glass-card-gold you-dont-wait-box">
-        <span className="wait-badge">⚡ IMMEDIATE ACTION</span>
+        <span className="wait-badge">⚡ ASTROLOGERS ONLINE</span>
 
-        <h2 className="wait-title">YOU DON'T HAVE TO WAIT.</h2>
-        <p className="wait-sub">Verified experts are available right now.</p>
+        <h2 className="wait-title">ASTROLOGERS ARE ONLINE NOW</h2>
+        <p className="wait-sub">Connect for a private, one-on-one astrology consultation.</p>
 
         <div className="wait-status-list">
           <div className="wait-status-item">
             <span className="pulse-dot">🟢</span>
-            <span><strong>{expertsCount} experts</strong> available right now</span>
+            <span><strong>{expertsCount} astrologers</strong> available right now</span>
           </div>
 
           <div className="wait-status-item">
-            <span>🔥</span>
-            <span><strong>{demoSessionsRemaining} free introductory sessions</strong> remaining today</span>
+            <span>✨</span>
+            <span><strong>Personalized Birth Chart Analysis</strong></span>
           </div>
 
           <div className="wait-status-item">
-            <span>⏳</span>
-            <span>
-              {isExpired ? 'Today\'s introductory window is closed' : `Today's introductory window closes in ${formattedHms}`}
-            </span>
+            <span>🔒</span>
+            <span>100% Private & Confidential</span>
           </div>
         </div>
 
         <button
           className="btn-primary btn-gold wait-cta-btn"
           onClick={() => onOpenModal('You Dont Have To Wait')}
-          disabled={isDisabled}
         >
-          {isDisabled ? 'TODAY\'S OFFER CLOSED' : 'TALK TO AN EXPERT NOW →'}
+          TALK TO AN ASTROLOGER NOW →
         </button>
       </div>
     </section>

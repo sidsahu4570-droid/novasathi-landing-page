@@ -140,10 +140,10 @@ export default function VideoTestimonials({ onOpenModal }) {
         {/* Section Header */}
         <div className="vt-header">
           <h2 className="vt-heading" id="vt-heading">
-            HEAR IT FROM PEOPLE WHO WERE WHERE YOU ARE.
+            HEAR FROM PEOPLE WHO'VE HAD A CONSULTATION
           </h2>
           <p className="vt-subheading">
-            Sometimes, one conversation is all it takes to see things differently.
+            See what clients thought about their personal astrology consultation.
           </p>
         </div>
 

@@ -9,20 +9,20 @@ export default function MicroFAQ() {
 
   const faqs = [
     {
-      q: "Is the first consultation really free?",
-      a: "Yes. Your first 5 minutes are free. Applicable per-minute charges apply after that."
+      q: "What birth details do I need for my consultation?",
+      a: "You'll need your date of birth, exact birth time, and birthplace (city/town). These details allow the astrologer to generate your exact birth chart (Kundli)."
     },
     {
-      q: "Can I talk privately?",
-      a: "Yes. NovaSathi is designed around private and confidential conversations."
+      q: "Is my consultation completely private and confidential?",
+      a: "Yes. All conversations are 100% private and confidential between you and your astrologer."
     },
     {
-      q: "Can I choose chat or call?",
-      a: "Yes. Available experts can be contacted through chat, call and, where supported, video."
+      q: "What areas of life can I ask about?",
+      a: "You can ask about career, business decisions, love, relationships, marriage compatibility, finances, and important life timing."
     },
     {
-      q: "Are the experts verified?",
-      a: "Yes. NovaSathi uses KYC and skill verification for its experts."
+      q: "Are the astrologers verified?",
+      a: "Yes. All astrologers undergo thorough background checks, credentials review, and expertise verification."
     }
   ];
 

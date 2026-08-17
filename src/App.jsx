@@ -9,6 +9,7 @@ import HowItWorks from './components/landing/HowItWorks';
 import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
 import WhatYouGet from './components/landing/WhatYouGet';
+import BirthDetailsRequired from './components/landing/BirthDetailsRequired';
 import WhyStartNow from './components/landing/WhyStartNow';
 import RiskReversal from './components/landing/RiskReversal';
 import IntroOfferCard from './components/landing/IntroOfferCard';
@@ -29,7 +30,7 @@ function checkIsAdminRoute() {
 
 /**
  * NovaSathi Root Application
- * High-Converting Action-Oriented Urgency Consultation Funnel.
+ * Premium Personal Astrology Consultation Platform
  */
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,7 +69,7 @@ export default function App() {
         {/* Living Celestial Background (Preserved Intact) */}
         <CosmicBackground />
 
-        {/* Conversion Psychology Landing Page Overlay */}
+        {/* Personal Astrology Consultation Overlay */}
         <div className="landing-overlay">
           <Navbar onOpenModal={handleOpenModal} />
           <Hero onOpenModal={handleOpenModal} />
@@ -79,6 +80,7 @@ export default function App() {
           <ExpertProfiles onOpenModal={handleOpenModal} />
           <VideoTestimonials onOpenModal={handleOpenModal} />
           <WhatYouGet onOpenModal={handleOpenModal} />
+          <BirthDetailsRequired onOpenModal={handleOpenModal} />
           <WhyStartNow onOpenModal={handleOpenModal} />
           <RiskReversal />
           <IntroOfferCard onOpenModal={handleOpenModal} />

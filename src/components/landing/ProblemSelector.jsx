@@ -10,57 +10,57 @@ export default function ProblemSelector({ onOpenModal }) {
       id: 'love',
       icon: '❤️',
       title: 'LOVE & RELATIONSHIPS',
-      desc: '"Should I stay, move on, or say what I really feel?"',
-      cta: 'Explore Love →',
+      desc: 'Questions about compatibility, relationships, marriage and important decisions.',
+      cta: 'Explore →',
       topic: 'Love & Relationships',
     },
     {
       id: 'career',
       icon: '💼',
-      title: 'CAREER & MONEY',
-      desc: '"Am I making the right move with my career or money?"',
-      cta: 'Find Career Clarity →',
-      topic: 'Career & Money',
+      title: 'CAREER & BUSINESS',
+      desc: 'Explore career direction, business decisions and professional opportunities.',
+      cta: 'Explore →',
+      topic: 'Career & Business',
     },
     {
-      id: 'astrology',
+      id: 'finance',
+      icon: '💰',
+      title: 'FINANCE & GROWTH',
+      desc: 'Explore the planetary periods relevant to your financial concerns and goals.',
+      cta: 'Explore →',
+      topic: 'Finance & Growth',
+    },
+    {
+      id: 'marriage',
+      icon: '💍',
+      title: 'MARRIAGE & FAMILY',
+      desc: 'Questions about marriage, relationships and important family matters.',
+      cta: 'Explore →',
+      topic: 'Marriage & Family',
+    },
+    {
+      id: 'future',
       icon: '🔮',
       title: 'FUTURE & ASTROLOGY',
-      desc: '"What does my chart say about the phase I\'m going through?"',
-      cta: 'Discover Your Path →',
+      desc: 'Explore your birth chart, planetary positions and relevant upcoming periods.',
+      cta: 'Explore →',
       topic: 'Future & Astrology',
     },
     {
-      id: 'tarot',
-      icon: '🃏',
-      title: 'TAROT & NUMEROLOGY',
-      desc: '"What perspective am I missing?"',
-      cta: 'Explore Guidance →',
-      topic: 'Tarot & Numerology',
-    },
-    {
-      id: 'vastu',
-      icon: '🏠',
-      title: 'VASTU & LIFE ENERGY',
-      desc: '"Could my surroundings be affecting my peace and progress?"',
-      cta: 'Explore Vastu →',
-      topic: 'Vastu & Life Energy',
-    },
-    {
-      id: 'support',
-      icon: '💜',
-      title: 'SOMEONE TO TALK TO',
-      desc: '"I don\'t need advice. I just need someone who listens."',
-      cta: 'Talk Privately →',
-      topic: 'Someone to Talk To',
+      id: 'decisions',
+      icon: '🧭',
+      title: 'LIFE DECISIONS',
+      desc: "Get an astrology-based perspective when you're considering an important decision.",
+      cta: 'Explore →',
+      topic: 'Life Decisions',
     },
   ];
 
   return (
     <section id="problem-selector" className="section-problem-selector content-container">
-      <h2 className="section-title">What keeps coming back to your mind?</h2>
+      <h2 className="section-title">WHAT'S ON YOUR MIND RIGHT NOW?</h2>
       <p className="section-subtitle">
-        Sometimes you already know the question. You just need someone to help you see it clearly.
+        Choose the area of life you'd like to understand better through your birth chart.
       </p>
 
       <div className="problem-grid">
@@ -82,7 +82,7 @@ export default function ProblemSelector({ onOpenModal }) {
             </div>
 
             <div className="problem-card-cta">
-              <span>{card.cta}</span>
+              <span style={{ color: 'var(--color-warm-gold)', fontWeight: 700 }}>{card.cta}</span>
             </div>
           </div>
         ))}

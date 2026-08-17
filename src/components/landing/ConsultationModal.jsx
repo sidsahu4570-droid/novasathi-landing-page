@@ -12,7 +12,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
   const [medium, setMedium] = useState('Chat');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [birthTime, setBirthTime] = useState('');
+  const [birthPlace, setBirthPlace] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
@@ -53,7 +55,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
     if (isOpen) {
       setName('');
       setPhone('');
-      setWhatsapp('');
+      setBirthDate('');
+      setBirthTime('');
+      setBirthPlace('');
       setPhoneError('');
       setStatus('idle');
       setErrorMsg('');
@@ -65,11 +69,11 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
 
   const topics = [
     'Love & Relationships',
-    'Career & Money',
+    'Career & Business',
+    'Finance & Growth',
+    'Marriage & Family',
     'Future & Astrology',
-    'Tarot & Numerology',
-    'Vastu & Life Energy',
-    'Someone to Talk To',
+    'Life Decisions',
   ];
 
   const validatePhone = (value) => {
@@ -107,7 +111,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           mode: medium,
           phone,
           name,
-          whatsapp,
+          birthDate,
+          birthTime,
+          birthPlace,
         }),
       });
 
@@ -126,17 +132,17 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxHeight: '90vh', overflowY: 'auto' }}>
         <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
           ✕
         </button>
 
         {/* ── Top Modal Urgency Banner ── */}
         <div className="modal-urgency-banner">
-          <div className="modal-urgency-title">🔥 FREE INTRODUCTORY SESSION</div>
+          <div className="modal-urgency-title">✨ PERSONAL ASTROLOGY CONSULTATION</div>
           <div className="modal-urgency-sub">
-            <span>🔥 {demoSessionsRemaining} sessions remaining today</span> •{' '}
-            <span>⏳ {isExpired ? 'Offer Closed' : `${formattedHms} remaining`}</span>
+            <span>🔒 Private & Confidential</span> •{' '}
+            <span>✨ Birth Chart Analysis</span>
           </div>
         </div>
 
@@ -144,25 +150,25 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
           /* ── AFTER SUBMISSION CONFIRMATION SCREEN ── */
           <div style={{ textAlign: 'left', padding: '16px 4px' }}>
             <h3 className="modal-title" style={{ color: '#6bcf7f', marginBottom: '6px', fontSize: '1.35rem' }}>
-              🔥 YOUR SESSION REQUEST IS IN
+              ✨ YOUR CONSULTATION REQUEST IS CONFIRMED
             </h3>
 
             <div className="modal-confirm-checklist">
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Your request has been received</span>
+                <span>Your birth details have been securely recorded</span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>We're matching you with an available expert</span>
+                <span>We're connecting you with an expert astrologer</span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Your selected topic has been recorded: <strong>{selectedTopic}</strong></span>
+                <span>Consultation Topic: <strong>{selectedTopic}</strong></span>
               </div>
               <div className="confirm-check-item">
                 <span className="check-icon">✓</span>
-                <span>Your preferred contact method has been recorded: <strong>{medium}</strong></span>
+                <span>Preferred Method: <strong>{medium}</strong></span>
               </div>
             </div>
 
@@ -180,7 +186,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
               fontWeight: '600',
             }}>
               <span className="pulse-dot">🟢</span>
-              <span>MATCHING WITH AN AVAILABLE EXPERT...</span>
+              <span>CONNECTING WITH AN ASTROLOGER...</span>
             </div>
 
             <button
@@ -209,9 +215,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
             )}
 
             <form onSubmit={handleSubmit} style={{ marginTop: '12px' }}>
-              {/* Question 1: Topic */}
+              {/* Topic Selection */}
               <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                What would you like help with?
+                Select Life Area / Topic
               </label>
               <div className="modal-topic-select">
                 {topics.map((t) => (
@@ -227,9 +233,9 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
-              {/* Question 2: Mode */}
+              {/* Consultation Mode */}
               <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '8px', fontWeight: '600' }}>
-                Choose how you'd like to connect
+                Choose Consultation Mode
               </label>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
                 {['Chat', 'Call', 'Video'].map((m) => (
@@ -246,12 +252,56 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 ))}
               </div>
 
+              {/* Birth Details */}
+              <div style={{ background: 'rgba(212, 168, 79, 0.08)', border: '1px solid rgba(212, 168, 79, 0.25)', borderRadius: '12px', padding: '14px', marginBottom: '18px' }}>
+                <label style={{ display: 'block', fontSize: '0.88rem', color: 'var(--color-warm-gold)', marginBottom: '10px', fontWeight: '700' }}>
+                  ✨ Your Birth Details (For Chart Calculation)
+                </label>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
+                  <div>
+                    <label style={{ fontSize: '0.78rem', color: '#E2D9F8', display: 'block', marginBottom: '4px' }}>Date of Birth</label>
+                    <input
+                      type="date"
+                      value={birthDate}
+                      onChange={(e) => setBirthDate(e.target.value)}
+                      disabled={status === 'loading'}
+                      className="modal-text-input"
+                      style={{ padding: '8px 10px', fontSize: '0.88rem' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '0.78rem', color: '#E2D9F8', display: 'block', marginBottom: '4px' }}>Exact Birth Time</label>
+                    <input
+                      type="time"
+                      value={birthTime}
+                      onChange={(e) => setBirthTime(e.target.value)}
+                      disabled={status === 'loading'}
+                      className="modal-text-input"
+                      style={{ padding: '8px 10px', fontSize: '0.88rem' }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '0.78rem', color: '#E2D9F8', display: 'block', marginBottom: '4px' }}>Birthplace (City / Town)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Mumbai, Delhi, Bengaluru"
+                    value={birthPlace}
+                    onChange={(e) => setBirthPlace(e.target.value)}
+                    disabled={status === 'loading'}
+                    className="modal-text-input"
+                    style={{ padding: '8px 10px', fontSize: '0.88rem' }}
+                  />
+                </div>
+              </div>
+
               {/* Contact Information */}
               <label style={{ display: 'block', fontSize: '0.86rem', color: 'var(--color-lavender)', marginBottom: '6px', fontWeight: '600' }}>
-                Where can our expert reach you?
+                Your Contact Information
               </label>
 
-              {/* Optional Name */}
               <input
                 type="text"
                 placeholder="Your Name (Optional)"
@@ -270,7 +320,7 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 border: `1px solid ${phoneError ? 'rgba(255,80,80,0.6)' : 'rgba(196,166,255,0.25)'}`,
                 borderRadius: '10px',
                 overflow: 'hidden',
-                marginBottom: phoneError ? '6px' : '10px',
+                marginBottom: phoneError ? '6px' : '16px',
               }}>
                 <span style={{
                   padding: '12px 14px',
@@ -309,17 +359,6 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                 </p>
               )}
 
-              {/* Optional WhatsApp Number */}
-              <input
-                type="tel"
-                placeholder="WhatsApp Number (Optional)"
-                value={whatsapp}
-                onChange={(e) => setWhatsapp(e.target.value)}
-                disabled={status === 'loading'}
-                className="modal-text-input"
-                style={{ marginBottom: '18px' }}
-              />
-
               {/* Submit Button */}
               <button
                 id="consultation-submit-btn"
@@ -331,13 +370,14 @@ export default function ConsultationModal({ isOpen, onClose, defaultTopic }) {
                   fontSize: '1.05rem',
                   padding: '14px',
                   opacity: status === 'loading' ? 0.7 : 1,
+                  fontWeight: 800,
                 }}
               >
-                {status === 'loading' ? 'Sending Request...' : 'CLAIM MY FREE SESSION →'}
+                {status === 'loading' ? 'Submitting Details...' : 'START MY ASTROLOGY CONSULTATION →'}
               </button>
 
               <p style={{ textAlign: 'center', fontSize: '0.82rem', color: 'rgba(248, 244, 234, 0.8)', marginTop: '12px' }}>
-                ₹0 to start • Private • No commitment
+                🔒 Private & Confidential • Personalized Birth Chart Analysis
               </p>
             </form>
           </>

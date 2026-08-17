@@ -36,27 +36,25 @@ export default function WhyStartNow({ onOpenModal }) {
   const points = [
     {
       icon: '🟢',
-      title: 'EXPERTS ARE AVAILABLE NOW',
-      desc: 'Connect immediately while verified experts are available online.',
+      title: 'ASTROLOGERS AVAILABLE ONLINE',
+      desc: 'Speak directly with experienced astrologers about your career, relationships and future.',
     },
     {
-      icon: '🔥',
-      title: 'LIMITED FREE INTRODUCTORY SESSIONS',
-      desc: `${demoSessionsRemaining} free introductory sessions remain available today.`,
+      icon: '✨',
+      title: 'PERSONALIZED BIRTH CHART',
+      desc: 'Guidance calculated from your birth date, exact birth time and birthplace.',
     },
     {
-      icon: '⏳',
-      title: "TODAY'S INTRODUCTORY OFFER",
-      desc: isExpired
-        ? "Today's free introductory session window has closed."
-        : `Your free introductory session window closes in ${formattedHms}.`,
+      icon: '🔒',
+      title: 'PRIVATE & CONFIDENTIAL',
+      desc: 'Discuss your personal questions in a 100% secure, one-on-one consultation.',
     },
   ];
 
   return (
     <section className="section-why-start-now content-container" id="why-start-now">
       <div className="glass-card glass-card-gold why-now-card-box">
-        <h2 className="why-now-box-title">WHY START NOW?</h2>
+        <h2 className="why-now-box-title">WHY GET AN ASTROLOGY CONSULTATION?</h2>
 
         <div className="why-now-points-grid">
           {points.map((p, i) => (
@@ -72,7 +70,7 @@ export default function WhyStartNow({ onOpenModal }) {
 
         <div className="why-now-box-cta">
           <button className="btn-primary btn-gold" onClick={() => onOpenModal('Why Start Now')}>
-            START MY FREE 5 MINUTES →
+            START MY CONSULTATION →
           </button>
         </div>
       </div>

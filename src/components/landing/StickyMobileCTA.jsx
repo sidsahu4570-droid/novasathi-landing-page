@@ -57,19 +57,18 @@ export default function StickyMobileCTA({ onOpenModal }) {
         <div className="sticky-desktop-content">
           <div className="sticky-desktop-info">
             <span className="sticky-fire-badge">
-              🔥 {demoSessionsRemaining > 0 ? `${demoSessionsRemaining} FREE SESSIONS LEFT TODAY` : 'SESSIONS FULL TODAY'}
+              ✨ PERSONAL ASTROLOGY CONSULTATION
             </span>
             <span className="sticky-divider">•</span>
             <span className="sticky-timer-text">
-              ⏳ <strong>{isExpired ? 'Offer Closed' : formattedHms}</strong>
+              🔒 Private & Confidential
             </span>
           </div>
           <button
             className="btn-primary btn-gold sticky-action-btn"
             onClick={() => onOpenModal('Sticky Bottom Bar')}
-            disabled={isDisabled}
           >
-            {isDisabled ? 'CLOSED' : 'START MY FREE 5 MINUTES →'}
+            START MY CONSULTATION →
           </button>
         </div>
 
@@ -77,18 +76,17 @@ export default function StickyMobileCTA({ onOpenModal }) {
         <div className="sticky-mobile-content">
           <div className="sticky-mobile-info">
             <span className="sticky-badge">
-              🔥 {demoSessionsRemaining > 0 ? `${demoSessionsRemaining} FREE SESSIONS LEFT` : 'SESSIONS FULL'}
+              ✨ ASTROLOGY CONSULTATION
             </span>
             <span className="sticky-sub">
-              ⏳ {isExpired ? 'Offer Closed' : `Closes in ${formattedMs}`}
+              🔒 Private Birth Chart Guidance
             </span>
           </div>
           <button
             className="btn-primary btn-gold sticky-mobile-btn"
             onClick={() => onOpenModal('Sticky Mobile Bar')}
-            disabled={isDisabled}
           >
-            {isDisabled ? 'CLOSED' : 'START NOW →'}
+            GET GUIDANCE →
           </button>
         </div>
       </div>
