@@ -138,11 +138,6 @@ export default function Hero({ onOpenModal }) {
               </div>
               <div className="hero-timer-boxes-row">
                 <div className="timer-box">
-                  <span className="timer-box-num">{hoursStr}</span>
-                  <span className="timer-box-label">Hours</span>
-                </div>
-                <span className="timer-sep">:</span>
-                <div className="timer-box">
                   <span className="timer-box-num">{minutesStr}</span>
                   <span className="timer-box-label">Minutes</span>
                 </div>
