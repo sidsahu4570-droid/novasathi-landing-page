@@ -1,60 +1,75 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const DemoAvailabilityContext = createContext({
-  demoSessionsRemaining: 12,
-  demoCapacity: 50,
-  demoPercent: 24,
+  introductorySessionsRemaining: 12,
+  expertsAvailableCount: 3,
+  showAvailabilityUrgency: true,
+  showIntroductorySessionCount: true,
+  decrementSessions: () => {},
 });
 
 export function DemoAvailabilityProvider({ children }) {
-  const [demoSessionsRemaining, setDemoSessionsRemaining] = useState(12);
-  const demoCapacity = 50;
+  const [offerState, setOfferState] = useState({
+    introductorySessionsRemaining: 12,
+    expertsAvailableCount: 3,
+    showAvailabilityUrgency: true,
+    showIntroductorySessionCount: true,
+  });
+
+  const fetchOfferState = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    try {
+      const res = await fetch(`${apiUrl}/api/offer`).catch(() => null);
+      if (res && res.ok) {
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await res.json();
+          const remaining = Math.max(0, (data.dailyLimit ?? 12) - (data.sessionsUsed ?? 0));
+          setOfferState({
+            introductorySessionsRemaining: remaining,
+            expertsAvailableCount: data.expertsAvailableCount ?? 3,
+            showAvailabilityUrgency: data.showRemainingSlots ?? true,
+            showIntroductorySessionCount: data.showRemainingSlots ?? true,
+          });
+          return;
+        }
+      }
+      // LocalStorage fallback
+      const saved = localStorage.getItem('ns_offer_settings');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const remaining = Math.max(0, (parsed.dailyLimit ?? 12) - (parsed.sessionsUsed ?? 0));
+        setOfferState({
+          introductorySessionsRemaining: remaining,
+          expertsAvailableCount: parsed.expertsAvailableCount ?? 3,
+          showAvailabilityUrgency: parsed.showRemainingSlots ?? true,
+          showIntroductorySessionCount: parsed.showRemainingSlots ?? true,
+        });
+      }
+    } catch (e) {}
+  };
 
   useEffect(() => {
-    console.log("Demo availability started: 12");
-
-    const t1 = setTimeout(() => {
-      setDemoSessionsRemaining(11);
-      console.log("Demo availability changed: 11");
-    }, 30000); // 30s from load -> 11
-
-    const t2 = setTimeout(() => {
-      setDemoSessionsRemaining(10);
-      console.log("Demo availability changed: 10");
-    }, 60000); // 60s from load -> 10
-
-    const t3 = setTimeout(() => {
-      setDemoSessionsRemaining(9);
-      console.log("Demo availability changed: 9");
-    }, 120000); // 120s from load -> 9
-
-    const t4 = setTimeout(() => {
-      setDemoSessionsRemaining(8);
-      console.log("Demo availability changed: 8");
-    }, 240000); // 240s from load -> 8
-
-    const t5 = setTimeout(() => {
-      setDemoSessionsRemaining(7);
-      console.log("Demo availability changed: 7");
-    }, 390000); // 390s (6m 30s) from load -> 7 (stops permanently)
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-      clearTimeout(t5);
-    };
+    fetchOfferState();
+    const interval = setInterval(fetchOfferState, 15000); // Polling every 15s to keep real admin state fresh
+    return () => clearInterval(interval);
   }, []);
 
-  const demoPercent = Math.round((demoSessionsRemaining / demoCapacity) * 100);
+  const decrementSessions = () => {
+    setOfferState((prev) => ({
+      ...prev,
+      introductorySessionsRemaining: Math.max(0, prev.introductorySessionsRemaining - 1),
+    }));
+  };
 
   return (
     <DemoAvailabilityContext.Provider
       value={{
-        demoSessionsRemaining,
-        demoCapacity,
-        demoPercent,
+        introductorySessionsRemaining: offerState.introductorySessionsRemaining,
+        expertsAvailableCount: offerState.expertsAvailableCount,
+        showAvailabilityUrgency: offerState.showAvailabilityUrgency,
+        showIntroductorySessionCount: offerState.showIntroductorySessionCount,
+        decrementSessions,
       }}
     >
       {children}
