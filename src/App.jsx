@@ -2,19 +2,12 @@ import React, { useState } from 'react';
 import CosmicBackground from './components/cosmic/CosmicBackground';
 import Navbar from './components/landing/Navbar';
 import Hero from './components/landing/Hero';
-import WhyPeopleStart from './components/landing/WhyPeopleStart';
 import ProblemSelector from './components/landing/ProblemSelector';
-import YouDontHaveToWait from './components/landing/YouDontHaveToWait';
 import HowItWorks from './components/landing/HowItWorks';
 import ExpertProfiles from './components/landing/ExpertProfiles';
 import VideoTestimonials from './components/landing/VideoTestimonials';
-import WhatYouGet from './components/landing/WhatYouGet';
-import BirthDetailsRequired from './components/landing/BirthDetailsRequired';
-import WhyStartNow from './components/landing/WhyStartNow';
-import RiskReversal from './components/landing/RiskReversal';
-import IntroOfferCard from './components/landing/IntroOfferCard';
-import FinalCTA from './components/landing/FinalCTA';
 import MicroFAQ from './components/landing/MicroFAQ';
+import FinalCTA from './components/landing/FinalCTA';
 import Footer from './components/landing/Footer';
 import StickyMobileCTA from './components/landing/StickyMobileCTA';
 import ConsultationModal from './components/landing/ConsultationModal';
@@ -73,19 +66,12 @@ export default function App() {
         <div className="landing-overlay">
           <Navbar onOpenModal={handleOpenModal} />
           <Hero onOpenModal={handleOpenModal} />
-          <WhyPeopleStart />
           <ProblemSelector onOpenModal={handleOpenModal} />
-          <YouDontHaveToWait onOpenModal={handleOpenModal} />
           <HowItWorks />
           <ExpertProfiles onOpenModal={handleOpenModal} />
           <VideoTestimonials onOpenModal={handleOpenModal} />
-          <WhatYouGet onOpenModal={handleOpenModal} />
-          <BirthDetailsRequired onOpenModal={handleOpenModal} />
-          <WhyStartNow onOpenModal={handleOpenModal} />
-          <RiskReversal />
-          <IntroOfferCard onOpenModal={handleOpenModal} />
-          <FinalCTA onOpenModal={handleOpenModal} />
           <MicroFAQ />
+          <FinalCTA onOpenModal={handleOpenModal} />
           <Footer />
         </div>
 
