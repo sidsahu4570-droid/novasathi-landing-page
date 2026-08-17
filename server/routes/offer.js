@@ -20,6 +20,10 @@ async function getOrCreateOffer() {
       endDate: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
     });
     await offer.save();
+  } else if (offer.dailyLimit === 50) {
+    offer.dailyLimit = 12;
+    offer.sessionsUsed = 0;
+    await offer.save();
   }
   return offer;
 }

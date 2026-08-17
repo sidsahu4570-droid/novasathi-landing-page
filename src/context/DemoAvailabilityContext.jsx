@@ -1,7 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const STARTING_SESSIONS = 12;
+
 const DemoAvailabilityContext = createContext({
+  currentSessionsRemaining: 12,
   introductorySessionsRemaining: 12,
+  startingSessions: 12,
+  STARTING_SESSIONS: 12,
+  availabilityPercentage: 100,
+  availabilityText: '12 of 12 sessions remaining today',
+  progressWidth: 100,
   expertsAvailableCount: 3,
   showAvailabilityUrgency: true,
   showIntroductorySessionCount: true,
@@ -11,13 +19,12 @@ const DemoAvailabilityContext = createContext({
 
 /**
  * Milestone Decrement Function
- * Calculates how many session milestone steps have passed based on cumulative elapsed seconds since page open:
- * 0s-29s  : 0 steps (e.g. 12)
- * 30s-59s : 1 step  (e.g. 11)
- * 60s-119s: 2 steps (e.g. 10)
- * 120s-179s: 3 steps (e.g. 9)
- * 180s-209s: 4 steps (e.g. 8)
- * >=210s   : 5 steps (e.g. 7 - STOPS permanently at step 5)
+ * 0s-29s   : 12
+ * 30s-59s  : 11
+ * 60s-119s : 10
+ * 120s-179s: 9
+ * 180s-209s: 8
+ * >=210s   : 7 (never decreases below 7)
  */
 function getMilestoneSteps(elapsedSec) {
   if (elapsedSec < 30) return 0;
@@ -30,13 +37,13 @@ function getMilestoneSteps(elapsedSec) {
 
 export function DemoAvailabilityProvider({ children }) {
   const [adminConfig, setAdminConfig] = useState({
-    startingCount: 12,
+    startingCount: STARTING_SESSIONS,
     expertsAvailableCount: 3,
     showAvailabilityUrgency: true,
     showIntroductorySessionCount: true,
   });
 
-  const [currentSessionsRemaining, setCurrentSessionsRemaining] = useState(12);
+  const [currentSessionsRemaining, setCurrentSessionsRemaining] = useState(STARTING_SESSIONS);
 
   // Initialize or read visitor start timestamp from localStorage
   const getVisitorStartTime = () => {
@@ -57,8 +64,9 @@ export function DemoAvailabilityProvider({ children }) {
         const contentType = res.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const data = await res.json();
+          const limit = (data.dailyLimit && data.dailyLimit !== 50) ? data.dailyLimit : STARTING_SESSIONS;
           setAdminConfig({
-            startingCount: data.dailyLimit ?? 12,
+            startingCount: limit,
             expertsAvailableCount: data.expertsAvailableCount ?? 3,
             showAvailabilityUrgency: data.showRemainingSlots ?? true,
             showIntroductorySessionCount: data.showRemainingSlots ?? true,
@@ -70,8 +78,9 @@ export function DemoAvailabilityProvider({ children }) {
       const saved = localStorage.getItem('ns_offer_settings');
       if (saved) {
         const parsed = JSON.parse(saved);
+        const limit = (parsed.dailyLimit && parsed.dailyLimit !== 50) ? parsed.dailyLimit : STARTING_SESSIONS;
         setAdminConfig({
-          startingCount: parsed.dailyLimit ?? 12,
+          startingCount: limit,
           expertsAvailableCount: parsed.expertsAvailableCount ?? 3,
           showAvailabilityUrgency: parsed.showRemainingSlots ?? true,
           showIntroductorySessionCount: parsed.showRemainingSlots ?? true,
@@ -85,8 +94,8 @@ export function DemoAvailabilityProvider({ children }) {
     const startTime = getVisitorStartTime();
     const elapsedSec = Math.max(0, Math.floor((Date.now() - startTime) / 1000));
     const stepsPassed = getMilestoneSteps(elapsedSec);
-    const start = adminConfig.startingCount || 12;
-    const minFloor = Math.max(0, start - 5);
+    const start = (adminConfig.startingCount && adminConfig.startingCount !== 50) ? adminConfig.startingCount : STARTING_SESSIONS;
+    const minFloor = Math.max(7, start - 5);
     const calculatedCount = Math.max(minFloor, start - stepsPassed);
 
     setCurrentSessionsRemaining(calculatedCount);
@@ -99,24 +108,30 @@ export function DemoAvailabilityProvider({ children }) {
 
   useEffect(() => {
     updateSessionCount();
-    const interval = setInterval(updateSessionCount, 1000); // Check every second for exact milestone transitions
+    const interval = setInterval(updateSessionCount, 1000);
     return () => clearInterval(interval);
   }, [adminConfig.startingCount]);
 
   const decrementSessions = () => {
-    setCurrentSessionsRemaining((prev) => Math.max(0, prev - 1));
+    setCurrentSessionsRemaining((prev) => Math.max(7, prev - 1));
   };
 
-  const startingSessions = adminConfig.startingCount || 12;
+  const startingSessions = (adminConfig.startingCount && adminConfig.startingCount !== 50) ? adminConfig.startingCount : STARTING_SESSIONS;
   const rawPct = (currentSessionsRemaining / startingSessions) * 100;
   const availabilityPercentage = rawPct % 1 === 0 ? rawPct : Number(rawPct.toFixed(1));
+  const availabilityText = `${currentSessionsRemaining} of ${startingSessions} sessions remaining today`;
+  const progressWidth = availabilityPercentage;
 
   return (
     <DemoAvailabilityContext.Provider
       value={{
+        currentSessionsRemaining,
         introductorySessionsRemaining: currentSessionsRemaining,
         startingSessions,
+        STARTING_SESSIONS: startingSessions,
         availabilityPercentage,
+        availabilityText,
+        progressWidth,
         expertsAvailableCount: adminConfig.expertsAvailableCount,
         showAvailabilityUrgency: adminConfig.showAvailabilityUrgency,
         showIntroductorySessionCount: adminConfig.showIntroductorySessionCount,
