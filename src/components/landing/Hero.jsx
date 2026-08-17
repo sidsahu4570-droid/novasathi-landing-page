@@ -9,6 +9,8 @@ import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 export default function Hero({ onOpenModal }) {
   const {
     introductorySessionsRemaining,
+    startingSessions,
+    availabilityPercentage,
     expertsAvailableCount,
     showAvailabilityUrgency,
     showIntroductorySessionCount,
@@ -50,8 +52,6 @@ export default function Hero({ onOpenModal }) {
   };
 
   const hasAvailableExperts = expertsAvailableCount > 0;
-  const demoCapacity = 50;
-  const demoPercent = Math.round((introductorySessionsRemaining / demoCapacity) * 100);
   const isFull = introductorySessionsRemaining <= 0;
   const isDisabled = isFull || isExpired || !offer.active;
 
@@ -126,16 +126,16 @@ export default function Hero({ onOpenModal }) {
             <div className="hero-progress-wrap">
               <div className="hero-progress-header">
                 <span>TODAY'S CONSULTATION AVAILABILITY</span>
-                <span className="hero-progress-pct">{demoPercent}% remaining</span>
+                <span className="hero-progress-pct">{availabilityPercentage}% remaining</span>
               </div>
               <div className="hero-progress-bar-track">
                 <div
                   className="hero-progress-bar-fill"
-                  style={{ width: `${demoPercent}%` }}
+                  style={{ width: `${availabilityPercentage}%` }}
                 ></div>
               </div>
               <div className="hero-progress-sub">
-                {introductorySessionsRemaining} of {demoCapacity} sessions remaining today
+                {introductorySessionsRemaining} of {startingSessions} sessions remaining today
               </div>
             </div>
 

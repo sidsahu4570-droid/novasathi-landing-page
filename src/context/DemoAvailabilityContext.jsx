@@ -107,14 +107,20 @@ export function DemoAvailabilityProvider({ children }) {
     setCurrentSessionsRemaining((prev) => Math.max(0, prev - 1));
   };
 
+  const startingSessions = adminConfig.startingCount || 12;
+  const rawPct = (currentSessionsRemaining / startingSessions) * 100;
+  const availabilityPercentage = rawPct % 1 === 0 ? rawPct : Number(rawPct.toFixed(1));
+
   return (
     <DemoAvailabilityContext.Provider
       value={{
         introductorySessionsRemaining: currentSessionsRemaining,
+        startingSessions,
+        availabilityPercentage,
         expertsAvailableCount: adminConfig.expertsAvailableCount,
         showAvailabilityUrgency: adminConfig.showAvailabilityUrgency,
         showIntroductorySessionCount: adminConfig.showIntroductorySessionCount,
-        startingCount: adminConfig.startingCount,
+        startingCount: startingSessions,
         decrementSessions,
       }}
     >
