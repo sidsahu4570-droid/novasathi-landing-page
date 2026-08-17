@@ -1092,9 +1092,11 @@ body, html {
   .hero-urgency-card-btn,
   .btn-gold,
   .final-cta-btn,
+  .wait-cta-btn,
   .hero-cta-group .btn-primary {
-    font-size: clamp(0.82rem, 3.8vw, 1.05rem) !important;
-    padding: 14px 14px !important;
+    white-space: nowrap !important;
+    font-size: clamp(0.78rem, 3.6vw, 1.05rem) !important;
+    padding: 13px 14px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3666,9 +3668,15 @@ body, html {
 
 .wait-cta-btn {
   width: 100%;
-  max-width: 380px;
-  font-size: 1.1rem !important;
-  padding: 16px 28px !important;
+  max-width: 440px;
+  font-size: clamp(0.85rem, 3.8vw, 1.1rem) !important;
+  padding: 14px 20px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
 }
 
 
