@@ -18,7 +18,6 @@ export default function FinalCTA({ onOpenModal }) {
         <button
           onClick={() => onOpenModal('Final CTA Astrology')}
           className="btn-primary btn-gold final-cta-btn"
-          style={{ padding: '16px 36px', fontSize: '1.1rem', fontWeight: 800 }}
         >
           START MY ASTROLOGY CONSULTATION →
         </button>
