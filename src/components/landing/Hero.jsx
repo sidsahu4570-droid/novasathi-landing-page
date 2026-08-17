@@ -64,25 +64,6 @@ export default function Hero({ onOpenModal }) {
             href="#experts"
             onClick={scrollToExperts}
             className="hero-green-availability-pill"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(107, 207, 127, 0.14)',
-              border: '1px solid rgba(107, 207, 127, 0.45)',
-              color: '#6bcf7f',
-              padding: '6px 16px',
-              borderRadius: '99px',
-              fontSize: '0.84rem',
-              fontWeight: 800,
-              letterSpacing: '0.04em',
-              textDecoration: 'none',
-              boxShadow: '0 0 12px rgba(107, 207, 127, 0.2)',
-              whiteSpace: 'nowrap',
-              maxWidth: 'calc(100vw - 32px)',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
           >
             {hasAvailableExperts ? (
               <>
