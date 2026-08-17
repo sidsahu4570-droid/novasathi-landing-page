@@ -116,10 +116,9 @@ export function DemoAvailabilityProvider({ children }) {
     setCurrentSessionsRemaining((prev) => Math.max(7, prev - 1));
   };
 
-  const startingSessions = (adminConfig.startingCount && adminConfig.startingCount !== 50) ? adminConfig.startingCount : STARTING_SESSIONS;
-  const rawPct = (currentSessionsRemaining / startingSessions) * 100;
-  const availabilityPercentage = rawPct % 1 === 0 ? rawPct : Number(rawPct.toFixed(1));
-  const availabilityText = `${currentSessionsRemaining} of ${startingSessions} sessions remaining today`;
+  const TOTAL_SESSION_CAPACITY = 100;
+  const availabilityPercentage = Math.round((currentSessionsRemaining / TOTAL_SESSION_CAPACITY) * 100);
+  const availabilityText = `${currentSessionsRemaining} of ${TOTAL_SESSION_CAPACITY} sessions remaining today`;
   const progressWidth = availabilityPercentage;
 
   return (
@@ -127,15 +126,17 @@ export function DemoAvailabilityProvider({ children }) {
       value={{
         currentSessionsRemaining,
         introductorySessionsRemaining: currentSessionsRemaining,
-        startingSessions,
-        STARTING_SESSIONS: startingSessions,
+        startingSessions: STARTING_SESSIONS,
+        STARTING_SESSIONS,
+        totalCapacity: TOTAL_SESSION_CAPACITY,
+        TOTAL_SESSION_CAPACITY,
         availabilityPercentage,
         availabilityText,
         progressWidth,
         expertsAvailableCount: adminConfig.expertsAvailableCount,
         showAvailabilityUrgency: adminConfig.showAvailabilityUrgency,
         showIntroductorySessionCount: adminConfig.showIntroductorySessionCount,
-        startingCount: startingSessions,
+        startingCount: STARTING_SESSIONS,
         decrementSessions,
       }}
     >

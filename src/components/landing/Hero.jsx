@@ -9,8 +9,8 @@ import { useDemoAvailability } from '../../context/DemoAvailabilityContext';
 export default function Hero({ onOpenModal }) {
   const {
     introductorySessionsRemaining,
-    startingSessions,
     availabilityPercentage,
+    availabilityText,
     expertsAvailableCount,
     showAvailabilityUrgency,
     showIntroductorySessionCount,
@@ -135,7 +135,7 @@ export default function Hero({ onOpenModal }) {
                 ></div>
               </div>
               <div className="hero-progress-sub">
-                {introductorySessionsRemaining} of {startingSessions} sessions remaining today
+                {availabilityText}
               </div>
             </div>
 
